@@ -1,5 +1,6 @@
 {
-  "itemGroup.exoticores": "Example Mod Tab",
-  "block.exoticores.example_block": "Example Block",
-  "item.exoticores.example_item": "Example Item"
+  "effect.exoticores.radiation": "Radiation",
+  "block.exoticores.thorite_ore": "Thorite Ore",
+  "item.exoticores.thorite_shard": "Thorite Shard",
+  "itemGroup.exoticores.exotic_ores_tab": "Exotic Ores Mod"
 }

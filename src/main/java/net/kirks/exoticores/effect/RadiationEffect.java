@@ -18,6 +18,6 @@ public class RadiationEffect extends MobEffect {
 
     @Override
     public boolean shouldApplyEffectTickThisTick(int tickCount, int amplification) {
-        return tickCount % 50 == 0;
+        return tickCount % 80 == 0;
     }
 }

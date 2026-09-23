@@ -2,5 +2,10 @@
   "effect.exoticores.radiation": "Radiation",
   "block.exoticores.thorite_ore": "Thorite Ore",
   "item.exoticores.thorite_shard": "Thorite Shard",
-  "itemGroup.exoticores.exotic_ores_tab": "Exotic Ores Mod"
+  "itemGroup.exoticores.exotic_ores_tab": "Exotic Ores Mod",
+
+  "item.exoticores.thorite_helmet": "Thorite Helmet",
+  "item.exoticores.thorite_chestplate": "Thorite Chestplate",
+  "item.exoticores.thorite_leggings": "Thorite Leggings",
+  "item.exoticores.thorite_boots": "Thorite Boots"
 }

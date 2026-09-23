@@ -1,10 +1,12 @@
 package net.kirks.exoticores.registry;
 
 import net.kirks.exoticores.ExoticOres;
+import net.kirks.exoticores.item.ModArmorMaterial;
 import net.kirks.exoticores.item.RadioactiveItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -22,6 +24,20 @@ public class ModItems {
     // BLOCK ITEMS
     public static final DeferredItem<BlockItem> THORITE_ORE_ITEM =
             ITEMS.registerSimpleBlockItem("thorite_ore", ModBlocks.THORITE_ORE);
+
+    // EQUIPMENT
+    public static final DeferredItem<Item> THORITE_HELMET = ITEMS.registerItem("thorite_helmet", properties ->
+            new Item(properties.humanoidArmor(ModArmorMaterial.THORITE_ARMOR_MATERIAL, ArmorType.HELMET)));
+
+    public static final DeferredItem<Item> THORITE_CHESTPLATE = ITEMS.registerItem("thorite_chestplate", properties ->
+            new Item(properties.humanoidArmor(ModArmorMaterial.THORITE_ARMOR_MATERIAL, ArmorType.CHESTPLATE)));
+
+    public static final DeferredItem<Item> THORITE_LEGGINGS = ITEMS.registerItem("thorite_leggings", properties ->
+            new Item(properties.humanoidArmor(ModArmorMaterial.THORITE_ARMOR_MATERIAL, ArmorType.LEGGINGS)));
+
+    public static final DeferredItem<Item> THORITE_BOOTS = ITEMS.registerItem("thorite_boots", properties ->
+            new Item(properties.humanoidArmor(ModArmorMaterial.THORITE_ARMOR_MATERIAL, ArmorType.BOOTS)));
+
 
     static {
         REGISTERED_ITEMS.add(THORITE_SHARD);

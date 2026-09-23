@@ -1,6 +1,7 @@
 {
   "effect.exoticores.radiation": "Radiation",
   "block.exoticores.thorite_ore": "Thorite Ore",
+  "block.exoticores.thorite_block": "Thorite Block",
   "item.exoticores.thorite_shard": "Thorite Shard",
   "itemGroup.exoticores.exotic_ores_tab": "Exotic Ores Mod",
 

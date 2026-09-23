@@ -23,6 +23,8 @@ public class ModItems {
     // BLOCK ITEMS
     public static final DeferredItem<BlockItem> THORITE_ORE_ITEM =
             ITEMS.registerSimpleBlockItem("thorite_ore", ModBlocks.THORITE_ORE);
+    public static final DeferredItem<BlockItem> THORITE_BLOCK_ITEM =
+            ITEMS.registerSimpleBlockItem("thorite_block", ModBlocks.THORITE_BLOCK);
 
     // EQUIPMENT
     public static final DeferredItem<Item> THORITE_HELMET = ITEMS.registerItem("thorite_helmet", properties ->

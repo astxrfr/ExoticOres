@@ -2,7 +2,7 @@ package net.kirks.exoticores;
 
 import com.mojang.logging.LogUtils;
 import net.kirks.exoticores.registry.*;
-import net.minecraft.client.Minecraft;
+import net.kirks.exoticores.worldgen.ModRegistrySetBuilder;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -12,21 +12,23 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
+
+import java.util.Set;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(ExoticOres.MODID)
 public class ExoticOres {
     public static final String MODID = "exoticores";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public ExoticOres(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(this::onDataGather);
 
         ModBlocks.BLOCKS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
@@ -61,16 +63,19 @@ public class ExoticOres {
         LOGGER.info("Starting server setup");
     }
 
-    public void onDataGather(GatherDataEvent.Server event) {
-
-    }
-
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MODID, value = Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientDataGather(GatherDataEvent.Client event) {
             event.createProvider(output -> new ModModelProvider(output, MODID));
+
+            event.createProvider(output -> new DatapackBuiltinEntriesProvider(
+                    output,
+                    event.getLookupProvider(),
+                    ModRegistrySetBuilder.BUILDER,
+                    Set.of(ExoticOres.MODID)
+            ));
         }
 
         @SubscribeEvent

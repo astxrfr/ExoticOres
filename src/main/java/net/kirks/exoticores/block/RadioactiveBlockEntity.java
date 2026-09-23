@@ -1,11 +1,13 @@
 package net.kirks.exoticores.block;
 
+import net.kirks.exoticores.ExoticOres;
 import net.kirks.exoticores.registry.ModBlockEntities;
 import net.kirks.exoticores.registry.ModEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -23,7 +25,7 @@ public class RadioactiveBlockEntity extends BlockEntity {
         if (level.isClientSide()) return;
         AABB range = new AABB(pos).inflate(10);
         for (LivingEntity mob : level.getEntitiesOfClass(LivingEntity.class, range)) {
-            if (mob.hasEffect(ModEffects.RADIATION)) return;
+            if (mob.hasEffect(ModEffects.RADIATION)) continue;
             mob.addEffect(new MobEffectInstance(ModEffects.RADIATION, 3000, 0));
         }
     }

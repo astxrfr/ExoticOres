@@ -1,6 +1,7 @@
 package net.kirks.exoticores;
 
 import com.mojang.logging.LogUtils;
+import net.kirks.exoticores.datagen.ModModelProvider;
 import net.kirks.exoticores.registry.*;
 import net.kirks.exoticores.worldgen.ModRegistrySetBuilder;
 import net.neoforged.api.distmarker.Dist;

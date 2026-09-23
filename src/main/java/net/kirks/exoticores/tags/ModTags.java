@@ -1,4 +1,4 @@
-package net.kirks.exoticores.Tags;
+package net.kirks.exoticores.tags;
 
 import net.kirks.exoticores.ExoticOres;
 import net.minecraft.resources.Identifier;

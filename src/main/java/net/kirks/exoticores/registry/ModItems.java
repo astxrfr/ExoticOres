@@ -1,7 +1,6 @@
 package net.kirks.exoticores.registry;
 
 import net.kirks.exoticores.ExoticOres;
-import net.kirks.exoticores.item.ModArmorMaterial;
 import net.kirks.exoticores.item.RadioactiveItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -41,5 +40,10 @@ public class ModItems {
 
     static {
         REGISTERED_ITEMS.add(THORITE_SHARD);
+
+        REGISTERED_ITEMS.add(THORITE_HELMET);
+        REGISTERED_ITEMS.add(THORITE_CHESTPLATE);
+        REGISTERED_ITEMS.add(THORITE_LEGGINGS);
+        REGISTERED_ITEMS.add(THORITE_BOOTS);
     }
 }

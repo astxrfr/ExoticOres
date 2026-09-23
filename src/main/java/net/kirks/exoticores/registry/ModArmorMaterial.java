@@ -1,8 +1,8 @@
-package net.kirks.exoticores.item;
+package net.kirks.exoticores.registry;
 
 import com.google.common.collect.Maps;
 import net.kirks.exoticores.ExoticOres;
-import net.kirks.exoticores.Tags.ModTags;
+import net.kirks.exoticores.tags.ModTags;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;

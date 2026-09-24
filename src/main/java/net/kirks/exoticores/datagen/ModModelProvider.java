@@ -7,10 +7,7 @@ import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredItem;
+import org.jspecify.annotations.NonNull;
 
 public class ModModelProvider extends ModelProvider {
     public ModModelProvider(PackOutput output, String modId) {
@@ -18,13 +15,26 @@ public class ModModelProvider extends ModelProvider {
     }
 
     @Override
-    protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
-        for (DeferredBlock<? extends Block> deferredBlock : ModBlocks.REGISTERED_BLOCKS) {
-            blockModels.createTrivialCube(deferredBlock.get());
-        }
+    protected void registerModels(@NonNull BlockModelGenerators blockModels, @NonNull ItemModelGenerators itemModels) {
+        registerBlocks(blockModels);
 
-        for (DeferredItem<? extends Item> deferredItem : ModItems.REGISTERED_ITEMS) {
-            itemModels.generateFlatItem(deferredItem.get(), ModelTemplates.FLAT_ITEM);
-        }
+        registerItems(itemModels);
+    }
+
+    private void registerBlocks(BlockModelGenerators blockModels) {
+        // TRIVIAL CUBES
+        blockModels.createTrivialCube(ModBlocks.THORITE_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.THORITE_BLOCK.get());
+    }
+
+    private void registerItems(ItemModelGenerators itemModels) {
+        // FLAT ITEMS
+        itemModels.generateFlatItem(ModItems.THORITE_SHARD.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RAW_THORITE.get(), ModelTemplates.FLAT_ITEM);
+
+        itemModels.generateFlatItem(ModItems.THORITE_HELMET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.THORITE_CHESTPLATE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.THORITE_LEGGINGS.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.THORITE_BOOTS.get(), ModelTemplates.FLAT_ITEM);
     }
 }

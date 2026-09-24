@@ -9,16 +9,14 @@ import net.minecraft.world.item.equipment.ArmorType;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ExoticOres.MODID);
-    public static final List<DeferredItem<? extends Item>> REGISTERED_ITEMS = new ArrayList<>();
-    public static final List<DeferredItem<? extends BlockItem>> REGISTERED_BLOCK_ITEMS = new ArrayList<>();
 
-    public static final DeferredItem<RadioactiveItem> THORITE_SHARD =
-            ITEMS.registerItem("thorite_shard", RadioactiveItem::new, () -> new Item.Properties().rarity(Rarity.RARE));
+    // RAW MATERIALS
+    public static final DeferredItem<RadioactiveItem> RAW_THORITE =
+            ITEMS.registerItem("raw_thorite", RadioactiveItem::new, () -> new Item.Properties().rarity(Rarity.RARE));
+    public static final DeferredItem<Item> THORITE_SHARD =
+            ITEMS.registerItem("thorite_shard", Item::new, () -> new Item.Properties().rarity(Rarity.RARE));
 
     // BLOCK ITEMS
     public static final DeferredItem<BlockItem> THORITE_ORE_ITEM =
@@ -38,14 +36,4 @@ public class ModItems {
 
     public static final DeferredItem<Item> THORITE_BOOTS = ITEMS.registerItem("thorite_boots", properties ->
             new Item(properties.humanoidArmor(ModArmorMaterial.THORITE_ARMOR_MATERIAL, ArmorType.BOOTS)));
-
-
-    static {
-        REGISTERED_ITEMS.add(THORITE_SHARD);
-
-        REGISTERED_ITEMS.add(THORITE_HELMET);
-        REGISTERED_ITEMS.add(THORITE_CHESTPLATE);
-        REGISTERED_ITEMS.add(THORITE_LEGGINGS);
-        REGISTERED_ITEMS.add(THORITE_BOOTS);
-    }
 }

@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "exoticores:thorite_block"
+        "recipe": "exoticores:thorite_leggings"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "exoticores:thorite_block"
+      "exoticores:thorite_leggings"
     ]
   }
 }

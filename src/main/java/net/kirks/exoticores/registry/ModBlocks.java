@@ -1,6 +1,7 @@
 package net.kirks.exoticores.registry;
 
 import net.kirks.exoticores.ExoticOres;
+import net.kirks.exoticores.block.CatalyzerTableBlock;
 import net.kirks.exoticores.block.RadioactiveBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -23,9 +24,17 @@ public class ModBlocks {
             .strength(30.0F, 1500.0F)
             .sound(SoundType.AMETHYST)
             .mapColor(MapColor.COLOR_PURPLE);
+    private static final BlockBehaviour.Properties catalyzer_table_properties = BlockBehaviour.Properties.of()
+            .requiresCorrectToolForDrops()
+            .strength(20.0F, 300.0F)
+            .sound(SoundType.STONE)
+            .mapColor(MapColor.COLOR_GRAY);
 
     public static final DeferredBlock<RadioactiveBlock> THORITE_ORE =
             BLOCKS.registerBlock("thorite_ore", RadioactiveBlock::new, () -> thorite_ore_properties);
     public static final DeferredBlock<Block> THORITE_BLOCK =
             BLOCKS.registerBlock("thorite_block", Block::new, () -> thorite_block_properties);
+
+    public static final DeferredBlock<CatalyzerTableBlock> CATALYZER_TABLE =
+            BLOCKS.registerBlock("catalyzer_table", CatalyzerTableBlock::new, () -> catalyzer_table_properties);
 }

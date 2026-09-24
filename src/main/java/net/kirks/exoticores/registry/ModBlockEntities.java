@@ -1,6 +1,7 @@
 package net.kirks.exoticores.registry;
 
 import net.kirks.exoticores.ExoticOres;
+import net.kirks.exoticores.block.CatalyzerTableBlockEntity;
 import net.kirks.exoticores.block.RadioactiveBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -15,5 +16,11 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register(
                     "radioactive_block_entity",
                     () -> new BlockEntityType<>(RadioactiveBlockEntity::new, ModBlocks.THORITE_ORE.get())
+            );
+
+    public static final Supplier<BlockEntityType<CatalyzerTableBlockEntity>> CATALYZER_TABLE_BLOCK_ENTITY =
+            BLOCK_ENTITIES.register(
+                    "catalyzer_table_block_entity",
+                    () -> new BlockEntityType<>(CatalyzerTableBlockEntity::new, ModBlocks.CATALYZER_TABLE.get())
             );
 }

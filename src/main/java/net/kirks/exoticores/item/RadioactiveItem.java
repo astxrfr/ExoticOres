@@ -27,7 +27,7 @@ public class RadioactiveItem extends Item {
                 effect.attemptToAdvanceStage(player);
                 return;
             }
-            player.addEffect(new MobEffectInstance(ModEffects.RADIATION, 3000, 0));
+            player.addEffect(new MobEffectInstance(ModEffects.RADIATION, RadiationEffect.PER_STAGE_DURATION, 0));
         }
     }
 }

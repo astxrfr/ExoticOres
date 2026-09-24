@@ -13,6 +13,8 @@ public class RadiationEffect extends MobEffect {
     private static final int TICK_EFFECT_INTERVAL = 80;
     private static final int MAX_RADIATION_STAGE = 5;
 
+    public static final int PER_STAGE_DURATION = 12000;
+
     public RadiationEffect(MobEffectCategory category, int color) {
         super(category, color);
     }
@@ -22,7 +24,7 @@ public class RadiationEffect extends MobEffect {
 
         entity.addEffect(new MobEffectInstance(
                 currentInstance.getEffect(),
-                2400,
+                PER_STAGE_DURATION,
                 currentInstance.getAmplifier() - 1,
                 currentInstance.isAmbient(),
                 currentInstance.isVisible(),
@@ -34,7 +36,7 @@ public class RadiationEffect extends MobEffect {
         if (currentInstance.getAmplifier() < MAX_RADIATION_STAGE) {
             entity.addEffect(new MobEffectInstance(
                     currentInstance.getEffect(),
-                    2400,
+                    PER_STAGE_DURATION,
                     currentInstance.getAmplifier() + 1,
                     currentInstance.isAmbient(),
                     currentInstance.isVisible(),
@@ -43,7 +45,7 @@ public class RadiationEffect extends MobEffect {
         } else {
             entity.addEffect(new MobEffectInstance(
                     currentInstance.getEffect(),
-                    2400,
+                    PER_STAGE_DURATION,
                     currentInstance.getAmplifier(),
                     currentInstance.isAmbient(),
                     currentInstance.isVisible(),
@@ -60,7 +62,7 @@ public class RadiationEffect extends MobEffect {
         if(current == null) return;
 
         int remainingTicks = current.getDuration();
-        if(remainingTicks < 100) advanceStage(entity, current);
+        if(remainingTicks < (PER_STAGE_DURATION/5)*4) advanceStage(entity, current);
     }
 
     @Override

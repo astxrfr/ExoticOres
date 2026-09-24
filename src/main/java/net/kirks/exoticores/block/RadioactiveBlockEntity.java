@@ -27,7 +27,7 @@ public class RadioactiveBlockEntity extends BlockEntity {
                 effect.attemptToAdvanceStage(mob);
                 continue;
             }
-            mob.addEffect(new MobEffectInstance(ModEffects.RADIATION, 2400, 0));
+            mob.addEffect(new MobEffectInstance(ModEffects.RADIATION, RadiationEffect.PER_STAGE_DURATION, 0));
         }
     }
 }

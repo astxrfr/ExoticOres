@@ -1,12 +1,13 @@
 {
   "effect.exoticores.radiation": "Radiación",
-  "block.exoticores.thorite_ore": "Mena de Torita",
-  "block.exoticores.thorite_block": "Bloque de Torita",
-  "item.exoticores.thorite_shard": "Cristal de Torita",
+  "block.exoticores.thorite_ore": "Mena de Thorite",
+  "block.exoticores.thorite_block": "Bloque de Thorite",
+  "item.exoticores.thorite_shard": "Cristal de Thorite",
   "itemGroup.exoticores.exotic_ores_tab": "Exotic Ores Mod",
+  "item.exoticores.raw_thorite": "Mineral de Thorite",
 
-  "item.exoticores.thorite_helmet": "Casco de Torita",
-  "item.exoticores.thorite_chestplate": "Pechera de Torita",
-  "item.exoticores.thorite_leggings": "Pantalones de Torita",
-  "item.exoticores.thorite_boots": "Botas de Torita"
+  "item.exoticores.thorite_helmet": "Casco de Thorite",
+  "item.exoticores.thorite_chestplate": "Pechera de Thorite",
+  "item.exoticores.thorite_leggings": "Pantalones de Thorite",
+  "item.exoticores.thorite_boots": "Botas de Thorite"
 }

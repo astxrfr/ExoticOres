@@ -35,6 +35,7 @@ public class ModDataGenerationEvents {
         ));
 
         event.createProvider(ModBlockTagsProvider::new);
+        event.createProvider(ModItemTagsProvider::new);
 
         event.createProvider(ModRecipeProvider.Runner::new);
 

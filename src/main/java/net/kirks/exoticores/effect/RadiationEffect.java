@@ -5,23 +5,13 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 
 import javax.annotation.Nonnull;
-import java.util.Set;
 
 public class RadiationEffect extends MobEffect {
     private static final int TICK_EFFECT_INTERVAL = 80;
     private static final int MAX_RADIATION_STAGE = 5;
-
-    private static final Set<EntityType<?>> UNAFFECTED_ENTITIES = Set.of(
-            EntityTypes.ENDERMITE,
-            EntityTypes.ENDERMAN,
-            EntityTypes.ENDER_DRAGON,
-            EntityTypes.SHULKER
-    );
 
     public RadiationEffect(MobEffectCategory category, int color) {
         super(category, color);
@@ -64,7 +54,6 @@ public class RadiationEffect extends MobEffect {
 
     public void attemptToAdvanceStage(LivingEntity entity) {
         if (entity.level().isClientSide()) return;
-        if (UNAFFECTED_ENTITIES.contains(entity.getType())) return;
 
         MobEffectInstance current = entity.getEffect(ModEffects.RADIATION);
 
@@ -76,7 +65,6 @@ public class RadiationEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(@Nonnull ServerLevel serverLevel, LivingEntity mob, int amplification) {
-        if (UNAFFECTED_ENTITIES.contains(mob.getType())) return true;
 
         mob.hurtServer(
                 serverLevel,

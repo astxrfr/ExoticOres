@@ -17,14 +17,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NonNull Provider registries) {
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
-                ModBlocks.THORITE_ORE.getKey(),
-                ModBlocks.THORITE_BLOCK.getKey()
-        );
+        tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(ModBlocks.THORITE_ORE.getKey())
+                .add(ModBlocks.THORITE_BLOCK.getKey());
 
-        tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
-                ModBlocks.THORITE_ORE.getKey(),
-                ModBlocks.THORITE_BLOCK.getKey()
-        );
+        tag(BlockTags.NEEDS_DIAMOND_TOOL)
+                .add(ModBlocks.THORITE_ORE.getKey())
+                .add(ModBlocks.THORITE_BLOCK.getKey());
     }
 }

@@ -1,5 +1,6 @@
 package net.kirks.exoticores.item;
 
+import net.kirks.exoticores.effect.RadiationEffect;
 import net.kirks.exoticores.registry.ModEffects;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -19,8 +20,13 @@ public class RadioactiveItem extends Item {
     @Override
     public void inventoryTick(ItemStack itemStack, ServerLevel level, Entity owner, @Nullable EquipmentSlot slot) {
         if (level.isClientSide()) return;
+
         if (owner instanceof Player player) {
-            if (player.hasEffect(ModEffects.RADIATION)) return;
+            if (player.hasEffect(ModEffects.RADIATION)) {
+                RadiationEffect effect = (RadiationEffect) player.getEffect(ModEffects.RADIATION).getEffect().value();
+                effect.attemptToAdvanceStage(player);
+                return;
+            }
             player.addEffect(new MobEffectInstance(ModEffects.RADIATION, 3000, 0));
         }
     }

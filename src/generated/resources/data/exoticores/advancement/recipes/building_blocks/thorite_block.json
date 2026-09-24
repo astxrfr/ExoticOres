@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "exoticores:thorite_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_thorite_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "exoticores:raw_thorite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_thorite_ingot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "exoticores:thorite_block"
+    ]
+  }
+}

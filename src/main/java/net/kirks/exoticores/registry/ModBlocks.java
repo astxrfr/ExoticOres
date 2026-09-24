@@ -3,15 +3,11 @@ package net.kirks.exoticores.registry;
 import net.kirks.exoticores.ExoticOres;
 import net.kirks.exoticores.block.RadioactiveBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(ExoticOres.MODID);
@@ -22,7 +18,7 @@ public class ModBlocks {
             .sound(SoundType.AMETHYST)
             .mapColor(MapColor.COLOR_PURPLE);
     private static final BlockBehaviour.Properties thorite_block_properties = BlockBehaviour.Properties.of()
-            .lightLevel((val) -> 5)
+            .lightLevel((_) -> 5)
             .requiresCorrectToolForDrops()
             .strength(30.0F, 1500.0F)
             .sound(SoundType.AMETHYST)

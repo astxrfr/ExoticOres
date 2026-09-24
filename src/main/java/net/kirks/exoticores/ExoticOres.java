@@ -1,11 +1,8 @@
 package net.kirks.exoticores;
 
 import com.mojang.logging.LogUtils;
-import net.kirks.exoticores.datagen.ModDataGenerationEvents;
-import net.kirks.exoticores.datagen.ModModelProvider;
 import net.kirks.exoticores.effect.ModEffectEvents;
 import net.kirks.exoticores.registry.*;
-import net.kirks.exoticores.worldgen.ModRegistrySetBuilder;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -15,12 +12,8 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
-import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
-
-import java.util.Set;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(ExoticOres.MODID)

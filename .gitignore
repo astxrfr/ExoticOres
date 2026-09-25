@@ -3,6 +3,7 @@
 
 # Gradle cache folder
 .gradle
+gradle/wrapper/gradle-wrapper.jar
 
 # Gradle build folder
 build

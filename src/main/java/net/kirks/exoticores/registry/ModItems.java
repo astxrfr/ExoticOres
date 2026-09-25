@@ -23,6 +23,8 @@ public class ModItems {
             ITEMS.registerSimpleBlockItem("thorite_ore", ModBlocks.THORITE_ORE);
     public static final DeferredItem<BlockItem> THORITE_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("thorite_block", ModBlocks.THORITE_BLOCK);
+    public static final DeferredItem<BlockItem> CATALYZER_TABLE_BLOCK_ITEM =
+            ITEMS.registerSimpleBlockItem("catalyzer_table", ModBlocks.CATALYZER_TABLE_BLOCK);
 
     // EQUIPMENT
     public static final DeferredItem<Item> THORITE_HELMET = ITEMS.registerItem("thorite_helmet", properties ->
@@ -36,11 +38,4 @@ public class ModItems {
 
     public static final DeferredItem<Item> THORITE_BOOTS = ITEMS.registerItem("thorite_boots", properties ->
             new Item(properties.humanoidArmor(ModArmorMaterial.THORITE_ARMOR_MATERIAL, ArmorType.BOOTS)));
-
-    // BLOCK ITEMS
-    public static final DeferredItem<BlockItem> WATER_FURNACE_ITEM =
-            ITEMS.registerSimpleBlockItem(
-                    "water_furnace",
-                    ModBlocks.WATER_FURNACE
-            );
 }

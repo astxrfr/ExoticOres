@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.kirks.exoticores.block.WaterFurnaceBlock;
+import net.kirks.exoticores.block.CatalyzerTableBlock;
 
 
 public class ModBlocks {
@@ -19,6 +19,7 @@ public class ModBlocks {
             .strength(60.0F, 1500.0F)
             .sound(SoundType.AMETHYST)
             .mapColor(MapColor.COLOR_PURPLE);
+
     private static final BlockBehaviour.Properties THORITE_BLOCK_PROPERTIES = BlockBehaviour.Properties.of()
             .lightLevel((_) -> 5)
             .requiresCorrectToolForDrops()
@@ -26,23 +27,19 @@ public class ModBlocks {
             .sound(SoundType.AMETHYST)
             .mapColor(MapColor.COLOR_PURPLE);
 
+    private static final BlockBehaviour.Properties CATALYZER_TABLE_BLOCK_PROPERTIES = BlockBehaviour.Properties.of()
+            .strength(3.5F)
+            .requiresCorrectToolForDrops()
+            .sound(SoundType.STONE)
+            .mapColor(MapColor.COLOR_PURPLE);
+
     public static final DeferredBlock<RadioactiveBlock> THORITE_ORE =
             BLOCKS.registerBlock("thorite_ore", RadioactiveBlock::new, () -> THORITE_ORE_PROPERTIES);
+
     public static final DeferredBlock<Block> THORITE_BLOCK =
             BLOCKS.registerBlock("thorite_block", Block::new, () -> THORITE_BLOCK_PROPERTIES);
 
-    private static final BlockBehaviour.Properties WATER_FURNACE_PROPERTIES =
-            BlockBehaviour.Properties.of()
-                    .strength(3.5F)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.STONE)
-                    .mapColor(MapColor.COLOR_PURPLE);
-
-    public static final DeferredBlock<WaterFurnaceBlock> WATER_FURNACE =
-            BLOCKS.registerBlock(
-                    "water_furnace",
-                    WaterFurnaceBlock::new,
-                    () -> WATER_FURNACE_PROPERTIES
-            );
+    public static final DeferredBlock<CatalyzerTableBlock> CATALYZER_TABLE_BLOCK =
+            BLOCKS.registerBlock("catalyzer_table", CatalyzerTableBlock::new, () -> CATALYZER_TABLE_BLOCK_PROPERTIES);
 }
 

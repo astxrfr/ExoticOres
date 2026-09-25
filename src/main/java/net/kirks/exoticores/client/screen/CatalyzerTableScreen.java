@@ -1,7 +1,7 @@
 package net.kirks.exoticores.client.screen;
 
 import net.kirks.exoticores.ExoticOres;
-import net.kirks.exoticores.menu.WaterFurnaceMenu;
+import net.kirks.exoticores.menu.CatalyzerTableMenu;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -9,13 +9,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
-public class WaterFurnaceScreen
-        extends AbstractContainerScreen<WaterFurnaceMenu> {
+public class CatalyzerTableScreen
+        extends AbstractContainerScreen<CatalyzerTableMenu> {
 
     private static final Identifier BACKGROUND_TEXTURE =
             Identifier.fromNamespaceAndPath(
                     ExoticOres.MODID,
-                    "textures/gui/container/water_furnace.png"
+                    "textures/gui/container/catalyzer_table.png"
             );
 
     private static final Identifier LIT_PROGRESS_TEXTURE =
@@ -30,8 +30,8 @@ public class WaterFurnaceScreen
                     "textures/gui/sprites/container/furnace/burn_progress.png"
             );
 
-    public WaterFurnaceScreen(
-            WaterFurnaceMenu menu,
+    public CatalyzerTableScreen(
+            CatalyzerTableMenu menu,
             Inventory playerInventory,
             Component title
     ) {

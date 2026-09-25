@@ -1,10 +1,9 @@
-package net.kirks.exoticores.block;
+package net.kirks.exoticores.block.entity;
 
 import net.kirks.exoticores.effect.RadiationEffect;
 import net.kirks.exoticores.registry.ModBlockEntities;
 import net.kirks.exoticores.registry.ModEffects;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;

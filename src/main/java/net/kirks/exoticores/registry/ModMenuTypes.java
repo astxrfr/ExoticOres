@@ -1,7 +1,7 @@
 package net.kirks.exoticores.registry;
 
 import net.kirks.exoticores.ExoticOres;
-import net.kirks.exoticores.menu.WaterFurnaceMenu;
+import net.kirks.exoticores.menu.CatalyzerTableMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
@@ -17,11 +17,11 @@ public final class ModMenuTypes {
                     ExoticOres.MODID
             );
 
-    public static final Supplier<MenuType<WaterFurnaceMenu>> WATER_FURNACE_MENU =
+    public static final Supplier<MenuType<CatalyzerTableMenu>> CATALYZER_TABLE_MENU =
             MENU_TYPES.register(
-                    "water_furnace",
+                    "catalyzer_table_menu",
                     () -> new MenuType<>(
-                            WaterFurnaceMenu::new,
+                            CatalyzerTableMenu::new,
                             FeatureFlags.DEFAULT_FLAGS
                     )
             );

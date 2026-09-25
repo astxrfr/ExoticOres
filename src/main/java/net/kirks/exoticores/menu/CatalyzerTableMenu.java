@@ -12,7 +12,7 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
-public class WaterFurnaceMenu extends AbstractContainerMenu {
+public class CatalyzerTableMenu extends AbstractContainerMenu {
 
     private static final int FURNACE_SLOT_COUNT = 4;
     private static final int DATA_COUNT = 4;
@@ -20,7 +20,7 @@ public class WaterFurnaceMenu extends AbstractContainerMenu {
     private final Container container;
     private final ContainerData data;
 
-    public WaterFurnaceMenu(
+    public CatalyzerTableMenu(
             int containerId,
             Inventory playerInventory
     ) {
@@ -32,13 +32,13 @@ public class WaterFurnaceMenu extends AbstractContainerMenu {
         );
     }
 
-    public WaterFurnaceMenu(
+    public CatalyzerTableMenu(
             int containerId,
             Inventory playerInventory,
             Container container,
             ContainerData data
     ) {
-        super(ModMenuTypes.WATER_FURNACE_MENU.get(), containerId);
+        super(ModMenuTypes.CATALYZER_TABLE_MENU.get(), containerId);
 
         checkContainerSize(container, FURNACE_SLOT_COUNT);
         checkContainerDataCount(data, DATA_COUNT);

@@ -3,6 +3,10 @@
     "exoticores:thorite_helmet",
     "exoticores:thorite_chestplate",
     "exoticores:thorite_leggings",
-    "exoticores:thorite_boots"
+    "exoticores:thorite_boots",
+    "exoticores:radiation_suit_helmet",
+    "exoticores:radiation_suit_chestplate",
+    "exoticores:radiation_suit_leggings",
+    "exoticores:radiation_suit_boots"
   ]
 }

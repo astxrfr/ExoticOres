@@ -1,32 +1,32 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "exoticores:thorite_chestplate"
-      },
-      "trigger": "minecraft:recipe_unlocked"
-    },
-    "has_thorite_shard": {
+    "has_lead_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "exoticores:thorite_shard"
+            "items": "exoticores:lead_ingot"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "exoticores:radiation_suit_boots"
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_thorite_shard"
+      "has_lead_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "exoticores:thorite_chestplate"
+      "exoticores:radiation_suit_boots"
     ]
   }
 }

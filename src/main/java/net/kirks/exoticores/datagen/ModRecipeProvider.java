@@ -7,6 +7,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.world.item.Item;
 import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
@@ -20,13 +21,54 @@ public class ModRecipeProvider extends RecipeProvider {
     protected void buildRecipes() {
         var items = registries.lookupOrThrow(Registries.ITEM);
 
+        armorRecipes(items);
+        storageRecipes(items);
+    }
+
+    private void armorRecipes(HolderLookup.RegistryLookup<Item> items) {
+        // THORITE HELMET
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, ModItems.THORITE_HELMET)
+                .pattern("III")
+                .pattern("I I")
+                .define('I', ModItems.THORITE_SHARD)
+                .unlockedBy("has_thorite_ingot", has(ModItems.THORITE_SHARD))
+                .save(output);
+
+        // THORITE CHESTPLATE
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, ModItems.THORITE_CHESTPLATE)
+                .pattern("I I")
+                .pattern("III")
+                .pattern("III")
+                .define('I', ModItems.THORITE_SHARD)
+                .unlockedBy("has_thorite_ingot", has(ModItems.THORITE_SHARD))
+                .save(output);
+
+        // THORITE LEGGINGS
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, ModItems.THORITE_LEGGINGS)
+                .pattern("III")
+                .pattern("I I")
+                .pattern("I I")
+                .define('I', ModItems.THORITE_SHARD)
+                .unlockedBy("has_thorite_ingot", has(ModItems.THORITE_SHARD))
+                .save(output);
+
+        // THORITE BOOTS
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, ModItems.THORITE_BOOTS)
+                .pattern("I I")
+                .pattern("I I")
+                .define('I', ModItems.THORITE_SHARD)
+                .unlockedBy("has_thorite_ingot", has(ModItems.THORITE_SHARD))
+                .save(output);
+    }
+
+    private void storageRecipes(HolderLookup.RegistryLookup<Item> items) {
         // 1 THORITE_BLOCK
         ShapedRecipeBuilder.shaped(items, RecipeCategory.BUILDING_BLOCKS, ModBlocks.THORITE_BLOCK)
                 .pattern("III")
                 .pattern("III")
                 .pattern("III")
                 .define('I', ModItems.THORITE_SHARD)
-                .unlockedBy("has_thorite_ingot", has(ModItems.RAW_THORITE))
+                .unlockedBy("has_thorite_ingot", has(ModItems.THORITE_SHARD))
                 .save(output);
 
         // 9 THORITE SHARDS

@@ -17,6 +17,10 @@ public class ModItems {
             ITEMS.registerItem("raw_thorite", RadioactiveItem::new, () -> new Item.Properties().rarity(Rarity.RARE));
     public static final DeferredItem<Item> THORITE_SHARD =
             ITEMS.registerItem("thorite_shard", Item::new, () -> new Item.Properties().rarity(Rarity.RARE));
+    public static final DeferredItem<Item> RAW_LEAD =
+            ITEMS.registerItem("raw_lead", Item::new, Item.Properties::new);
+    public static final DeferredItem<Item> LEAD_INGOT =
+            ITEMS.registerItem("lead_ingot", Item::new, Item.Properties::new);
 
     // BLOCK ITEMS
     public static final DeferredItem<BlockItem> THORITE_ORE_ITEM =
@@ -25,6 +29,10 @@ public class ModItems {
             ITEMS.registerSimpleBlockItem("thorite_block", ModBlocks.THORITE_BLOCK);
     public static final DeferredItem<BlockItem> CATALYZER_TABLE_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("catalyzer_table", ModBlocks.CATALYZER_TABLE_BLOCK);
+    public static final DeferredItem<BlockItem> LEAD_ORE_ITEM =
+            ITEMS.registerSimpleBlockItem("lead_ore", ModBlocks.LEAD_ORE);
+    public static final DeferredItem<BlockItem> DEEPSLATE_LEAD_ORE_ITEM =
+            ITEMS.registerSimpleBlockItem("deepslate_lead_ore", ModBlocks.DEEPSLATE_LEAD_ORE);
 
     // EQUIPMENT
     public static final DeferredItem<Item> THORITE_HELMET = ITEMS.registerItem("thorite_helmet", properties ->

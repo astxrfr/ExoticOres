@@ -25,6 +25,8 @@ public class ModModelProvider extends ModelProvider {
         // TRIVIAL CUBES
         blockModels.createTrivialCube(ModBlocks.THORITE_ORE.get());
         blockModels.createTrivialCube(ModBlocks.THORITE_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.LEAD_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.DEEPSLATE_LEAD_ORE.get());
 
         // TRIVIAL BLOCKS
         blockModels.createHorizontallyRotatedBlock(
@@ -45,6 +47,9 @@ public class ModModelProvider extends ModelProvider {
         // FLAT ITEMS
         itemModels.generateFlatItem(ModItems.THORITE_SHARD.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RAW_THORITE.get(), ModelTemplates.FLAT_ITEM);
+
+        itemModels.generateFlatItem(ModItems.RAW_LEAD.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.LEAD_INGOT.get(), ModelTemplates.FLAT_ITEM);
 
         itemModels.generateFlatItem(ModItems.THORITE_HELMET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.THORITE_CHESTPLATE.get(), ModelTemplates.FLAT_ITEM);

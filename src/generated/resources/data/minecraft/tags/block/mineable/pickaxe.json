@@ -1,6 +1,8 @@
 {
   "values": [
     "exoticores:thorite_ore",
-    "exoticores:thorite_block"
+    "exoticores:thorite_block",
+    "exoticores:lead_ore",
+    "exoticores:deepslate_lead_ore"
   ]
 }

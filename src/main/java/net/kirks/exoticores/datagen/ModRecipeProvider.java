@@ -8,6 +8,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.CookingBookCategory;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
@@ -23,6 +25,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
         armorRecipes(items);
         storageRecipes(items);
+        cookingRecipes(items);
     }
 
     private void armorRecipes(HolderLookup.RegistryLookup<Item> items) {
@@ -76,6 +79,28 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(ModBlocks.THORITE_BLOCK)
                 .unlockedBy("has_thorite_block", has(ModBlocks.THORITE_BLOCK))
                 .save(output);
+    }
+
+    private void cookingRecipes(HolderLookup.RegistryLookup<Item> items) {
+        // LEAD
+        SimpleCookingRecipeBuilder.smelting(
+                Ingredient.of(ModItems.RAW_LEAD.get()),
+                RecipeCategory.MISC,
+                CookingBookCategory.MISC,
+                ModItems.LEAD_INGOT.get(),
+                0.5F,
+                200)
+                .unlockedBy("has_raw_lead", has(ModItems.RAW_LEAD))
+                .save(output, ExoticOres.MODID+":lead_ingot_from_smelting");
+        SimpleCookingRecipeBuilder.blasting(
+                Ingredient.of(ModItems.RAW_LEAD.get()),
+                RecipeCategory.MISC,
+                CookingBookCategory.MISC,
+                ModItems.LEAD_INGOT.get(),
+                0.5F,
+                100)
+                .unlockedBy("has_raw_lead", has(ModItems.RAW_LEAD))
+                .save(output, ExoticOres.MODID+":lead_ingot_from_blasting");
     }
 
     public static class Runner extends RecipeProvider.Runner {

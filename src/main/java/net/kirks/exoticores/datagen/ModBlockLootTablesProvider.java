@@ -26,6 +26,14 @@ public class ModBlockLootTablesProvider extends BlockLootSubProvider {
                 ModBlocks.THORITE_ORE.get(),
                 createOreDrop(ModBlocks.THORITE_ORE.get(), ModItems.RAW_THORITE.get())
         );
+        add(
+                ModBlocks.LEAD_ORE.get(),
+                createOreDrop(ModBlocks.LEAD_ORE.get(), ModItems.RAW_LEAD.get())
+        );
+        add(
+                ModBlocks.DEEPSLATE_LEAD_ORE.get(),
+                createOreDrop(ModBlocks.DEEPSLATE_LEAD_ORE.get(), ModItems.RAW_LEAD.get())
+        );
     }
 
     @Override

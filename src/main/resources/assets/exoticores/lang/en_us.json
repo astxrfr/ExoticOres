@@ -1,10 +1,17 @@
 {
+  "itemGroup.exoticores.exotic_ores_tab": "Exotic Ores Mod",
+
   "effect.exoticores.radiation": "Radiation",
   "block.exoticores.thorite_ore": "Thorite Ore",
+  "item.exoticores.raw_thorite": "Raw Thorite",
   "block.exoticores.thorite_block": "Thorite Block",
   "item.exoticores.thorite_shard": "Thorite Shard",
-  "itemGroup.exoticores.exotic_ores_tab": "Exotic Ores Mod",
-  "item.exoticores.raw_thorite": "Raw Thorite",
+  "block.exoticores.catalyzer_table": "Catalyzer Table",
+
+  "item.exoticores.raw_lead": "Raw Lead",
+  "item.exoticores.lead_ingot": "Lead Ingot",
+  "block.exoticores.lead_ore": "Lead Ore",
+  "block.exoticores.deepslate_lead_ore": "Deepslate Lead Ore",
 
   "item.exoticores.thorite_helmet": "Thorite Helmet",
   "item.exoticores.thorite_chestplate": "Thorite Chestplate",

@@ -1,6 +1,6 @@
 package net.kirks.exoticores.block.entity;
 
-import net.kirks.exoticores.menu.WaterFurnaceMenu;
+import net.kirks.exoticores.menu.CatalyzerTableMenu;
 import net.kirks.exoticores.registry.ModBlockEntities;
 import net.kirks.exoticores.registry.ModItems;
 import net.minecraft.core.BlockPos;
@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
-public class WaterFurnaceBlockEntity extends BlockEntity
+public class CatalyzerTableBlockEntity extends BlockEntity
         implements Container, MenuProvider {
 
     public static final int INPUT_SLOT = 0;
@@ -86,12 +86,12 @@ public class WaterFurnaceBlockEntity extends BlockEntity
                 }
             };
 
-    public WaterFurnaceBlockEntity(
+    public CatalyzerTableBlockEntity(
             BlockPos pos,
             BlockState state
     ) {
         super(
-                ModBlockEntities.WATER_FURNACE.get(),
+                ModBlockEntities.CATALYZER_TABLE_BLOCK_ENTITY.get(),
                 pos,
                 state
         );
@@ -101,7 +101,7 @@ public class WaterFurnaceBlockEntity extends BlockEntity
             Level level,
             BlockPos pos,
             BlockState state,
-            WaterFurnaceBlockEntity blockEntity
+            CatalyzerTableBlockEntity blockEntity
     ) {
         boolean changed = false;
 
@@ -410,7 +410,7 @@ public class WaterFurnaceBlockEntity extends BlockEntity
             Inventory playerInventory,
             Player player
     ) {
-        return new WaterFurnaceMenu(
+        return new CatalyzerTableMenu(
                 containerId,
                 playerInventory,
                 this,

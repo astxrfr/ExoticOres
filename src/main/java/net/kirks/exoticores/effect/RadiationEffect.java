@@ -5,23 +5,15 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 
 import javax.annotation.Nonnull;
-import java.util.Set;
 
 public class RadiationEffect extends MobEffect {
     private static final int TICK_EFFECT_INTERVAL = 80;
     private static final int MAX_RADIATION_STAGE = 5;
 
-    private static final Set<EntityType<?>> UNAFFECTED_ENTITIES = Set.of(
-            EntityTypes.ENDERMITE,
-            EntityTypes.ENDERMAN,
-            EntityTypes.ENDER_DRAGON,
-            EntityTypes.SHULKER
-    );
+    public static final int PER_STAGE_DURATION = 12000;
 
     public RadiationEffect(MobEffectCategory category, int color) {
         super(category, color);
@@ -32,7 +24,7 @@ public class RadiationEffect extends MobEffect {
 
         entity.addEffect(new MobEffectInstance(
                 currentInstance.getEffect(),
-                2400,
+                PER_STAGE_DURATION,
                 currentInstance.getAmplifier() - 1,
                 currentInstance.isAmbient(),
                 currentInstance.isVisible(),
@@ -44,7 +36,7 @@ public class RadiationEffect extends MobEffect {
         if (currentInstance.getAmplifier() < MAX_RADIATION_STAGE) {
             entity.addEffect(new MobEffectInstance(
                     currentInstance.getEffect(),
-                    2400,
+                    PER_STAGE_DURATION,
                     currentInstance.getAmplifier() + 1,
                     currentInstance.isAmbient(),
                     currentInstance.isVisible(),
@@ -53,7 +45,7 @@ public class RadiationEffect extends MobEffect {
         } else {
             entity.addEffect(new MobEffectInstance(
                     currentInstance.getEffect(),
-                    2400,
+                    PER_STAGE_DURATION,
                     currentInstance.getAmplifier(),
                     currentInstance.isAmbient(),
                     currentInstance.isVisible(),
@@ -64,19 +56,17 @@ public class RadiationEffect extends MobEffect {
 
     public void attemptToAdvanceStage(LivingEntity entity) {
         if (entity.level().isClientSide()) return;
-        if (UNAFFECTED_ENTITIES.contains(entity.getType())) return;
 
         MobEffectInstance current = entity.getEffect(ModEffects.RADIATION);
 
         if(current == null) return;
 
         int remainingTicks = current.getDuration();
-        if(remainingTicks < 100) advanceStage(entity, current);
+        if(remainingTicks < (PER_STAGE_DURATION/5)*4) advanceStage(entity, current);
     }
 
     @Override
     public boolean applyEffectTick(@Nonnull ServerLevel serverLevel, LivingEntity mob, int amplification) {
-        if (UNAFFECTED_ENTITIES.contains(mob.getType())) return true;
 
         mob.hurtServer(
                 serverLevel,

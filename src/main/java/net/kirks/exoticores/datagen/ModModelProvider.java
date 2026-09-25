@@ -5,7 +5,7 @@ import net.kirks.exoticores.registry.ModItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
-import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.*;
 import net.minecraft.data.PackOutput;
 import org.jspecify.annotations.NonNull;
 
@@ -25,6 +25,20 @@ public class ModModelProvider extends ModelProvider {
         // TRIVIAL CUBES
         blockModels.createTrivialCube(ModBlocks.THORITE_ORE.get());
         blockModels.createTrivialCube(ModBlocks.THORITE_BLOCK.get());
+
+        // TRIVIAL BLOCKS
+        blockModels.createHorizontallyRotatedBlock(
+                ModBlocks.CATALYZER_TABLE_BLOCK.get(),
+                TexturedModel.createDefault(block -> new TextureMapping()
+                    .put(TextureSlot.UP, TextureMapping.getBlockTexture(block, "_up"))
+                    .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(block, "_down"))
+                    .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(block, "_north"))
+                    .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(block, "_south"))
+                    .put(TextureSlot.EAST, TextureMapping.getBlockTexture(block, "_east"))
+                    .put(TextureSlot.WEST, TextureMapping.getBlockTexture(block, "_west"))
+                    .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_north")),
+                ModelTemplates.CUBE
+            ));
     }
 
     private void registerItems(ItemModelGenerators itemModels) {

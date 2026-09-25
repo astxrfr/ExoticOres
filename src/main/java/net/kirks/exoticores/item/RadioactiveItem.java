@@ -12,6 +12,8 @@ import net.minecraft.world.item.ItemStack;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
+import java.util.Objects;
+
 public class RadioactiveItem extends Item {
     public RadioactiveItem(Properties properties) {
         super(properties);
@@ -23,11 +25,12 @@ public class RadioactiveItem extends Item {
 
         if (owner instanceof Player player) {
             if (player.hasEffect(ModEffects.RADIATION)) {
-                RadiationEffect effect = (RadiationEffect) player.getEffect(ModEffects.RADIATION).getEffect().value();
+                MobEffectInstance effectInstance = Objects.requireNonNull(player.getEffect(ModEffects.RADIATION));
+                RadiationEffect effect = (RadiationEffect) effectInstance.getEffect().value();
                 effect.attemptToAdvanceStage(player);
                 return;
             }
-            player.addEffect(new MobEffectInstance(ModEffects.RADIATION, 3000, 0));
+            player.addEffect(new MobEffectInstance(ModEffects.RADIATION, RadiationEffect.PER_STAGE_DURATION, 0));
         }
     }
 }

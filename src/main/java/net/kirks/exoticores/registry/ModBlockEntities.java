@@ -1,8 +1,8 @@
 package net.kirks.exoticores.registry;
 
 import net.kirks.exoticores.ExoticOres;
-import net.kirks.exoticores.block.RadioactiveBlockEntity;
-import net.kirks.exoticores.block.entity.WaterFurnaceBlockEntity;
+import net.kirks.exoticores.block.entity.RadioactiveBlockEntity;
+import net.kirks.exoticores.block.entity.CatalyzerTableBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -27,13 +27,13 @@ public class ModBlockEntities {
                     )
             );
 
-    public static final Supplier<BlockEntityType<WaterFurnaceBlockEntity>>
-            WATER_FURNACE =
+    public static final Supplier<BlockEntityType<CatalyzerTableBlockEntity>>
+            CATALYZER_TABLE_BLOCK_ENTITY =
             BLOCK_ENTITIES.register(
-                    "water_furnace",
+                    "catalyzer_table_entity",
                     () -> new BlockEntityType<>(
-                            WaterFurnaceBlockEntity::new,
-                            ModBlocks.WATER_FURNACE.get()
+                            CatalyzerTableBlockEntity::new,
+                            ModBlocks.CATALYZER_TABLE_BLOCK.get()
                     )
             );
 

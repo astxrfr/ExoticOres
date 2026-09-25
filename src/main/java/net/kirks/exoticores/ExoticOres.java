@@ -14,7 +14,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
-import net.kirks.exoticores.client.screen.WaterFurnaceScreen;
+import net.kirks.exoticores.client.screen.CatalyzerTableScreen;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -77,8 +77,8 @@ public class ExoticOres {
                 RegisterMenuScreensEvent event
         ) {
             event.register(
-                    ModMenuTypes.WATER_FURNACE_MENU.get(),
-                    WaterFurnaceScreen::new
+                    ModMenuTypes.CATALYZER_TABLE_MENU.get(),
+                    CatalyzerTableScreen::new
             );
         }
     }

@@ -18,6 +18,8 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_THORITE_ORE =
             registerKey("add_thorite_ore");
+    public static final ResourceKey<BiomeModifier> ADD_LEAD_ORE =
+            registerKey("add_lead_ore");
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
@@ -26,6 +28,12 @@ public class ModBiomeModifiers {
         context.register(ADD_THORITE_ORE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_END),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.THORITE_ORE_PLACED)),
+                GenerationStep.Decoration.UNDERGROUND_ORES
+        ));
+
+        context.register(ADD_LEAD_ORE, new BiomeModifiers.AddFeaturesBiomeModifier(
+                biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.LEAD_ORE_PLACED)),
                 GenerationStep.Decoration.UNDERGROUND_ORES
         ));
     }

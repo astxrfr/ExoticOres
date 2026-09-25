@@ -16,5 +16,10 @@
   "item.exoticores.thorite_helmet": "Casco de Thorite",
   "item.exoticores.thorite_chestplate": "Pechera de Thorite",
   "item.exoticores.thorite_leggings": "Pantalones de Thorite",
-  "item.exoticores.thorite_boots": "Botas de Thorite"
+  "item.exoticores.thorite_boots": "Botas de Thorite",
+
+  "item.exoticores.radiation_suit_helmet": "Casco de Traje de Radiación",
+  "item.exoticores.radiation_suit_chestplate": "Pechera de Traje de Radiación",
+  "item.exoticores.radiation_suit_leggings": "Pantalones de Traje de Radiación",
+  "item.exoticores.radiation_suit_boots": "Botas de Traje de Radiación"
 }

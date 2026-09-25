@@ -36,4 +36,11 @@ public class ModItems {
 
     public static final DeferredItem<Item> THORITE_BOOTS = ITEMS.registerItem("thorite_boots", properties ->
             new Item(properties.humanoidArmor(ModArmorMaterial.THORITE_ARMOR_MATERIAL, ArmorType.BOOTS)));
+
+    // BLOCK ITEMS
+    public static final DeferredItem<BlockItem> WATER_FURNACE_ITEM =
+            ITEMS.registerSimpleBlockItem(
+                    "water_furnace",
+                    ModBlocks.WATER_FURNACE
+            );
 }

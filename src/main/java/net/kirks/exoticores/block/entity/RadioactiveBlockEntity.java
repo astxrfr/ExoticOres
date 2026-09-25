@@ -11,6 +11,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
+import java.util.Objects;
+
 public class RadioactiveBlockEntity extends BlockEntity {
     public RadioactiveBlockEntity(BlockPos worldPosition, BlockState blockState) {
         super(ModBlockEntities.RADIOACTIVE_BLOCK_ENTITY.get(), worldPosition, blockState);
@@ -22,7 +24,8 @@ public class RadioactiveBlockEntity extends BlockEntity {
 
         for (LivingEntity mob : level.getEntitiesOfClass(LivingEntity.class, range)) {
             if (mob.hasEffect(ModEffects.RADIATION)) {
-                RadiationEffect effect = (RadiationEffect) mob.getEffect(ModEffects.RADIATION).getEffect().value();
+                MobEffectInstance effectInstance = Objects.requireNonNull(mob.getEffect(ModEffects.RADIATION));
+                RadiationEffect effect = (RadiationEffect) effectInstance.getEffect().value();
                 effect.attemptToAdvanceStage(mob);
                 continue;
             }

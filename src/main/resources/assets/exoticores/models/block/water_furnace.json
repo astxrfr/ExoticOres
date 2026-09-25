@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "exoticores:block/water_furnace_north",
+    "north": "exoticores:block/water_furnace_north",
+    "south": "exoticores:block/water_furnace_sur",
+    "east": "exoticores:block/water_furnace_east",
+    "west": "exoticores:block/water_furnace_west",
+    "up": "exoticores:block/water_furnace_up",
+    "down": "exoticores:block/water_furnace_down"
+  }
+}

@@ -14,6 +14,8 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
+import net.kirks.exoticores.client.screen.WaterFurnaceScreen;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(ExoticOres.MODID)
@@ -31,6 +33,7 @@ public class ExoticOres {
         ModEffects.MOB_EFFECTS.register(modEventBus);
         ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         ModCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
+        ModMenuTypes.MENU_TYPES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (ExoticOres) to respond directly to events.
@@ -66,8 +69,17 @@ public class ExoticOres {
 
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            // Some client setup code
             LOGGER.info("Starting client setup");
+        }
+
+        @SubscribeEvent
+        public static void registerScreens(
+                RegisterMenuScreensEvent event
+        ) {
+            event.register(
+                    ModMenuTypes.WATER_FURNACE_MENU.get(),
+                    WaterFurnaceScreen::new
+            );
         }
     }
 }

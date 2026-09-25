@@ -55,5 +55,10 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.THORITE_CHESTPLATE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.THORITE_LEGGINGS.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.THORITE_BOOTS.get(), ModelTemplates.FLAT_ITEM);
+
+        itemModels.generateFlatItem(ModItems.RADIATION_SUIT_HELMET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RADIATION_SUIT_CHESPLATE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RADIATION_SUIT_LEGGINGS.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RADIATION_SUIT_BOOTS.get(), ModelTemplates.FLAT_ITEM);
     }
 }

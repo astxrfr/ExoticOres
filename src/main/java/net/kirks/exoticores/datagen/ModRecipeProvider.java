@@ -34,7 +34,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("III")
                 .pattern("I I")
                 .define('I', ModItems.THORITE_SHARD)
-                .unlockedBy("has_thorite_ingot", has(ModItems.THORITE_SHARD))
+                .unlockedBy("has_thorite_shard", has(ModItems.THORITE_SHARD))
                 .save(output);
 
         // THORITE CHESTPLATE
@@ -43,7 +43,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("III")
                 .pattern("III")
                 .define('I', ModItems.THORITE_SHARD)
-                .unlockedBy("has_thorite_ingot", has(ModItems.THORITE_SHARD))
+                .unlockedBy("has_thorite_shard", has(ModItems.THORITE_SHARD))
                 .save(output);
 
         // THORITE LEGGINGS
@@ -52,7 +52,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("I I")
                 .pattern("I I")
                 .define('I', ModItems.THORITE_SHARD)
-                .unlockedBy("has_thorite_ingot", has(ModItems.THORITE_SHARD))
+                .unlockedBy("has_thorite_shard", has(ModItems.THORITE_SHARD))
                 .save(output);
 
         // THORITE BOOTS
@@ -60,7 +60,41 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("I I")
                 .pattern("I I")
                 .define('I', ModItems.THORITE_SHARD)
-                .unlockedBy("has_thorite_ingot", has(ModItems.THORITE_SHARD))
+                .unlockedBy("has_thorite_shard", has(ModItems.THORITE_SHARD))
+                .save(output);
+
+        // RAD SUIT HELMET
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, ModItems.RADIATION_SUIT_HELMET)
+                .pattern("III")
+                .pattern("I I")
+                .define('I', ModItems.LEAD_INGOT)
+                .unlockedBy("has_lead_ingot", has(ModItems.LEAD_INGOT))
+                .save(output);
+
+        // RAD SUIT CHESTPLATE
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, ModItems.RADIATION_SUIT_CHESPLATE)
+                .pattern("I I")
+                .pattern("III")
+                .pattern("III")
+                .define('I', ModItems.LEAD_INGOT)
+                .unlockedBy("has_lead_ingot", has(ModItems.LEAD_INGOT))
+                .save(output);
+
+        // RAD SUIT LEGGINGS
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, ModItems.RADIATION_SUIT_LEGGINGS)
+                .pattern("III")
+                .pattern("I I")
+                .pattern("I I")
+                .define('I', ModItems.LEAD_INGOT)
+                .unlockedBy("has_lead_ingot", has(ModItems.LEAD_INGOT))
+                .save(output);
+
+        // RAD SUIT BOOTS
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, ModItems.RADIATION_SUIT_BOOTS)
+                .pattern("I I")
+                .pattern("I I")
+                .define('I', ModItems.LEAD_INGOT)
+                .unlockedBy("has_lead_ingot", has(ModItems.LEAD_INGOT))
                 .save(output);
     }
 

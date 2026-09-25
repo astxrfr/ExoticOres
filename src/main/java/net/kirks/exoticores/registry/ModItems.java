@@ -46,4 +46,16 @@ public class ModItems {
 
     public static final DeferredItem<Item> THORITE_BOOTS = ITEMS.registerItem("thorite_boots", properties ->
             new Item(properties.humanoidArmor(ModArmorMaterial.THORITE_ARMOR_MATERIAL, ArmorType.BOOTS)));
+
+    public static final DeferredItem<Item> RADIATION_SUIT_HELMET = ITEMS.registerItem("radiation_suit_helmet", properties ->
+            new Item(properties.humanoidArmor(ModArmorMaterial.RADIATION_SUIT_MATERIAL, ArmorType.HELMET)));
+
+    public static final DeferredItem<Item> RADIATION_SUIT_CHESPLATE = ITEMS.registerItem("radiation_suit_chestplate", properties ->
+            new Item(properties.humanoidArmor(ModArmorMaterial.RADIATION_SUIT_MATERIAL, ArmorType.CHESTPLATE)));
+
+    public static final DeferredItem<Item> RADIATION_SUIT_LEGGINGS = ITEMS.registerItem("radiation_suit_leggings", properties ->
+            new Item(properties.humanoidArmor(ModArmorMaterial.RADIATION_SUIT_MATERIAL, ArmorType.LEGGINGS)));
+
+    public static final DeferredItem<Item> RADIATION_SUIT_BOOTS = ITEMS.registerItem("radiation_suit_boots", properties ->
+            new Item(properties.humanoidArmor(ModArmorMaterial.RADIATION_SUIT_MATERIAL, ArmorType.BOOTS)));
 }

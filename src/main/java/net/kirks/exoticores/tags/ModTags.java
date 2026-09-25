@@ -20,6 +20,7 @@ public class ModTags {
 
     public static class Items {
         public static final TagKey<Item> THORITE_REPAIRABLE = createTag("thorite_repairable");
+        public static final TagKey<Item> LEAD_REPAIRABLE = createTag("lead_repairable");
         public static final TagKey<Item> RADIATION_PROTECTIVE = createTag("radiation_protective");
 
         private static TagKey<Item> createTag(String name) {

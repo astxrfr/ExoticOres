@@ -21,6 +21,10 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .add(ModItems.THORITE_HELMET.getKey())
                 .add(ModItems.THORITE_CHESTPLATE.getKey())
                 .add(ModItems.THORITE_LEGGINGS.getKey())
-                .add(ModItems.THORITE_BOOTS.getKey());
+                .add(ModItems.THORITE_BOOTS.getKey())
+                .add(ModItems.RADIATION_SUIT_HELMET.getKey())
+                .add(ModItems.RADIATION_SUIT_CHESPLATE.getKey())
+                .add(ModItems.RADIATION_SUIT_LEGGINGS.getKey())
+                .add(ModItems.RADIATION_SUIT_BOOTS.getKey());
     }
 }

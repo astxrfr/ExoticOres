@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "exoticores:block/catalyzer_table_down",
+    "east": "exoticores:block/catalyzer_table_east",
+    "north": "exoticores:block/catalyzer_table_north",
+    "particle": "exoticores:block/catalyzer_table_north",
+    "south": "exoticores:block/catalyzer_table_south",
+    "up": "exoticores:block/catalyzer_table_up",
+    "west": "exoticores:block/catalyzer_table_west"
+  }
+}

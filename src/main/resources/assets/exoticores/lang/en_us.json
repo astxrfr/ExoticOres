@@ -21,5 +21,7 @@
   "item.exoticores.radiation_suit_helmet": "Radiation Suit Helmet",
   "item.exoticores.radiation_suit_chestplate": "Radiation Suit Chestplate",
   "item.exoticores.radiation_suit_leggings": "Radiation Suit Leggings",
-  "item.exoticores.radiation_suit_boots": "Radiation Suit Boots"
+  "item.exoticores.radiation_suit_boots": "Radiation Suit Boots",
+
+  "message.exoticores.effect_not_cleared": "Radiation cannot be cured with milk!"
 }

@@ -21,5 +21,7 @@
   "item.exoticores.radiation_suit_helmet": "Casco de Traje de Radiación",
   "item.exoticores.radiation_suit_chestplate": "Pechera de Traje de Radiación",
   "item.exoticores.radiation_suit_leggings": "Pantalones de Traje de Radiación",
-  "item.exoticores.radiation_suit_boots": "Botas de Traje de Radiación"
+  "item.exoticores.radiation_suit_boots": "Botas de Traje de Radiación",
+
+  "message.exoticores.effect_not_cleared": "¡La radiación no se puede curar con leche!"
 }

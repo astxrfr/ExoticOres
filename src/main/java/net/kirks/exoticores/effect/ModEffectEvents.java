@@ -20,13 +20,6 @@ public class ModEffectEvents {
     );
 
     @SubscribeEvent
-    public static void onEffectRemove(MobEffectEvent.Remove event) {
-        if (event.getEffect() != ModEffects.RADIATION) return;
-
-        if (event.getEntity().getUseItem().is(Items.MILK_BUCKET)) event.setCanceled(true);
-    }
-
-    @SubscribeEvent
     public static void onEffectApplicable(MobEffectEvent.Applicable event) {
         if (!event.getEffectInstance().getEffect().is(ModEffects.RADIATION.getKey())) return;
 

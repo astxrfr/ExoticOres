@@ -95,6 +95,4 @@ public class RadiationEffect extends MobEffect {
 
         return tickCount % interval == 0;
     }
-
-
 }

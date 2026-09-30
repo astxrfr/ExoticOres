@@ -26,10 +26,13 @@ public class RadioactiveBlockEntity extends BlockEntity {
             if (mob.hasEffect(ModEffects.RADIATION)) {
                 MobEffectInstance effectInstance = Objects.requireNonNull(mob.getEffect(ModEffects.RADIATION));
                 RadiationEffect effect = (RadiationEffect) effectInstance.getEffect().value();
-                effect.attemptToAdvanceStage(mob);
+
+                var distance = Math.sqrt(pos.distToCenterSqr(mob.position()));
+                int intensity = Math.max(1, (int)(10 - distance));
+                effect.attemptToAdvance(mob, intensity);
                 continue;
             }
-            mob.addEffect(new MobEffectInstance(ModEffects.RADIATION, RadiationEffect.PER_STAGE_DURATION, 0));
+            mob.addEffect(new MobEffectInstance(ModEffects.RADIATION, RadiationEffect.INITIAL_DURATION, 0));
         }
     }
 }

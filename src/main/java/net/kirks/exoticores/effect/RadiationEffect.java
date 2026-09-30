@@ -1,5 +1,7 @@
 package net.kirks.exoticores.effect;
 
+import net.kirks.exoticores.ExoticOres;
+import net.kirks.exoticores.registry.ModDataAttachments;
 import net.kirks.exoticores.registry.ModEffects;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
@@ -11,88 +13,58 @@ import javax.annotation.Nonnull;
 
 public class RadiationEffect extends MobEffect {
     private static final int TICK_EFFECT_INTERVAL = 80;
-    private static final int MAX_RADIATION_STAGE = 5;
 
-    public static final int PER_STAGE_DURATION = 12000;
+    public static final int INITIAL_DURATION = 10;
 
     public RadiationEffect(MobEffectCategory category, int color) {
         super(category, color);
     }
 
-    private void regressStage(@Nonnull LivingEntity entity, @Nonnull MobEffectInstance currentInstance) {
-        if (currentInstance.getAmplifier() == 0) return;
+    private void advance(@Nonnull LivingEntity entity, @Nonnull MobEffectInstance currentInstance, int intensity) {
 
         entity.addEffect(new MobEffectInstance(
                 currentInstance.getEffect(),
-                PER_STAGE_DURATION,
-                currentInstance.getAmplifier() - 1,
+                currentInstance.getDuration()+intensity,
+                currentInstance.getAmplifier() + 1,
                 currentInstance.isAmbient(),
                 currentInstance.isVisible(),
                 currentInstance.showIcon()
         ));
     }
 
-    private void advanceStage(@Nonnull LivingEntity entity, @Nonnull MobEffectInstance currentInstance) {
-        if (currentInstance.getAmplifier() < MAX_RADIATION_STAGE) {
-            entity.addEffect(new MobEffectInstance(
-                    currentInstance.getEffect(),
-                    PER_STAGE_DURATION,
-                    currentInstance.getAmplifier() + 1,
-                    currentInstance.isAmbient(),
-                    currentInstance.isVisible(),
-                    currentInstance.showIcon()
-            ));
-        } else {
-            entity.addEffect(new MobEffectInstance(
-                    currentInstance.getEffect(),
-                    PER_STAGE_DURATION,
-                    currentInstance.getAmplifier(),
-                    currentInstance.isAmbient(),
-                    currentInstance.isVisible(),
-                    currentInstance.showIcon()
-            ));
-        }
-    }
-
-    public void attemptToAdvanceStage(LivingEntity entity) {
+    public void attemptToAdvance(LivingEntity entity, int intensity) {
         if (entity.level().isClientSide()) return;
 
         MobEffectInstance current = entity.getEffect(ModEffects.RADIATION);
-
         if(current == null) return;
 
-        int remainingTicks = current.getDuration();
-        if(remainingTicks < (PER_STAGE_DURATION/5)*4) advanceStage(entity, current);
+        advance(entity, current, intensity);
     }
 
     @Override
     public boolean applyEffectTick(@Nonnull ServerLevel serverLevel, LivingEntity mob, int amplification) {
-
-        mob.hurtServer(
-                serverLevel,
-                mob.damageSources().magic(),
-                0.5f + amplification*amplification/25f
-        );
-
         MobEffectInstance currentEffect = mob.getEffect(ModEffects.RADIATION);
+        if (currentEffect == null) return false;
 
-        if(currentEffect != null) {
-            int duration = currentEffect.getDuration();
-            if (duration >= 100) return true;
-
-            regressStage(mob, currentEffect);
+        int cooldown = mob.getData(ModDataAttachments.RADIATION_COOLDOWN.get()) - 1;
+        if (cooldown > 0) {
+            mob.setData(ModDataAttachments.RADIATION_COOLDOWN, cooldown);
+            return true;
         }
 
+        var duration = currentEffect.getDuration();
+        float durationDamageFunction = (float) Math.sqrt(duration)/100.0f;
+        float damage = Math.max(0.1f, durationDamageFunction);
+        mob.hurtServer(serverLevel, mob.damageSources().magic(), damage);
+
+        float durationIntervalFunction = (float) (1 - Math.pow(Math.E, -(duration*duration/Math.pow(2, 30))))*10;
+        int nextInterval = Math.max(10, (int) (TICK_EFFECT_INTERVAL / Math.max(1.0, durationIntervalFunction)));
+        mob.setData(ModDataAttachments.RADIATION_COOLDOWN, nextInterval);
         return true;
     }
 
     @Override
-    public boolean shouldApplyEffectTickThisTick(int tickCount, int amplification) {
-        int interval = Math.max(
-                1,
-                (int) (TICK_EFFECT_INTERVAL/(1.0 + amplification * 1.5))
-        );
-
-        return tickCount % interval == 0;
+    public boolean shouldApplyEffectTickThisTick(int remainingDuration, int amplification) {
+        return true;
     }
 }

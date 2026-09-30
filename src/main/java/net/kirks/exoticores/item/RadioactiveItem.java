@@ -27,10 +27,10 @@ public class RadioactiveItem extends Item {
             if (player.hasEffect(ModEffects.RADIATION)) {
                 MobEffectInstance effectInstance = Objects.requireNonNull(player.getEffect(ModEffects.RADIATION));
                 RadiationEffect effect = (RadiationEffect) effectInstance.getEffect().value();
-                effect.attemptToAdvanceStage(player);
+                effect.attemptToAdvance(player, 10);
                 return;
             }
-            player.addEffect(new MobEffectInstance(ModEffects.RADIATION, RadiationEffect.PER_STAGE_DURATION, 0));
+            player.addEffect(new MobEffectInstance(ModEffects.RADIATION, RadiationEffect.INITIAL_DURATION, 0));
         }
     }
 }

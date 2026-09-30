@@ -45,6 +45,8 @@ public class ExoticOres {
         ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         ModCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         ModMenuTypes.MENU_TYPES.register(modEventBus);
+        ModDataAttachments.ATTACHMENTS.register(modEventBus);
+        ModConsumeEffects.CONSUME_EFFECTS.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (ExoticOres) to respond directly to events.

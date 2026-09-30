@@ -1,4 +1,4 @@
-package net.kirks.exoticores.registry;
+package net.kirks.exoticores.datagen;
 
 import com.google.common.collect.Maps;
 import net.kirks.exoticores.ExoticOres;

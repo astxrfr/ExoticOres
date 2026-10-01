@@ -40,5 +40,7 @@ public class ModDataGenerationEvents {
         event.createProvider(ModRecipeProvider.Runner::new);
 
         event.createProvider(ModEquipmentAssetProvider::new);
+
+        event.createProvider(ModSoundProvider::new);
     }
 }

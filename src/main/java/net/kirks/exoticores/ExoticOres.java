@@ -1,8 +1,11 @@
 package net.kirks.exoticores;
 
 import com.mojang.logging.LogUtils;
+import net.kirks.exoticores.datagen.ModSoundProvider;
 import net.kirks.exoticores.effect.ClearExceptProtectedConsumeEffect;
 import net.kirks.exoticores.effect.ModEffectEvents;
+import net.kirks.exoticores.network.GeigerTickClient;
+import net.kirks.exoticores.network.ModNetworkEvents;
 import net.kirks.exoticores.registry.*;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Items;
@@ -38,6 +41,8 @@ public class ExoticOres {
     public ExoticOres(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::modifyDefaults);
+        modEventBus.addListener(ModNetworkEvents::registerPayloads);
+        modEventBus.addListener(ModNetworkEvents.Client::registerClientHandlers);
 
         ModBlocks.BLOCKS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
@@ -47,12 +52,14 @@ public class ExoticOres {
         ModMenuTypes.MENU_TYPES.register(modEventBus);
         ModDataAttachments.ATTACHMENTS.register(modEventBus);
         ModConsumeEffects.CONSUME_EFFECTS.register(modEventBus);
+        ModSounds.SOUND_EVENTS.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (ExoticOres) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
         NeoForge.EVENT_BUS.register(ModEffectEvents.class);
+        NeoForge.EVENT_BUS.register(GeigerTickClient.class);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         //modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

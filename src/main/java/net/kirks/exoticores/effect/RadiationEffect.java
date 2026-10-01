@@ -1,15 +1,26 @@
 package net.kirks.exoticores.effect;
 
 import net.kirks.exoticores.ExoticOres;
+import net.kirks.exoticores.network.payload.GeigerPayload;
 import net.kirks.exoticores.registry.ModDataAttachments;
 import net.kirks.exoticores.registry.ModEffects;
+import net.kirks.exoticores.registry.ModSounds;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nonnull;
+import java.util.Random;
 
 public class RadiationEffect extends MobEffect {
     private static final int TICK_EFFECT_INTERVAL = 80;
@@ -20,11 +31,10 @@ public class RadiationEffect extends MobEffect {
         super(category, color);
     }
 
-    private void advance(@Nonnull LivingEntity entity, @Nonnull MobEffectInstance currentInstance, int intensity) {
-
+    private void advance(@Nonnull LivingEntity entity, @Nonnull MobEffectInstance currentInstance, float intensity) {
         entity.addEffect(new MobEffectInstance(
                 currentInstance.getEffect(),
-                currentInstance.getDuration()+intensity,
+                currentInstance.getDuration()+(int)intensity,
                 currentInstance.getAmplifier() + 1,
                 currentInstance.isAmbient(),
                 currentInstance.isVisible(),
@@ -32,13 +42,18 @@ public class RadiationEffect extends MobEffect {
         ));
     }
 
-    public void attemptToAdvance(LivingEntity entity, int intensity) {
+    public void attemptToAdvance(LivingEntity entity, float intensity) {
         if (entity.level().isClientSide()) return;
 
         MobEffectInstance current = entity.getEffect(ModEffects.RADIATION);
         if(current == null) return;
 
         advance(entity, current, intensity);
+
+        if (entity.is(EntityTypes.PLAYER)) {
+            if (entity.tickCount % 4 == 0)
+                PacketDistributor.sendToPlayer((ServerPlayer) entity, new GeigerPayload(intensity));
+        }
     }
 
     @Override

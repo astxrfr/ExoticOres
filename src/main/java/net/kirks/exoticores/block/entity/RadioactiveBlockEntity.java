@@ -28,7 +28,7 @@ public class RadioactiveBlockEntity extends BlockEntity {
                 RadiationEffect effect = (RadiationEffect) effectInstance.getEffect().value();
 
                 var distance = Math.sqrt(pos.distToCenterSqr(mob.position()));
-                int intensity = Math.max(1, (int)(10 - distance));
+                float intensity = (float) Math.max(1, (10 - distance));
                 effect.attemptToAdvance(mob, intensity);
                 continue;
             }

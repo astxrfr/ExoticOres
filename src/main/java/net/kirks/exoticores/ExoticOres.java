@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.kirks.exoticores.datagen.ModSoundProvider;
 import net.kirks.exoticores.effect.ClearExceptProtectedConsumeEffect;
 import net.kirks.exoticores.effect.ModEffectEvents;
+import net.kirks.exoticores.effect.RadiationExposure;
 import net.kirks.exoticores.network.GeigerTickClient;
 import net.kirks.exoticores.network.ModNetworkEvents;
 import net.kirks.exoticores.registry.*;
@@ -60,6 +61,7 @@ public class ExoticOres {
         NeoForge.EVENT_BUS.register(this);
         NeoForge.EVENT_BUS.register(ModEffectEvents.class);
         NeoForge.EVENT_BUS.register(GeigerTickClient.class);
+        NeoForge.EVENT_BUS.register(RadiationExposure.class);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         //modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

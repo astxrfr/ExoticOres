@@ -1,6 +1,6 @@
 package net.kirks.exoticores.block.entity;
 
-import net.kirks.exoticores.effect.RadiationEffect;
+import net.kirks.exoticores.effect.RadiationExposure;
 import net.kirks.exoticores.registry.ModBlockEntities;
 import net.kirks.exoticores.registry.ModEffects;
 import net.minecraft.core.BlockPos;
@@ -10,8 +10,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-
-import java.util.Objects;
 
 public class RadioactiveBlockEntity extends BlockEntity {
     public RadioactiveBlockEntity(BlockPos worldPosition, BlockState blockState) {
@@ -23,16 +21,9 @@ public class RadioactiveBlockEntity extends BlockEntity {
         AABB range = new AABB(pos).inflate(10);
 
         for (LivingEntity mob : level.getEntitiesOfClass(LivingEntity.class, range)) {
-            if (mob.hasEffect(ModEffects.RADIATION)) {
-                MobEffectInstance effectInstance = Objects.requireNonNull(mob.getEffect(ModEffects.RADIATION));
-                RadiationEffect effect = (RadiationEffect) effectInstance.getEffect().value();
-
-                var distance = Math.sqrt(pos.distToCenterSqr(mob.position()));
-                float intensity = (float) Math.max(1, (10 - distance));
-                effect.attemptToAdvance(mob, intensity);
-                continue;
-            }
-            mob.addEffect(new MobEffectInstance(ModEffects.RADIATION, RadiationEffect.INITIAL_DURATION, 0));
+            var distance = Math.sqrt(pos.distToCenterSqr(mob.position()));
+            float intensity = (float) Math.max(1, (10 - distance));
+            RadiationExposure.contribute(mob, intensity);
         }
     }
 }

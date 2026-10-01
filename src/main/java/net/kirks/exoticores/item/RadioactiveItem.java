@@ -1,6 +1,7 @@
 package net.kirks.exoticores.item;
 
 import net.kirks.exoticores.effect.RadiationEffect;
+import net.kirks.exoticores.effect.RadiationExposure;
 import net.kirks.exoticores.registry.ModEffects;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -24,13 +25,7 @@ public class RadioactiveItem extends Item {
         if (level.isClientSide()) return;
 
         if (owner instanceof Player player) {
-            if (player.hasEffect(ModEffects.RADIATION)) {
-                MobEffectInstance effectInstance = Objects.requireNonNull(player.getEffect(ModEffects.RADIATION));
-                RadiationEffect effect = (RadiationEffect) effectInstance.getEffect().value();
-                effect.attemptToAdvance(player, 10);
-                return;
-            }
-            player.addEffect(new MobEffectInstance(ModEffects.RADIATION, RadiationEffect.INITIAL_DURATION, 0));
+            RadiationExposure.contribute(player, 10);
         }
     }
 }

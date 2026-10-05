@@ -22,6 +22,9 @@ public class ModItems {
     public static final DeferredItem<Item> LEAD_INGOT =
             ITEMS.registerItem("lead_ingot", Item::new, Item.Properties::new);
 
+    // TOOLS
+    public static DeferredItem<Item> HERRAMIENTA_EJEMPLO;
+
     // BLOCK ITEMS
     public static final DeferredItem<BlockItem> THORITE_ORE_ITEM =
             ITEMS.registerSimpleBlockItem("thorite_ore", ModBlocks.THORITE_ORE);

@@ -14,4 +14,5 @@ public class ModEffects {
 
     public static final DeferredHolder<MobEffect, RadiationEffect> RADIATION =
             MOB_EFFECTS.register("radiation", () -> new RadiationEffect(MobEffectCategory.HARMFUL, 0x8e4ea3));
+
 }

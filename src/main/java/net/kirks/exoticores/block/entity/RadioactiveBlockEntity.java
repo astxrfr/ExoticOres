@@ -1,6 +1,6 @@
 package net.kirks.exoticores.block.entity;
 
-import net.kirks.exoticores.Config;
+import net.kirks.exoticores.ExoticOresConfig;
 import net.kirks.exoticores.effect.RadiationExposure;
 import net.kirks.exoticores.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
 public class RadioactiveBlockEntity extends BlockEntity {
-    private static final double EFFECT_RANGE = 10 * Config.RADIATION_RADIUS_MULT.get();
+    private static final double EFFECT_RANGE = 10 * ExoticOresConfig.RADIATION_RADIUS_MULT.get();
 
     public RadioactiveBlockEntity(BlockPos worldPosition, BlockState blockState) {
         super(ModBlockEntities.RADIOACTIVE_BLOCK_ENTITY.get(), worldPosition, blockState);

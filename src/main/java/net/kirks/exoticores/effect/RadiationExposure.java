@@ -1,6 +1,6 @@
 package net.kirks.exoticores.effect;
 
-import net.kirks.exoticores.Config;
+import net.kirks.exoticores.ExoticOresConfig;
 import net.kirks.exoticores.network.payload.GeigerPayload;
 import net.kirks.exoticores.registry.ModEffects;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,7 +18,7 @@ import java.util.WeakHashMap;
 public class RadiationExposure {
     public static final int INITIAL_DURATION = 10;
 
-    private static final boolean RADIATION_DISABLED = !Config.RADIATION_ENABLED.get();
+    private static final boolean RADIATION_DISABLED = !ExoticOresConfig.RADIATION_ENABLED.get();
     private static final Map<LivingEntity, Float> PENDING = new WeakHashMap<>();
 
     private static void advance(@Nonnull LivingEntity entity, @Nonnull MobEffectInstance currentInstance, float intensity) {

@@ -1,16 +1,12 @@
 package net.kirks.exoticores.effect;
 
-import net.kirks.exoticores.network.payload.GeigerPayload;
 import net.kirks.exoticores.registry.ModDataAttachments;
 import net.kirks.exoticores.registry.ModEffects;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nonnull;
 

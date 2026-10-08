@@ -43,7 +43,7 @@ public class ExoticOres {
         NeoForge.EVENT_BUS.register(ModEffectEvents.class);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
-        modContainer.registerConfig(ModConfig.Type.SERVER, Config.SERVER_SPEC);
+        modContainer.registerConfig(ModConfig.Type.SERVER, ExoticOresConfig.SERVER_SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

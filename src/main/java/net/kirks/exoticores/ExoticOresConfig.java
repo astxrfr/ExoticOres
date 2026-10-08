@@ -2,8 +2,8 @@ package net.kirks.exoticores;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-public class Config {
-    private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+public class ExoticOresConfig {
+    private static final ModConfigSpec.Builder SERVER_BUILDER = new ModConfigSpec.Builder();
 
     public static final ModConfigSpec.BooleanValue RADIATION_ENABLED;
     public static final ModConfigSpec.DoubleValue RADIATION_RADIUS_MULT;
@@ -11,18 +11,18 @@ public class Config {
     static final ModConfigSpec SERVER_SPEC;
 
     static {
-        BUILDER.push("radiation");
+        SERVER_BUILDER.push("radiation");
 
-        RADIATION_ENABLED = BUILDER
+        RADIATION_ENABLED = SERVER_BUILDER
                 .comment("Whether the radiation mechanic is enabled.")
                 .define("enabled", true);
 
-        RADIATION_RADIUS_MULT = BUILDER
+        RADIATION_RADIUS_MULT = SERVER_BUILDER
                 .comment("Multiplies the range for radiation applying objects/blocks.")
                 .defineInRange("multiplier", 1, 0.1, 10);
 
-        BUILDER.pop();
+        SERVER_BUILDER.pop();
 
-        SERVER_SPEC = BUILDER.build();
+        SERVER_SPEC = SERVER_BUILDER.build();
     }
 }

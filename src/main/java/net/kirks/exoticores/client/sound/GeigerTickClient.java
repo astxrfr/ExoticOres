@@ -1,15 +1,16 @@
-package net.kirks.exoticores.network;
+package net.kirks.exoticores.client.sound;
 
-import net.kirks.exoticores.ExoticOres;
+import net.kirks.exoticores.network.payload.RadiationIntensityPayload;
 import net.kirks.exoticores.registry.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.util.RandomSource;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderFrameEvent;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 @EventBusSubscriber(value = Dist.CLIENT)
 public class GeigerTickClient {
@@ -17,8 +18,8 @@ public class GeigerTickClient {
     private static float smoothed = 0f;
     private static long lastPacketTick = -1000;
 
-    public static void receive(float intensity) {
-        target = intensity;
+    public static void receive(RadiationIntensityPayload payload) {
+        target = payload.intensity();
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null) lastPacketTick = mc.level.getGameTime();
     }

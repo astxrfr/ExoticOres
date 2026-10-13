@@ -1,11 +1,10 @@
 package net.kirks.exoticores;
 
 import com.mojang.logging.LogUtils;
-import net.kirks.exoticores.datagen.ModSoundProvider;
 import net.kirks.exoticores.effect.ClearExceptProtectedConsumeEffect;
 import net.kirks.exoticores.effect.ModEffectEvents;
 import net.kirks.exoticores.effect.RadiationExposure;
-import net.kirks.exoticores.network.GeigerTickClient;
+import net.kirks.exoticores.client.sound.GeigerTickClient;
 import net.kirks.exoticores.network.ModNetworkEvents;
 import net.kirks.exoticores.registry.*;
 import net.minecraft.core.component.DataComponents;
@@ -13,7 +12,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.consume_effects.ClearAllStatusEffectsConsumeEffect;
-import net.minecraft.world.item.consume_effects.ConsumeEffect;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -29,8 +27,6 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 import net.kirks.exoticores.client.screen.CatalyzerTableScreen;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-
-import java.util.List;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(ExoticOres.MODID)

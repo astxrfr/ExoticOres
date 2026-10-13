@@ -11,19 +11,17 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
 public class RadioactiveBlockEntity extends BlockEntity {
-    private static final double EFFECT_RANGE = 10 * ExoticOresConfig.RADIATION_RADIUS_MULT.get();
-
     public RadioactiveBlockEntity(BlockPos worldPosition, BlockState blockState) {
         super(ModBlockEntities.RADIOACTIVE_BLOCK_ENTITY.get(), worldPosition, blockState);
     }
 
     public static void tick(Level level, BlockPos pos) {
         if (level.isClientSide()) return;
-        AABB range = new AABB(pos).inflate(EFFECT_RANGE);
+        AABB range = new AABB(pos).inflate(RadiationExposure.EFFECT_RANGE);
 
         for (LivingEntity mob : level.getEntitiesOfClass(LivingEntity.class, range)) {
             var distance = Math.sqrt(pos.distToCenterSqr(mob.position()));
-            float intensity = (float) Math.max(1, (10 - distance));
+            float intensity = (float) Math.max(0, (RadiationExposure.EFFECT_RANGE - distance));
             RadiationExposure.contribute(mob, intensity);
         }
     }

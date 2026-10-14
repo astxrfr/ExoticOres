@@ -1,15 +1,19 @@
 package net.kirks.exoticores.datagen;
 
+import net.kirks.exoticores.block.CatalyzerTableBlock;
 import net.kirks.exoticores.registry.ModBlocks;
 import net.kirks.exoticores.registry.ModItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
-import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 
 public class ModModelProvider extends ModelProvider {
@@ -21,56 +25,98 @@ public class ModModelProvider extends ModelProvider {
     @Override
     protected void registerModels(
             @NonNull BlockModelGenerators blockModels,
-            @NonNull ItemModelGenerators itemModels) {
-
+            @NonNull ItemModelGenerators itemModels
+    ) {
         registerBlocks(blockModels);
         registerItems(itemModels);
     }
 
     private void registerBlocks(BlockModelGenerators blockModels) {
-
-        // Bloques que usan la misma textura en todas sus caras.
+        // Estos bloques usan la misma textura en todas sus caras.
         blockModels.createTrivialCube(ModBlocks.THORITE_ORE.get());
         blockModels.createTrivialCube(ModBlocks.THORITE_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.LEAD_ORE.get());
         blockModels.createTrivialCube(ModBlocks.DEEPSLATE_LEAD_ORE.get());
 
-        // La mesa tiene una textura diferente para cada cara.
-        blockModels.createHorizontallyRotatedBlock(
-                ModBlocks.CATALYZER_TABLE_BLOCK.get(),
-                TexturedModel.createDefault(
-                        block -> new TextureMapping()
-                                .put(
-                                        TextureSlot.UP,
-                                        TextureMapping.getBlockTexture(block, "_up")
-                                )
-                                .put(
-                                        TextureSlot.DOWN,
-                                        TextureMapping.getBlockTexture(block, "_down")
-                                )
-                                .put(
-                                        TextureSlot.NORTH,
-                                        TextureMapping.getBlockTexture(block, "_north")
-                                )
-                                .put(
-                                        TextureSlot.SOUTH,
-                                        TextureMapping.getBlockTexture(block, "_south")
-                                )
-                                .put(
-                                        TextureSlot.EAST,
-                                        TextureMapping.getBlockTexture(block, "_east")
-                                )
-                                .put(
-                                        TextureSlot.WEST,
-                                        TextureMapping.getBlockTexture(block, "_west")
-                                )
-                                .put(
-                                        TextureSlot.PARTICLE,
-                                        TextureMapping.getBlockTexture(block, "_north")
-                                ),
-                        ModelTemplates.CUBE
+        // Generamos las dos apariencias del catalizador.
+        createCatalyzerModels(blockModels);
+    }
+
+    private void createCatalyzerModels(BlockModelGenerators blockModels) {
+        var block = ModBlocks.CATALYZER_TABLE_BLOCK.get();
+
+        // Apagado: usamos las texturas normales.
+        var apagado = ModelTemplates.CUBE.create(
+                block,
+                catalyzerTextures(false),
+                blockModels.modelOutput
+        );
+
+        // Encendido: el frente usa la textura animada.
+        var encendido = ModelTemplates.CUBE.createWithSuffix(
+                block,
+                "_on",
+                catalyzerTextures(true),
+                blockModels.modelOutput
+        );
+
+        // LIT elige la apariencia y FACING mantiene la orientacion.
+        blockModels.blockStateOutput.accept(
+                MultiVariantGenerator.dispatch(block)
+                        .with(
+                                PropertyDispatch.initial(CatalyzerTableBlock.LIT)
+                                        .select(
+                                                false,
+                                                BlockModelGenerators.plainVariant(apagado)
+                                        )
+                                        .select(
+                                                true,
+                                                BlockModelGenerators.plainVariant(encendido)
+                                        )
+                        )
+                        .with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING)
+        );
+
+        // En el inventario mostramos el catalizador apagado.
+        blockModels.registerSimpleItemModel(block, apagado);
+    }
+
+    private TextureMapping catalyzerTextures(boolean encendido) {
+        var block = ModBlocks.CATALYZER_TABLE_BLOCK.get();
+
+        // Elegimos el frente segun si esta encendido o apagado.
+        Material frente = new Material(
+                Identifier.fromNamespaceAndPath(
+                        "exoticores",
+                        encendido
+                                ? "block/catalyzer_animation_on"
+                                : "block/catalyzer_animation_off"
                 )
         );
+
+        return new TextureMapping()
+                .put(
+                        TextureSlot.UP,
+                        TextureMapping.getBlockTexture(block, "_up")
+                )
+                .put(
+                        TextureSlot.DOWN,
+                        TextureMapping.getBlockTexture(block, "_down")
+                )
+                .put(TextureSlot.NORTH, frente)
+                .put(
+                        TextureSlot.SOUTH,
+                        TextureMapping.getBlockTexture(block, "_south")
+                )
+                .put(
+                        TextureSlot.EAST,
+                        TextureMapping.getBlockTexture(block, "_east")
+                )
+                .put(
+                        TextureSlot.WEST,
+                        TextureMapping.getBlockTexture(block, "_west")
+                )
+                .put(TextureSlot.PARTICLE, frente);
     }
 
     private void registerItems(ItemModelGenerators itemModels) {
@@ -97,8 +143,7 @@ public class ModModelProvider extends ModelProvider {
                 ModelTemplates.FLAT_ITEM
         );
 
-        // HERRAMIENTAS
-        // Handheld coloca las herramientas en la mano con la orientacion adecuada.
+        // HERRAMIENTAS DE THORITE
 
         itemModels.generateFlatItem(
                 ModItems.THORITE_PICKAXE.get(),
@@ -125,7 +170,7 @@ public class ModModelProvider extends ModelProvider {
                 ModelTemplates.FLAT_HANDHELD_ITEM
         );
 
-        // La lanza usa sus modelos de inventario y de mano.
+        // La lanza usa sus texturas de inventario y de mano.
         itemModels.generateSpear(ModItems.THORITE_SPEAR.get());
 
         // ARMADURA DE THORITE

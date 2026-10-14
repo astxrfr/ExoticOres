@@ -1,6 +1,7 @@
 package net.kirks.exoticores.registry;
 
 import net.kirks.exoticores.ExoticOres;
+import net.kirks.exoticores.datagen.ModArmorMaterial;
 import net.kirks.exoticores.item.RadioactiveItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;

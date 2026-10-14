@@ -1,17 +1,14 @@
 package net.kirks.exoticores.block.entity;
 
-import net.kirks.exoticores.effect.RadiationEffect;
+import net.kirks.exoticores.ExoticOresConfig;
+import net.kirks.exoticores.effect.RadiationExposure;
 import net.kirks.exoticores.registry.ModBlockEntities;
-import net.kirks.exoticores.registry.ModEffects;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-
-import java.util.Objects;
 
 public class RadioactiveBlockEntity extends BlockEntity {
     public RadioactiveBlockEntity(BlockPos worldPosition, BlockState blockState) {
@@ -20,16 +17,12 @@ public class RadioactiveBlockEntity extends BlockEntity {
 
     public static void tick(Level level, BlockPos pos) {
         if (level.isClientSide()) return;
-        AABB range = new AABB(pos).inflate(10);
+        AABB range = new AABB(pos).inflate(RadiationExposure.EFFECT_RANGE);
 
         for (LivingEntity mob : level.getEntitiesOfClass(LivingEntity.class, range)) {
-            if (mob.hasEffect(ModEffects.RADIATION)) {
-                MobEffectInstance effectInstance = Objects.requireNonNull(mob.getEffect(ModEffects.RADIATION));
-                RadiationEffect effect = (RadiationEffect) effectInstance.getEffect().value();
-                effect.attemptToAdvanceStage(mob);
-                continue;
-            }
-            mob.addEffect(new MobEffectInstance(ModEffects.RADIATION, RadiationEffect.PER_STAGE_DURATION, 0));
+            var distance = Math.sqrt(pos.distToCenterSqr(mob.position()));
+            float intensity = (float) Math.max(0, (RadiationExposure.EFFECT_RANGE - distance));
+            RadiationExposure.contribute(mob, intensity);
         }
     }
 }

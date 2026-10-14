@@ -120,30 +120,17 @@ public class ModEffectEvents {
 
     @SubscribeEvent
     public static void onEffectApplicable(MobEffectEvent.Applicable event) {
-        if (!event.getEffectInstance()
-                .getEffect()
-                .is(ModEffects.RADIATION.getKey())) {
-            return;
-        }
+        if (!event.getEffectInstance().getEffect().is(ModEffects.RADIATION.getKey())) return;
 
-        LivingEntity entity = event.getEntity();
+        boolean inmuneEntity = UNAFFECTED_ENTITIES_RADIATION.contains(event.getEntity().getType());
 
-        boolean immuneEntity =
-                UNAFFECTED_ENTITIES_RADIATION.contains(entity.getType());
-
-        // Necesita las cuatro piezas marcadas como protectoras.
         boolean wearingProtection =
-                entity.getItemBySlot(EquipmentSlot.HEAD)
-                        .is(ModTags.Items.RADIATION_PROTECTIVE)
-                        && entity.getItemBySlot(EquipmentSlot.CHEST)
-                        .is(ModTags.Items.RADIATION_PROTECTIVE)
-                        && entity.getItemBySlot(EquipmentSlot.LEGS)
-                        .is(ModTags.Items.RADIATION_PROTECTIVE)
-                        && entity.getItemBySlot(EquipmentSlot.FEET)
-                        .is(ModTags.Items.RADIATION_PROTECTIVE);
+                event.getEntity().getItemBySlot(EquipmentSlot.HEAD).is(ModTags.Items.RADIATION_PROTECTIVE)
+                && event.getEntity().getItemBySlot(EquipmentSlot.CHEST).is(ModTags.Items.RADIATION_PROTECTIVE)
+                && event.getEntity().getItemBySlot(EquipmentSlot.LEGS).is(ModTags.Items.RADIATION_PROTECTIVE)
+                && event.getEntity().getItemBySlot(EquipmentSlot.FEET).is(ModTags.Items.RADIATION_PROTECTIVE);
 
-        if (immuneEntity || wearingProtection) {
+        if (inmuneEntity || wearingProtection)
             event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
-        }
     }
 }

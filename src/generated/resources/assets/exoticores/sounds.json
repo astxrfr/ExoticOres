@@ -1,0 +1,11 @@
+{
+  "geiger_click": {
+    "sounds": [
+      "exoticores:geiger_click1",
+      "exoticores:geiger_click2",
+      "exoticores:geiger_click3",
+      "exoticores:geiger_click4"
+    ],
+    "subtitle": "subtitles.exoticores.geiger_click"
+  }
+}

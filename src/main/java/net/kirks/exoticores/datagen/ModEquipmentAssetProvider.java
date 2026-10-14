@@ -1,6 +1,5 @@
 package net.kirks.exoticores.datagen;
 import net.kirks.exoticores.ExoticOres;
-import net.kirks.exoticores.registry.ModArmorMaterial;
 import net.minecraft.client.data.models.EquipmentAssetProvider;
 import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.data.PackOutput;

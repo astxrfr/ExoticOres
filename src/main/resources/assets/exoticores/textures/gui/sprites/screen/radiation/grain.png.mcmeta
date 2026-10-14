@@ -1,0 +1,13 @@
+{
+  "animation": {
+    "width": 128,
+    "height": 128,
+    "frametime": 1,
+    "interpolate": false
+  },
+  "gui": {
+    "scaling": {
+      "type": "stretch"
+    }
+  }
+}

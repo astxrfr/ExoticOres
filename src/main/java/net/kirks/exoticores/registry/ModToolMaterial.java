@@ -15,6 +15,14 @@ public final class ModToolMaterial {
             16,     // Encantabilidad.
             ModTags.Items.THORITE_REPAIRABLE
     );
+    public static final ToolMaterial LEAD = new ToolMaterial(
+            BlockTags.INCORRECT_FOR_IRON_TOOL,
+            400,   // Durabilidad.
+            7.0F,   // Velocidad de mineria.
+            2.5F,   // Daño extra del material.
+            8,     // Encantabilidad.
+            ModTags.Items.LEAD_REPAIRABLE
+    );
 
     private ModToolMaterial() {}
 }

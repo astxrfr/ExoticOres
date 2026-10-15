@@ -170,6 +170,32 @@ public class ModModelProvider extends ModelProvider {
                 ModelTemplates.FLAT_HANDHELD_ITEM
         );
 
+        // Lead tools
+        itemModels.generateFlatItem(
+                ModItems.LEAD_PICKAXE.get(),
+                ModelTemplates.FLAT_HANDHELD_ITEM
+        );
+
+        itemModels.generateFlatItem(
+                ModItems.LEAD_AXE.get(),
+                ModelTemplates.FLAT_HANDHELD_ITEM
+        );
+
+        itemModels.generateFlatItem(
+                ModItems.LEAD_SHOVEL.get(),
+                ModelTemplates.FLAT_HANDHELD_ITEM
+        );
+
+        itemModels.generateFlatItem(
+                ModItems.LEAD_HOE.get(),
+                ModelTemplates.FLAT_HANDHELD_ITEM
+        );
+
+        itemModels.generateFlatItem(
+                ModItems.LEAD_SWORD.get(),
+                ModelTemplates.FLAT_HANDHELD_ITEM
+        );
+
         // La lanza usa sus texturas de inventario y de mano.
         itemModels.generateSpear(ModItems.THORITE_SPEAR.get());
 

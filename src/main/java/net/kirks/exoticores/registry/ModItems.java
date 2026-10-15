@@ -103,6 +103,60 @@ public class ModItems {
                                             -2.4F
                                     )
                     ));
+    // Lead shit fuck
+
+    public static final DeferredItem<Item> LEAD_PICKAXE =
+            ITEMS.registerItem("lead_pickaxe", properties ->
+                    new Item(
+                            toolAppearance(properties, "lead_pickaxe")
+                                    .pickaxe(
+                                            ModToolMaterial.LEAD,
+                                            1.0F,
+                                            -2.8F
+                                    )
+                    ));
+
+  // Usamos AxeItem para conservar el clic derecho al pelar troncos.
+  public static final DeferredItem<AxeItem> LEAD_AXE =
+          ITEMS.registerItem("lead_axe", properties ->
+                  new AxeItem(
+                          ModToolMaterial.LEAD,
+                          5.0F,
+                          -3.0F,
+                          toolAppearance(properties, "lead_axe")
+                  ));
+
+  // La pala conserva la funcion de hacer caminos.
+  public static final DeferredItem<ShovelItem> LEAD_SHOVEL =
+          ITEMS.registerItem("lead_shovel", properties ->
+                  new ShovelItem(
+                          ModToolMaterial.LEAD,
+                          1.5F,
+                          -3.0F,
+                          toolAppearance(properties, "lead_shovel")
+                  ));
+
+  // La azada conserva la funcion de arar la tierra.
+  public static final DeferredItem<HoeItem> LEAD_HOE =
+          ITEMS.registerItem("lead_hoe", properties ->
+                  new HoeItem(
+                          ModToolMaterial.LEAD,
+                          -4.0F,
+                          0.0F,
+                          toolAppearance(properties, "lead_hoe")
+                  ));
+
+  public static final DeferredItem<Item> LEAD_SWORD =
+          ITEMS.registerItem("lead_sword", properties ->
+                  new Item(
+                          toolAppearance(properties, "lead_sword")
+                                  .sword(
+                                          ModToolMaterial.LEAD,
+                                          3.0F,
+                                          -2.4F
+                                  )
+                  ));
+
 
     // La lanza usa estocadas y carga; no se arroja como un tridente.
     public static final DeferredItem<Item> THORITE_SPEAR =
@@ -134,6 +188,8 @@ public class ModItems {
                         )
                 );
     }
+    // Plomo shit fuck
+
 
     // BLOQUES COMO ITEMS
 

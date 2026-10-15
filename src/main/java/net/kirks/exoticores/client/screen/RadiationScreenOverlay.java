@@ -144,7 +144,7 @@ public class RadiationScreenOverlay {
         int alphaB = dose > 0.01 ? 160 : 0;
         int alphaF = dose > 0.01 ? 200 : 0;
 
-        var displacement = Math.max(0, exposure*2);
+        var displacement = Math.max(0, exposure);
         float xOffset = (rdm.nextFloat() * 2 - 1) * displacement;
         float yOffset = (rdm.nextFloat() * 2 - 1) * displacement;
 

@@ -1,4 +1,4 @@
-package net.kirks.exoticores.effect;
+package net.kirks.exoticores.effect.radiation;
 
 import net.kirks.exoticores.ExoticOresConfig;
 import net.kirks.exoticores.network.payload.RadiationIntensityPayload;
@@ -16,9 +16,10 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 //TODO: Add radiation effect for missing items/contexts
-public class RadiationExposure {
+public class RadiationExposureManager {
     public static final int INITIAL_DURATION = 10;
     public static final double EFFECT_RANGE = 10 * ExoticOresConfig.RADIATION_RADIUS_MULT.get();
+    public static final float EFFECT_INTENSITY = 3f;
 
     private static final boolean RADIATION_DISABLED = !ExoticOresConfig.RADIATION_ENABLED.get();
     private static final Map<LivingEntity, Float> PENDING = new WeakHashMap<>();
@@ -51,7 +52,7 @@ public class RadiationExposure {
         if (entity.level().isClientSide()) return;
         if (Float.isInfinite(intensity) || intensity <= 0) return;
 
-        PENDING.merge(entity, intensity, Math::max);
+        PENDING.merge(entity, intensity, Float::sum);
     }
 
     @SubscribeEvent
@@ -61,16 +62,17 @@ public class RadiationExposure {
 
     @SubscribeEvent
     public static void afterServerTick(ServerTickEvent.Post event) {
-        var contributions = Map.copyOf(PENDING);
+        var mappedContributions = Map.copyOf(PENDING);
         PENDING.clear();
 
-        contributions.forEach((entity, intensity) -> {
+        mappedContributions.forEach((entity, intensity) -> {
             if (entity.isRemoved() || !entity.isAlive()) return;
 
             if (!entity.hasEffect(ModEffects.RADIATION)) {
                 entity.addEffect(new MobEffectInstance(ModEffects.RADIATION, INITIAL_DURATION, 0));
             }
 
+            intensity = (float) (EFFECT_INTENSITY * Math.log(intensity+1));
             attemptToAdvance(entity, intensity);
         });
     }

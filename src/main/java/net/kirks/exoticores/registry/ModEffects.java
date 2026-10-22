@@ -1,7 +1,7 @@
 package net.kirks.exoticores.registry;
 
 import net.kirks.exoticores.ExoticOres;
-import net.kirks.exoticores.effect.RadiationEffect;
+import net.kirks.exoticores.effect.radiation.RadiationEffect;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;

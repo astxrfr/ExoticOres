@@ -1,7 +1,6 @@
 package net.kirks.exoticores.block.entity;
 
-import net.kirks.exoticores.ExoticOresConfig;
-import net.kirks.exoticores.effect.RadiationExposure;
+import net.kirks.exoticores.effect.radiation.RadiationExposureManager;
 import net.kirks.exoticores.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,12 +16,12 @@ public class RadioactiveBlockEntity extends BlockEntity {
 
     public static void tick(Level level, BlockPos pos) {
         if (level.isClientSide()) return;
-        AABB range = new AABB(pos).inflate(RadiationExposure.EFFECT_RANGE);
+        AABB range = new AABB(pos).inflate(RadiationExposureManager.EFFECT_RANGE);
 
         for (LivingEntity mob : level.getEntitiesOfClass(LivingEntity.class, range)) {
             var distance = Math.sqrt(pos.distToCenterSqr(mob.position()));
-            float intensity = (float) Math.max(0, (RadiationExposure.EFFECT_RANGE - distance));
-            RadiationExposure.contribute(mob, intensity);
+            float intensity = (float) Math.max(0, (RadiationExposureManager.EFFECT_RANGE - distance));
+            RadiationExposureManager.contribute(mob, intensity);
         }
     }
 }

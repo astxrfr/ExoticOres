@@ -1,7 +1,7 @@
 package net.kirks.exoticores.client.screen;
 
 import net.kirks.exoticores.ExoticOres;
-import net.kirks.exoticores.effect.radiation.RadiationExposureManager;
+import net.kirks.exoticores.effect.radiation.RadiationExposure;
 import net.kirks.exoticores.network.payload.RadiationIntensityPayload;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
@@ -39,7 +39,7 @@ public class RadiationScreenOverlay {
     private RadiationScreenOverlay() {}
 
     public static void recieve(RadiationIntensityPayload payload) {
-        target = (float) (payload.intensity() / RadiationExposureManager.EFFECT_RANGE);
+        target = (float) (payload.intensity() / RadiationExposure.EFFECT_RANGE);
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null) lastPacketTick = mc.level.getGameTime();
     }

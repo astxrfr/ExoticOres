@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 //TODO: Add radiation effect for missing items/contexts
-public class RadiationExposureManager {
+public class RadiationExposure {
     public static final int INITIAL_DURATION = 10;
     public static final double EFFECT_RANGE = 10 * ExoticOresConfig.RADIATION_RADIUS_MULT.get();
     public static final float EFFECT_INTENSITY = 3f;

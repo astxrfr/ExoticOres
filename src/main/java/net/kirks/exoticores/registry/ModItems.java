@@ -2,13 +2,17 @@ package net.kirks.exoticores.registry;
 
 import net.kirks.exoticores.ExoticOres;
 import net.kirks.exoticores.datagen.ModArmorMaterial;
+import net.kirks.exoticores.item.RadioactiveBlockItem;
 import net.kirks.exoticores.item.RadioactiveItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
 
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ExoticOres.MODID);
@@ -25,7 +29,7 @@ public class ModItems {
 
     // BLOCK ITEMS
     public static final DeferredItem<BlockItem> THORITE_ORE_ITEM =
-            ITEMS.registerSimpleBlockItem("thorite_ore", ModBlocks.THORITE_ORE);
+            registerSimpleRadioactiveBlockItem("thorite_ore", ModBlocks.THORITE_ORE);
     public static final DeferredItem<BlockItem> THORITE_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("thorite_block", ModBlocks.THORITE_BLOCK);
     public static final DeferredItem<BlockItem> CATALYZER_TABLE_BLOCK_ITEM =
@@ -59,4 +63,9 @@ public class ModItems {
 
     public static final DeferredItem<Item> RADIATION_SUIT_BOOTS = ITEMS.registerItem("radiation_suit_boots", properties ->
             new Item(properties.humanoidArmor(ModArmorMaterial.RADIATION_SUIT_MATERIAL, ArmorType.BOOTS)));
+
+
+    public static DeferredItem<BlockItem> registerSimpleRadioactiveBlockItem(String name, Supplier<? extends Block> block) {
+        return ITEMS.registerItem(name, props -> new RadioactiveBlockItem(block.get(), props), () -> new Item.Properties().useBlockDescriptionPrefix());
+    }
 }

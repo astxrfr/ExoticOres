@@ -1,5 +1,6 @@
 package net.kirks.exoticores.effect.radiation.container.mixin;
 
+import net.kirks.exoticores.effect.radiation.BlockRadiationContext;
 import net.kirks.exoticores.effect.radiation.RadiationExposure;
 import net.kirks.exoticores.effect.radiation.Radioactive;
 import net.kirks.exoticores.effect.radiation.container.ContainerRadiationTicker;
@@ -55,17 +56,8 @@ public abstract class BaseContainerBlockEntityMixin extends BlockEntity implemen
 
     @Override
     public void exoticOres$tick() {
-        var pos = getBlockPos();
-        var level = getLevel();
-        double radius = RadiationExposure.EFFECT_RANGE;
-        if (level.isClientSide()) return;
-        AABB range = new AABB(pos).inflate(radius);
-
-        for (LivingEntity mob : level.getEntitiesOfClass(LivingEntity.class, range)) {
-            var distance = Math.sqrt(pos.distToCenterSqr(mob.position()));
-            float intensity = (float) Math.max(0, (radius - distance));
-            RadiationExposure.contribute(mob, intensity);
-        }
+        if (exoticOres$hasRadioactiveItem())
+            emit(new BlockRadiationContext(getLevel(), getBlockPos()));
     }
 
     @Override

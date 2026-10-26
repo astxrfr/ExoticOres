@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Block;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
-public class RadioactiveBlockItem extends BlockItem implements BaseRadioactiveItem {
+public class RadioactiveBlockItem extends BlockItem implements RadiationItemEmitter {
     public RadioactiveBlockItem(Block block, Properties properties) {
         super(block, properties);
     }

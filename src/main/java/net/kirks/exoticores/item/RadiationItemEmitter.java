@@ -11,7 +11,7 @@ import org.jspecify.annotations.Nullable;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-public interface BaseRadioactiveItem extends Radioactive<ItemRadiationContext> {
+public interface RadiationItemEmitter extends Radioactive<ItemRadiationContext> {
     @Override
     default @Nullable Map<? extends LivingEntity, Float> radiate(ItemRadiationContext context) {
         if (context.level().isClientSide()) return null;

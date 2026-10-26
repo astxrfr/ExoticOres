@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
-public class RadioactiveItem extends Item implements BaseRadioactiveItem {
+public class RadioactiveItem extends Item implements RadiationItemEmitter {
     public RadioactiveItem(Properties properties) {
         super(properties);
     }

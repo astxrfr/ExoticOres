@@ -5,7 +5,7 @@ import net.kirks.exoticores.effect.ClearExceptProtectedConsumeEffect;
 import net.kirks.exoticores.effect.ModEffectEvents;
 import net.kirks.exoticores.effect.radiation.RadiationExposure;
 import net.kirks.exoticores.client.sound.GeigerTickClient;
-import net.kirks.exoticores.effect.radiation.container.ContainerRadiationListener;
+import net.kirks.exoticores.effect.radiation.container.ContainerRadiationTickListener;
 import net.kirks.exoticores.network.ModNetworkEvents;
 import net.kirks.exoticores.registry.*;
 import net.minecraft.core.component.DataComponents;
@@ -60,7 +60,7 @@ public class ExoticOres {
         NeoForge.EVENT_BUS.register(ModEffectEvents.class);
         NeoForge.EVENT_BUS.register(GeigerTickClient.class);
         NeoForge.EVENT_BUS.register(RadiationExposure.class);
-        NeoForge.EVENT_BUS.register(ContainerRadiationListener.class);
+        NeoForge.EVENT_BUS.register(ContainerRadiationTickListener.class);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.SERVER, ExoticOresConfig.SERVER_SPEC);

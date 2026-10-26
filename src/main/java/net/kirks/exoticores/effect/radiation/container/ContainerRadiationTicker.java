@@ -1,5 +1,6 @@
 package net.kirks.exoticores.effect.radiation.container;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.HashSet;
@@ -18,11 +19,12 @@ public class ContainerRadiationTicker {
         REGISTRY.remove(block);
     }
 
-    public static void tick() {
+    public static void tick(ServerLevel level) {
         REGISTRY.forEach(block -> {
+            if (block.getLevel() != level || block.isRemoved()) return;
+
             var container = (RadiationContainer) block;
-            if (container.exoticOres$hasRadioactiveItem())
-                container.exoticOres$tick();
+            container.exoticOres$tick();
         });
     }
 }

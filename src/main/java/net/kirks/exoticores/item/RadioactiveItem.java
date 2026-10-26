@@ -1,31 +1,30 @@
 package net.kirks.exoticores.item;
 
-import net.kirks.exoticores.effect.RadiationEffect;
-import net.kirks.exoticores.effect.RadiationExposure;
-import net.kirks.exoticores.registry.ModEffects;
+import net.kirks.exoticores.effect.radiation.ItemRadiationContext;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
-import java.util.Objects;
-
-public class RadioactiveItem extends Item {
+public class RadioactiveItem extends Item implements RadiationItemEmitter {
     public RadioactiveItem(Properties properties) {
         super(properties);
     }
 
     @Override
-    public void inventoryTick(@NonNull ItemStack itemStack, ServerLevel level, @NonNull Entity owner, @Nullable EquipmentSlot slot) {
-        if (level.isClientSide()) return;
+    public void inventoryTick(@NonNull ItemStack itemStack, @NonNull ServerLevel level, @NonNull Entity owner, @Nullable EquipmentSlot slot) {
+        emit(new ItemRadiationContext(level, itemStack, owner));
+    }
 
-        if (owner instanceof Player player) {
-            RadiationExposure.contribute(player, 10);
-        }
+    @Override
+    public boolean onEntityItemUpdate(@NonNull ItemStack stack, ItemEntity entity) {
+        if (entity.level() instanceof ServerLevel level)
+            emit(new ItemRadiationContext(level, stack, entity));
+
+        return false;
     }
 }

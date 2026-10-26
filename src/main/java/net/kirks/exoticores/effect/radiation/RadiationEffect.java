@@ -1,4 +1,4 @@
-package net.kirks.exoticores.effect;
+package net.kirks.exoticores.effect.radiation;
 
 import net.kirks.exoticores.registry.ModDataAttachments;
 import net.kirks.exoticores.registry.ModEffects;

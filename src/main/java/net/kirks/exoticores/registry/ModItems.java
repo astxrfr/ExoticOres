@@ -32,6 +32,7 @@ public class ModItems {
     public static final DeferredItem<Item> LEAD_INGOT =
             ITEMS.registerItem("lead_ingot", Item::new, Item.Properties::new);
 
+    // TOOLS
     public static final DeferredItem<Item> THORITE_PICKAXE =
             ITEMS.registerItem("thorite_pickaxe", properties ->
                     new Item(
@@ -83,7 +84,6 @@ public class ModItems {
                                             -2.4F
                                     )
                     ));
-    // Lead shit fuck
 
     public static final DeferredItem<Item> LEAD_PICKAXE =
             ITEMS.registerItem("lead_pickaxe", properties ->
@@ -138,7 +138,6 @@ public class ModItems {
                   ));
 
 
-    // La lanza usa estocadas y carga; no se arroja como un tridente.
     public static final DeferredItem<Item> THORITE_SPEAR =
             ITEMS.registerItem("thorite_spear", properties ->
                     new Item(
@@ -154,8 +153,6 @@ public class ModItems {
                                     )
                     ));
 
-    // Aqui elegimos la definicion visual del item, no el PNG directamente.
-    // Para la lanza apunta a assets/exoticores/items/thorite_spear.json.
     private static Item.Properties toolAppearance(
             Item.Properties properties, String modelName) {
 
@@ -168,10 +165,8 @@ public class ModItems {
                         )
                 );
     }
-    // Plomo shit fuck
 
-
-    // BLOQUES COMO ITEMS
+    // BLOCK ITEMS
 
     public static final DeferredItem<BlockItem> THORITE_ORE_ITEM =
             registerSimpleRadioactiveBlockItem("thorite_ore", ModBlocks.THORITE_ORE);

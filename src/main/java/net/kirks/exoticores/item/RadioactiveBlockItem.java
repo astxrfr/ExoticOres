@@ -1,37 +1,31 @@
 package net.kirks.exoticores.item;
 
 import net.kirks.exoticores.effect.radiation.ItemRadiationContext;
-import net.kirks.exoticores.effect.radiation.Radioactive;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
-import java.util.Map;
-
-public class RadioactiveBlockItem extends BlockItem implements Radioactive<ItemRadiationContext> {
+public class RadioactiveBlockItem extends BlockItem implements BaseRadioactiveItem {
     public RadioactiveBlockItem(Block block, Properties properties) {
         super(block, properties);
     }
 
     @Override
-    public void inventoryTick(ItemStack itemStack, ServerLevel level, Entity owner, @Nullable EquipmentSlot slot) {
+    public void inventoryTick(@NonNull ItemStack itemStack, @NonNull ServerLevel level, @NonNull Entity owner, @Nullable EquipmentSlot slot) {
         emit(new ItemRadiationContext(level, itemStack, owner));
     }
 
     @Override
-    public @Nullable Map<? extends LivingEntity, Float> radiate(ItemRadiationContext context) {
-        if (context.level().isClientSide()) return null;
+    public boolean onEntityItemUpdate(@NonNull ItemStack stack, ItemEntity entity) {
+        if (entity.level() instanceof ServerLevel level)
+            emit(new ItemRadiationContext(level, stack, entity));
 
-        if (context.owner() instanceof Player player) {
-            return Map.of(player, 10f);
-        }
-
-        return null;
+        return false;
     }
 }

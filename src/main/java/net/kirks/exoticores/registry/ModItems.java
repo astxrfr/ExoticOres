@@ -62,6 +62,17 @@ public class ModItems {
                     new RadioactiveHitItem(toolAppearance(properties, "thorite_sword")
                             .sword(ModToolMaterial.THORITE, 3.0F, -2.4F)));
 
+    public static final DeferredItem<Item> THORITE_SPEAR =
+            ITEMS.registerItem("thorite_spear", properties ->
+                    new RadioactiveHitItem(toolAppearance(properties, "thorite_spear")
+                            .spear(ModToolMaterial.THORITE,
+                                    0.8F,       // Tiempo entre estocadas.
+                                    1.0F,       // Multiplicador de daño de carga.
+                                    0.6F,       // Espera para activar la carga.
+                                    4.0F, 9.0F, // Ventana y velocidad para desmontar.
+                                    8.0F, 5.0F, // Ventana y velocidad para empujar.
+                                    12.0F, 4.5F)));
+
     public static final DeferredItem<Item> LEAD_PICKAXE =
             ITEMS.registerItem("lead_pickaxe", properties ->
                     new Item(
@@ -115,12 +126,12 @@ public class ModItems {
                   ));
 
 
-    public static final DeferredItem<Item> THORITE_SPEAR =
-            ITEMS.registerItem("thorite_spear", properties ->
-                    new RadioactiveHitItem(
-                            toolAppearance(properties, "thorite_spear")
+    public static final DeferredItem<Item> LEAD_SPEAR =
+            ITEMS.registerItem("lead_spear", properties ->
+                    new Item(
+                            toolAppearance(properties, "lead_spear")
                                     .spear(
-                                            ModToolMaterial.THORITE,
+                                            ModToolMaterial.LEAD,
                                             0.8F,       // Tiempo entre estocadas.
                                             1.0F,       // Multiplicador de daño de carga.
                                             0.6F,       // Espera para activar la carga.

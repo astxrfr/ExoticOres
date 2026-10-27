@@ -121,8 +121,7 @@ public class ModModelProvider extends ModelProvider {
 
     private void registerItems(ItemModelGenerators itemModels) {
 
-        // MATERIALES
-
+        // Raw materials
         itemModels.generateFlatItem(
                 ModItems.THORITE_SHARD.get(),
                 ModelTemplates.FLAT_ITEM
@@ -143,8 +142,7 @@ public class ModModelProvider extends ModelProvider {
                 ModelTemplates.FLAT_ITEM
         );
 
-        // HERRAMIENTAS DE THORITE
-
+        // Thorite tools
         itemModels.generateFlatItem(
                 ModItems.THORITE_PICKAXE.get(),
                 ModelTemplates.FLAT_HANDHELD_ITEM
@@ -169,6 +167,8 @@ public class ModModelProvider extends ModelProvider {
                 ModItems.THORITE_SWORD.get(),
                 ModelTemplates.FLAT_HANDHELD_ITEM
         );
+
+        itemModels.generateSpear(ModItems.THORITE_SPEAR.get());
 
         // Lead tools
         itemModels.generateFlatItem(
@@ -196,11 +196,9 @@ public class ModModelProvider extends ModelProvider {
                 ModelTemplates.FLAT_HANDHELD_ITEM
         );
 
-        // La lanza usa sus texturas de inventario y de mano.
-        itemModels.generateSpear(ModItems.THORITE_SPEAR.get());
+        itemModels.generateSpear(ModItems.LEAD_SPEAR.get());
 
-        // ARMADURA DE THORITE
-
+        // thorite armor
         itemModels.generateFlatItem(
                 ModItems.THORITE_HELMET.get(),
                 ModelTemplates.FLAT_ITEM
@@ -221,8 +219,7 @@ public class ModModelProvider extends ModelProvider {
                 ModelTemplates.FLAT_ITEM
         );
 
-        // TRAJE CONTRA RADIACION
-
+        // rad suit
         itemModels.generateFlatItem(
                 ModItems.RADIATION_SUIT_HELMET.get(),
                 ModelTemplates.FLAT_ITEM

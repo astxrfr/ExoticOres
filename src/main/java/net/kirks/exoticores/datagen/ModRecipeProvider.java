@@ -10,6 +10,7 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.neoforge.registries.DeferredItem;
 import org.jspecify.annotations.NonNull;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -141,48 +142,100 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     private void toolRecipes(HolderLookup.RegistryLookup<Item> items) {
-        // I = cristal de Thorite.
-        // B = vara de blaze.
-        // Los espacios son casillas vacias de la mesa de crafteo.
-
-        // Hacha: tres cristales y dos varas.
+        // Thorite tools
         toolRecipe(items, RecipeCategory.TOOLS,
                 ModItems.THORITE_AXE,
+                ModItems.THORITE_SHARD.asItem(),
+                Items.BLAZE_ROD,
                 "II",
                 "IB",
                 " B");
 
-        // Pala: un cristal y dos varas.
         toolRecipe(items, RecipeCategory.TOOLS,
                 ModItems.THORITE_SHOVEL,
+                ModItems.THORITE_SHARD.asItem(),
+                Items.BLAZE_ROD,
                 "I",
                 "B",
                 "B");
 
-        // Espada: dos cristales y una vara.
         toolRecipe(items, RecipeCategory.COMBAT,
                 ModItems.THORITE_SWORD,
+                ModItems.THORITE_SHARD.asItem(),
+                Items.BLAZE_ROD,
                 "I",
                 "I",
                 "B");
 
-        // Pico: tres cristales y dos varas.
         toolRecipe(items, RecipeCategory.TOOLS,
                 ModItems.THORITE_PICKAXE,
+                ModItems.THORITE_SHARD.asItem(),
+                Items.BLAZE_ROD,
                 "III",
                 " B ",
                 " B ");
 
-        // Azada: dos cristales y dos varas.
         toolRecipe(items, RecipeCategory.TOOLS,
                 ModItems.THORITE_HOE,
+                ModItems.THORITE_SHARD.asItem(),
+                Items.BLAZE_ROD,
                 "II",
                 " B",
                 " B");
 
-        // Lanza: un cristal y dos varas en diagonal.
         toolRecipe(items, RecipeCategory.COMBAT,
                 ModItems.THORITE_SPEAR,
+                ModItems.THORITE_SHARD.asItem(),
+                Items.BLAZE_ROD,
+                "  I",
+                " B ",
+                "B  ");
+
+        // lead tools
+        toolRecipe(items, RecipeCategory.TOOLS,
+                ModItems.LEAD_AXE,
+                ModItems.LEAD_INGOT.asItem(),
+                Items.STICK,
+                "II",
+                "IB",
+                " B");
+
+        toolRecipe(items, RecipeCategory.TOOLS,
+                ModItems.LEAD_SHOVEL,
+                ModItems.LEAD_INGOT.asItem(),
+                Items.STICK,
+                "I",
+                "B",
+                "B");
+
+        toolRecipe(items, RecipeCategory.COMBAT,
+                ModItems.LEAD_SWORD,
+                ModItems.LEAD_INGOT.asItem(),
+                Items.STICK,
+                "I",
+                "I",
+                "B");
+
+        toolRecipe(items, RecipeCategory.TOOLS,
+                ModItems.LEAD_PICKAXE,
+                ModItems.LEAD_INGOT.asItem(),
+                Items.STICK,
+                "III",
+                " B ",
+                " B ");
+
+        toolRecipe(items, RecipeCategory.TOOLS,
+                ModItems.LEAD_HOE,
+                ModItems.LEAD_INGOT.asItem(),
+                Items.STICK,
+                "II",
+                " B",
+                " B");
+
+        toolRecipe(items, RecipeCategory.COMBAT,
+                ModItems.LEAD_SPEAR,
+                ModItems.LEAD_INGOT.asItem(),
+                Items.STICK,
                 "  I",
                 " B ",
                 "B  ");
@@ -192,19 +245,19 @@ public class ModRecipeProvider extends RecipeProvider {
             HolderLookup.RegistryLookup<Item> items,
             RecipeCategory category,
             ItemLike result,
+            Item ingot,
+            Item stick,
             String... pattern) {
 
-        // Armamos la receta usando las filas que recibimos.
         var recipe = ShapedRecipeBuilder.shaped(items, category, result);
 
         for (String row : pattern) {
             recipe.pattern(row);
         }
 
-        // Aqui asignamos el ingrediente de cada letra.
-        recipe.define('I', ModItems.THORITE_SHARD)
-                .define('B', Items.BLAZE_ROD)
-                .unlockedBy("has_thorite_shard", has(ModItems.THORITE_SHARD))
+        recipe.define('I', ingot)
+                .define('B', stick)
+                .unlockedBy("has_thorite_shard", has(ingot))
                 .save(output);
     }
 

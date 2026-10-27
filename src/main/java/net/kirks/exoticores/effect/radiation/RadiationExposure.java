@@ -1,5 +1,6 @@
 package net.kirks.exoticores.effect.radiation;
 
+import net.kirks.exoticores.ExoticOres;
 import net.kirks.exoticores.ExoticOresConfig;
 import net.kirks.exoticores.network.payload.RadiationIntensityPayload;
 import net.kirks.exoticores.registry.ModEffects;
@@ -38,8 +39,14 @@ public class RadiationExposure {
     }
 
     private static void attemptToAdvance(LivingEntity entity, float intensity) {
+        if (!entity.hasEffect(ModEffects.RADIATION))
+            entity.addEffect(new MobEffectInstance(ModEffects.RADIATION, INITIAL_DURATION, 0));
+
         MobEffectInstance current = entity.getEffect(ModEffects.RADIATION);
-        if(current == null) return;
+        if (current == null) {
+            ExoticOres.LOGGER.warn("effect instance was removed before advancing!", new IllegalStateException("current should not be null"));
+            return;
+        }
 
         advance(entity, current, intensity);
 
@@ -73,10 +80,6 @@ public class RadiationExposure {
 
         mappedContributions.forEach((entity, intensity) -> {
             if (entity.isRemoved() || !entity.isAlive()) return;
-
-            if (!entity.hasEffect(ModEffects.RADIATION)) {
-                entity.addEffect(new MobEffectInstance(ModEffects.RADIATION, INITIAL_DURATION, 0));
-            }
 
             intensity = (float) (EFFECT_INTENSITY * Math.log(intensity+1));
             attemptToAdvance(entity, intensity);

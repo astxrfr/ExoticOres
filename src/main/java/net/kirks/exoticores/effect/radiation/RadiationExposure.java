@@ -27,7 +27,7 @@ public class RadiationExposure {
         entity.addEffect(new MobEffectInstance(
                 currentInstance.getEffect(),
                 currentInstance.getDuration()+(int)intensity,
-                currentInstance.getAmplifier() + 1,
+                currentInstance.getAmplifier(),
                 currentInstance.isAmbient(),
                 currentInstance.isVisible(),
                 currentInstance.showIcon()

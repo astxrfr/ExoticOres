@@ -43,10 +43,7 @@ public class RadiationExposure {
             entity.addEffect(new MobEffectInstance(ModEffects.RADIATION, INITIAL_DURATION, 0));
 
         MobEffectInstance current = entity.getEffect(ModEffects.RADIATION);
-        if (current == null) {
-            ExoticOres.LOGGER.warn("effect instance was removed before advancing!", new IllegalStateException("current should not be null"));
-            return;
-        }
+        if (current == null) return;
 
         advance(entity, current, intensity);
 

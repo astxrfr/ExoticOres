@@ -11,14 +11,12 @@ import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import java.util.Set;
 
 public class ModEffectEvents {
-    private static final Set<EntityType<?>> UNAFFECTED_ENTITIES_RADIATION =
-            Set.of(
-                    EntityTypes.ENDERMITE,
-                    EntityTypes.ENDERMAN,
-                    EntityTypes.ENDER_DRAGON,
-                    EntityTypes.SHULKER
-            );
-
+    private static final Set<EntityType<?>> UNAFFECTED_ENTITIES_RADIATION = Set.of(
+            EntityTypes.ENDERMITE,
+            EntityTypes.ENDERMAN,
+            EntityTypes.ENDER_DRAGON,
+            EntityTypes.SHULKER
+    );
 
     @SubscribeEvent
     public static void onEffectApplicable(MobEffectEvent.Applicable event) {

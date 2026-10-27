@@ -37,6 +37,7 @@ public class ModItems {
             ITEMS.registerItem("lead_ingot", Item::new, Item.Properties::new);
 
     // TOOLS
+    // thorite
     public static final DeferredItem<Item> THORITE_PICKAXE =
             ITEMS.registerItem("thorite_pickaxe", properties ->
                     new RadioactiveHitItem(toolAppearance(properties, "thorite_pickaxe")
@@ -73,6 +74,7 @@ public class ModItems {
                                     8.0F, 5.0F, // Ventana y velocidad para empujar.
                                     12.0F, 4.5F)));
 
+    // lead
     public static final DeferredItem<Item> LEAD_PICKAXE =
             ITEMS.registerItem("lead_pickaxe", properties ->
                     new Item(
@@ -84,7 +86,6 @@ public class ModItems {
                                     )
                     ));
 
-  // Usamos AxeItem para conservar el clic derecho al pelar troncos.
   public static final DeferredItem<AxeItem> LEAD_AXE =
           ITEMS.registerItem("lead_axe", properties ->
                   new AxeItem(
@@ -94,7 +95,6 @@ public class ModItems {
                           toolAppearance(properties, "lead_axe")
                   ));
 
-  // La pala conserva la funcion de hacer caminos.
   public static final DeferredItem<ShovelItem> LEAD_SHOVEL =
           ITEMS.registerItem("lead_shovel", properties ->
                   new ShovelItem(
@@ -104,7 +104,6 @@ public class ModItems {
                           toolAppearance(properties, "lead_shovel")
                   ));
 
-  // La azada conserva la funcion de arar la tierra.
   public static final DeferredItem<HoeItem> LEAD_HOE =
           ITEMS.registerItem("lead_hoe", properties ->
                   new HoeItem(
@@ -141,21 +140,17 @@ public class ModItems {
                                     )
                     ));
 
-    private static Item.Properties toolAppearance(
-            Item.Properties properties, String modelName) {
-
-        return properties.rarity(Rarity.RARE)
-                .component(
-                        DataComponents.ITEM_MODEL,
-                        Identifier.fromNamespaceAndPath(
-                                ExoticOres.MODID,
-                                modelName
-                        )
-                );
+    private static Item.Properties toolAppearance(Item.Properties properties, String modelName) {
+        return properties.rarity(Rarity.RARE).component(
+                DataComponents.ITEM_MODEL,
+                Identifier.fromNamespaceAndPath(
+                        ExoticOres.MODID,
+                        modelName
+                )
+        );
     }
 
     // BLOCK ITEMS
-
     public static final DeferredItem<BlockItem> THORITE_ORE_ITEM =
             registerSimpleRadioactiveBlockItem("thorite_ore", ModBlocks.THORITE_ORE);
     public static final DeferredItem<BlockItem> THORITE_BLOCK_ITEM =

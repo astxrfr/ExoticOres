@@ -32,60 +32,54 @@ public class ModModelProvider extends ModelProvider {
     }
 
     private void registerBlocks(BlockModelGenerators blockModels) {
-        // Estos bloques usan la misma textura en todas sus caras.
+        // TRIVIAL CUBES
         blockModels.createTrivialCube(ModBlocks.THORITE_ORE.get());
         blockModels.createTrivialCube(ModBlocks.THORITE_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.LEAD_ORE.get());
         blockModels.createTrivialCube(ModBlocks.DEEPSLATE_LEAD_ORE.get());
 
-        // Generamos las dos apariencias del catalizador.
         createCatalyzerModels(blockModels);
     }
 
     private void createCatalyzerModels(BlockModelGenerators blockModels) {
         var block = ModBlocks.CATALYZER_TABLE_BLOCK.get();
 
-        // Apagado: usamos las texturas normales.
-        var apagado = ModelTemplates.CUBE.create(
+        var off = ModelTemplates.CUBE.create(
                 block,
                 catalyzerTextures(false),
                 blockModels.modelOutput
         );
 
-        // Encendido: el frente usa la textura animada.
-        var encendido = ModelTemplates.CUBE.createWithSuffix(
+        var on = ModelTemplates.CUBE.createWithSuffix(
                 block,
                 "_on",
                 catalyzerTextures(true),
                 blockModels.modelOutput
         );
 
-        // LIT elige la apariencia y FACING mantiene la orientacion.
         blockModels.blockStateOutput.accept(
                 MultiVariantGenerator.dispatch(block)
                         .with(
                                 PropertyDispatch.initial(CatalyzerTableBlock.LIT)
                                         .select(
                                                 false,
-                                                BlockModelGenerators.plainVariant(apagado)
+                                                BlockModelGenerators.plainVariant(off)
                                         )
                                         .select(
                                                 true,
-                                                BlockModelGenerators.plainVariant(encendido)
+                                                BlockModelGenerators.plainVariant(on)
                                         )
                         )
                         .with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING)
         );
 
-        // En el inventario mostramos el catalizador apagado.
-        blockModels.registerSimpleItemModel(block, apagado);
+        blockModels.registerSimpleItemModel(block, off);
     }
 
     private TextureMapping catalyzerTextures(boolean encendido) {
         var block = ModBlocks.CATALYZER_TABLE_BLOCK.get();
 
-        // Elegimos el frente segun si esta encendido o apagado.
-        Material frente = new Material(
+        Material front = new Material(
                 Identifier.fromNamespaceAndPath(
                         "exoticores",
                         encendido
@@ -103,7 +97,7 @@ public class ModModelProvider extends ModelProvider {
                         TextureSlot.DOWN,
                         TextureMapping.getBlockTexture(block, "_down")
                 )
-                .put(TextureSlot.NORTH, frente)
+                .put(TextureSlot.NORTH, front)
                 .put(
                         TextureSlot.SOUTH,
                         TextureMapping.getBlockTexture(block, "_south")
@@ -116,128 +110,42 @@ public class ModModelProvider extends ModelProvider {
                         TextureSlot.WEST,
                         TextureMapping.getBlockTexture(block, "_west")
                 )
-                .put(TextureSlot.PARTICLE, frente);
+                .put(TextureSlot.PARTICLE, front);
     }
 
     private void registerItems(ItemModelGenerators itemModels) {
-
         // Raw materials
-        itemModels.generateFlatItem(
-                ModItems.THORITE_SHARD.get(),
-                ModelTemplates.FLAT_ITEM
-        );
-
-        itemModels.generateFlatItem(
-                ModItems.RAW_THORITE.get(),
-                ModelTemplates.FLAT_ITEM
-        );
-
-        itemModels.generateFlatItem(
-                ModItems.RAW_LEAD.get(),
-                ModelTemplates.FLAT_ITEM
-        );
-
-        itemModels.generateFlatItem(
-                ModItems.LEAD_INGOT.get(),
-                ModelTemplates.FLAT_ITEM
-        );
+        itemModels.generateFlatItem(ModItems.THORITE_SHARD.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RAW_THORITE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RAW_LEAD.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.LEAD_INGOT.get(), ModelTemplates.FLAT_ITEM);
 
         // Thorite tools
-        itemModels.generateFlatItem(
-                ModItems.THORITE_PICKAXE.get(),
-                ModelTemplates.FLAT_HANDHELD_ITEM
-        );
-
-        itemModels.generateFlatItem(
-                ModItems.THORITE_AXE.get(),
-                ModelTemplates.FLAT_HANDHELD_ITEM
-        );
-
-        itemModels.generateFlatItem(
-                ModItems.THORITE_SHOVEL.get(),
-                ModelTemplates.FLAT_HANDHELD_ITEM
-        );
-
-        itemModels.generateFlatItem(
-                ModItems.THORITE_HOE.get(),
-                ModelTemplates.FLAT_HANDHELD_ITEM
-        );
-
-        itemModels.generateFlatItem(
-                ModItems.THORITE_SWORD.get(),
-                ModelTemplates.FLAT_HANDHELD_ITEM
-        );
-
+        itemModels.generateFlatItem(ModItems.THORITE_PICKAXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.generateFlatItem(ModItems.THORITE_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.generateFlatItem(ModItems.THORITE_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.generateFlatItem(ModItems.THORITE_HOE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.generateFlatItem(ModItems.THORITE_SWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateSpear(ModItems.THORITE_SPEAR.get());
 
         // Lead tools
-        itemModels.generateFlatItem(
-                ModItems.LEAD_PICKAXE.get(),
-                ModelTemplates.FLAT_HANDHELD_ITEM
-        );
-
-        itemModels.generateFlatItem(
-                ModItems.LEAD_AXE.get(),
-                ModelTemplates.FLAT_HANDHELD_ITEM
-        );
-
-        itemModels.generateFlatItem(
-                ModItems.LEAD_SHOVEL.get(),
-                ModelTemplates.FLAT_HANDHELD_ITEM
-        );
-
-        itemModels.generateFlatItem(
-                ModItems.LEAD_HOE.get(),
-                ModelTemplates.FLAT_HANDHELD_ITEM
-        );
-
-        itemModels.generateFlatItem(
-                ModItems.LEAD_SWORD.get(),
-                ModelTemplates.FLAT_HANDHELD_ITEM
-        );
-
+        itemModels.generateFlatItem(ModItems.LEAD_PICKAXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.generateFlatItem(ModItems.LEAD_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.generateFlatItem(ModItems.LEAD_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.generateFlatItem(ModItems.LEAD_HOE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.generateFlatItem(ModItems.LEAD_SWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateSpear(ModItems.LEAD_SPEAR.get());
 
         // thorite armor
-        itemModels.generateFlatItem(
-                ModItems.THORITE_HELMET.get(),
-                ModelTemplates.FLAT_ITEM
-        );
-
-        itemModels.generateFlatItem(
-                ModItems.THORITE_CHESTPLATE.get(),
-                ModelTemplates.FLAT_ITEM
-        );
-
-        itemModels.generateFlatItem(
-                ModItems.THORITE_LEGGINGS.get(),
-                ModelTemplates.FLAT_ITEM
-        );
-
-        itemModels.generateFlatItem(
-                ModItems.THORITE_BOOTS.get(),
-                ModelTemplates.FLAT_ITEM
-        );
+        itemModels.generateFlatItem(ModItems.THORITE_HELMET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.THORITE_CHESTPLATE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.THORITE_LEGGINGS.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.THORITE_BOOTS.get(), ModelTemplates.FLAT_ITEM);
 
         // rad suit
-        itemModels.generateFlatItem(
-                ModItems.RADIATION_SUIT_HELMET.get(),
-                ModelTemplates.FLAT_ITEM
-        );
-
-        itemModels.generateFlatItem(
-                ModItems.RADIATION_SUIT_CHESPLATE.get(),
-                ModelTemplates.FLAT_ITEM
-        );
-
-        itemModels.generateFlatItem(
-                ModItems.RADIATION_SUIT_LEGGINGS.get(),
-                ModelTemplates.FLAT_ITEM
-        );
-
-        itemModels.generateFlatItem(
-                ModItems.RADIATION_SUIT_BOOTS.get(),
-                ModelTemplates.FLAT_ITEM
-        );
+        itemModels.generateFlatItem(ModItems.RADIATION_SUIT_HELMET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RADIATION_SUIT_CHESPLATE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RADIATION_SUIT_LEGGINGS.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RADIATION_SUIT_BOOTS.get(), ModelTemplates.FLAT_ITEM);
     }
 }

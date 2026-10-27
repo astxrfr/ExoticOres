@@ -6,7 +6,6 @@ import net.minecraft.world.item.ToolMaterial;
 
 public final class ModToolMaterial {
 
-    // Va, aqui cambiamos las estadisticas de todas de una sola vez.
     public static final ToolMaterial THORITE = new ToolMaterial(
             BlockTags.INCORRECT_FOR_NETHERITE_TOOL,
             1800,   // Durabilidad.

@@ -117,7 +117,7 @@ public class ModItems {
 
     public static final DeferredItem<Item> THORITE_SPEAR =
             ITEMS.registerItem("thorite_spear", properties ->
-                    new Item(
+                    new RadioactiveHitItem(
                             toolAppearance(properties, "thorite_spear")
                                     .spear(
                                             ModToolMaterial.THORITE,

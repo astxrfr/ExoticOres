@@ -4,9 +4,18 @@ import net.kirks.exoticores.ExoticOres;
 import net.kirks.exoticores.datagen.ModArmorMaterial;
 import net.kirks.exoticores.item.RadioactiveBlockItem;
 import net.kirks.exoticores.item.RadioactiveItem;
+import net.kirks.exoticores.item.radiation.hit.RadioactiveHitAxeItem;
+import net.kirks.exoticores.item.radiation.hit.RadioactiveHitHoeItem;
+import net.kirks.exoticores.item.radiation.hit.RadioactiveHitItem;
+import net.kirks.exoticores.item.radiation.hit.RadioactiveHitShovelItem;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -26,6 +35,120 @@ public class ModItems {
             ITEMS.registerItem("raw_lead", Item::new, Item.Properties::new);
     public static final DeferredItem<Item> LEAD_INGOT =
             ITEMS.registerItem("lead_ingot", Item::new, Item.Properties::new);
+
+    // TOOLS
+    // thorite
+    public static final DeferredItem<Item> THORITE_PICKAXE =
+            ITEMS.registerItem("thorite_pickaxe", properties ->
+                    new RadioactiveHitItem(toolAppearance(properties, "thorite_pickaxe")
+                            .pickaxe(ModToolMaterial.THORITE, 1.0F, -2.8F)));
+
+    public static final DeferredItem<AxeItem> THORITE_AXE =
+            ITEMS.registerItem("thorite_axe", properties ->
+                    new RadioactiveHitAxeItem(ModToolMaterial.THORITE, 5.0F, -3.0F,
+                            toolAppearance(properties, "thorite_axe")));
+
+    public static final DeferredItem<ShovelItem> THORITE_SHOVEL =
+            ITEMS.registerItem("thorite_shovel", properties ->
+                    new RadioactiveHitShovelItem(ModToolMaterial.THORITE, 1.5F, -3.0F,
+                            toolAppearance(properties, "thorite_shovel")));
+
+    public static final DeferredItem<HoeItem> THORITE_HOE =
+            ITEMS.registerItem("thorite_hoe", properties ->
+                    new RadioactiveHitHoeItem(ModToolMaterial.THORITE, -4.0F, 0.0F,
+                            toolAppearance(properties, "thorite_hoe")));
+
+    public static final DeferredItem<Item> THORITE_SWORD =
+            ITEMS.registerItem("thorite_sword", properties ->
+                    new RadioactiveHitItem(toolAppearance(properties, "thorite_sword")
+                            .sword(ModToolMaterial.THORITE, 3.0F, -2.4F)));
+
+    public static final DeferredItem<Item> THORITE_SPEAR =
+            ITEMS.registerItem("thorite_spear", properties ->
+                    new RadioactiveHitItem(toolAppearance(properties, "thorite_spear")
+                            .spear(ModToolMaterial.THORITE,
+                                    0.8F,       // Tiempo entre estocadas.
+                                    1.0F,       // Multiplicador de daño de carga.
+                                    0.6F,       // Espera para activar la carga.
+                                    4.0F, 9.0F, // Ventana y velocidad para desmontar.
+                                    8.0F, 5.0F, // Ventana y velocidad para empujar.
+                                    12.0F, 4.5F)));
+
+    // lead
+    public static final DeferredItem<Item> LEAD_PICKAXE =
+            ITEMS.registerItem("lead_pickaxe", properties ->
+                    new Item(
+                            toolAppearance(properties, "lead_pickaxe")
+                                    .pickaxe(
+                                            ModToolMaterial.LEAD,
+                                            1.0F,
+                                            -2.8F
+                                    )
+                    ));
+
+  public static final DeferredItem<AxeItem> LEAD_AXE =
+          ITEMS.registerItem("lead_axe", properties ->
+                  new AxeItem(
+                          ModToolMaterial.LEAD,
+                          5.0F,
+                          -3.0F,
+                          toolAppearance(properties, "lead_axe")
+                  ));
+
+  public static final DeferredItem<ShovelItem> LEAD_SHOVEL =
+          ITEMS.registerItem("lead_shovel", properties ->
+                  new ShovelItem(
+                          ModToolMaterial.LEAD,
+                          1.5F,
+                          -3.0F,
+                          toolAppearance(properties, "lead_shovel")
+                  ));
+
+  public static final DeferredItem<HoeItem> LEAD_HOE =
+          ITEMS.registerItem("lead_hoe", properties ->
+                  new HoeItem(
+                          ModToolMaterial.LEAD,
+                          -4.0F,
+                          0.0F,
+                          toolAppearance(properties, "lead_hoe")
+                  ));
+
+  public static final DeferredItem<Item> LEAD_SWORD =
+          ITEMS.registerItem("lead_sword", properties ->
+                  new Item(
+                          toolAppearance(properties, "lead_sword")
+                                  .sword(
+                                          ModToolMaterial.LEAD,
+                                          3.0F,
+                                          -2.4F
+                                  )
+                  ));
+
+
+    public static final DeferredItem<Item> LEAD_SPEAR =
+            ITEMS.registerItem("lead_spear", properties ->
+                    new Item(
+                            toolAppearance(properties, "lead_spear")
+                                    .spear(
+                                            ModToolMaterial.LEAD,
+                                            0.8F,       // Tiempo entre estocadas.
+                                            1.0F,       // Multiplicador de daño de carga.
+                                            0.6F,       // Espera para activar la carga.
+                                            4.0F, 9.0F, // Ventana y velocidad para desmontar.
+                                            8.0F, 5.0F, // Ventana y velocidad para empujar.
+                                            12.0F, 4.5F // Ventana y velocidad para hacer daño.
+                                    )
+                    ));
+
+    private static Item.Properties toolAppearance(Item.Properties properties, String modelName) {
+        return properties.rarity(Rarity.RARE).component(
+                DataComponents.ITEM_MODEL,
+                Identifier.fromNamespaceAndPath(
+                        ExoticOres.MODID,
+                        modelName
+                )
+        );
+    }
 
     // BLOCK ITEMS
     public static final DeferredItem<BlockItem> THORITE_ORE_ITEM =

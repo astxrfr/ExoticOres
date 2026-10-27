@@ -10,7 +10,10 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.neoforge.registries.DeferredItem;
 import org.jspecify.annotations.NonNull;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -23,6 +26,7 @@ public class ModRecipeProvider extends RecipeProvider {
     protected void buildRecipes() {
         var items = registries.lookupOrThrow(Registries.ITEM);
 
+        toolRecipes(items);
         armorRecipes(items);
         storageRecipes(items);
         cookingRecipes(items);
@@ -135,6 +139,126 @@ public class ModRecipeProvider extends RecipeProvider {
                 100)
                 .unlockedBy("has_raw_lead", has(ModItems.RAW_LEAD))
                 .save(output, ExoticOres.MODID+":lead_ingot_from_blasting");
+    }
+
+    private void toolRecipes(HolderLookup.RegistryLookup<Item> items) {
+        // Thorite tools
+        toolRecipe(items, RecipeCategory.TOOLS,
+                ModItems.THORITE_AXE,
+                ModItems.THORITE_SHARD.asItem(),
+                Items.BLAZE_ROD,
+                "II",
+                "IB",
+                " B");
+
+        toolRecipe(items, RecipeCategory.TOOLS,
+                ModItems.THORITE_SHOVEL,
+                ModItems.THORITE_SHARD.asItem(),
+                Items.BLAZE_ROD,
+                "I",
+                "B",
+                "B");
+
+        toolRecipe(items, RecipeCategory.COMBAT,
+                ModItems.THORITE_SWORD,
+                ModItems.THORITE_SHARD.asItem(),
+                Items.BLAZE_ROD,
+                "I",
+                "I",
+                "B");
+
+        toolRecipe(items, RecipeCategory.TOOLS,
+                ModItems.THORITE_PICKAXE,
+                ModItems.THORITE_SHARD.asItem(),
+                Items.BLAZE_ROD,
+                "III",
+                " B ",
+                " B ");
+
+        toolRecipe(items, RecipeCategory.TOOLS,
+                ModItems.THORITE_HOE,
+                ModItems.THORITE_SHARD.asItem(),
+                Items.BLAZE_ROD,
+                "II",
+                " B",
+                " B");
+
+        toolRecipe(items, RecipeCategory.COMBAT,
+                ModItems.THORITE_SPEAR,
+                ModItems.THORITE_SHARD.asItem(),
+                Items.BLAZE_ROD,
+                "  I",
+                " B ",
+                "B  ");
+
+        // lead tools
+        toolRecipe(items, RecipeCategory.TOOLS,
+                ModItems.LEAD_AXE,
+                ModItems.LEAD_INGOT.asItem(),
+                Items.STICK,
+                "II",
+                "IB",
+                " B");
+
+        toolRecipe(items, RecipeCategory.TOOLS,
+                ModItems.LEAD_SHOVEL,
+                ModItems.LEAD_INGOT.asItem(),
+                Items.STICK,
+                "I",
+                "B",
+                "B");
+
+        toolRecipe(items, RecipeCategory.COMBAT,
+                ModItems.LEAD_SWORD,
+                ModItems.LEAD_INGOT.asItem(),
+                Items.STICK,
+                "I",
+                "I",
+                "B");
+
+        toolRecipe(items, RecipeCategory.TOOLS,
+                ModItems.LEAD_PICKAXE,
+                ModItems.LEAD_INGOT.asItem(),
+                Items.STICK,
+                "III",
+                " B ",
+                " B ");
+
+        toolRecipe(items, RecipeCategory.TOOLS,
+                ModItems.LEAD_HOE,
+                ModItems.LEAD_INGOT.asItem(),
+                Items.STICK,
+                "II",
+                " B",
+                " B");
+
+        toolRecipe(items, RecipeCategory.COMBAT,
+                ModItems.LEAD_SPEAR,
+                ModItems.LEAD_INGOT.asItem(),
+                Items.STICK,
+                "  I",
+                " B ",
+                "B  ");
+    }
+
+    private void toolRecipe(
+            HolderLookup.RegistryLookup<Item> items,
+            RecipeCategory category,
+            ItemLike result,
+            Item ingot,
+            Item stick,
+            String... pattern) {
+
+        var recipe = ShapedRecipeBuilder.shaped(items, category, result);
+
+        for (String row : pattern) {
+            recipe.pattern(row);
+        }
+
+        recipe.define('I', ingot)
+                .define('B', stick)
+                .unlockedBy("has_thorite_shard", has(ingot))
+                .save(output);
     }
 
     public static class Runner extends RecipeProvider.Runner {

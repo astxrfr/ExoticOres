@@ -15,7 +15,7 @@ public interface RadiationBlockEmitter extends Radioactive<BlockRadiationContext
     default @Nullable Map<LivingEntity, Float> radiate(BlockRadiationContext context) {
         var pos = context.pos();
         var level = context.level();
-        double radius = RadiationExposure.EFFECT_RANGE;
+        double radius = RadiationExposure.EFFECT_RANGE.getAsDouble();
         if (level.isClientSide()) return null;
         AABB range = new AABB(pos).inflate(radius);
 

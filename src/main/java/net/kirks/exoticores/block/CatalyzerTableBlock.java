@@ -16,23 +16,33 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public class CatalyzerTableBlock extends Block implements EntityBlock {
-    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
+
+    // Hacia donde mira el frente del catalizador.
+    public static final EnumProperty<Direction> FACING =
+            BlockStateProperties.HORIZONTAL_FACING;
+
+    // Aqui guardamos si esta encendido o apagado.
+    public static final BooleanProperty LIT =
+            BlockStateProperties.LIT;
 
     public CatalyzerTableBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH));
+
+        // Al colocarlo empieza apagado.
+        registerDefaultState(
+                defaultBlockState()
+                        .setValue(FACING, Direction.NORTH)
+                        .setValue(LIT, false)
+        );
     }
 
-    /*
-     * Abre el menú cuando el jugador hace clic derecho
-     * con la mano vacía.
-     */
     @Override
     protected InteractionResult useWithoutItem(
             BlockState state,
@@ -41,30 +51,26 @@ public class CatalyzerTableBlock extends Block implements EntityBlock {
             Player player,
             BlockHitResult hit
     ) {
+        // Abrimos el menu desde el servidor.
         if (!level.isClientSide()
                 && level.getBlockEntity(pos)
-                instanceof CatalyzerTableBlockEntity furnace) {
+                instanceof CatalyzerTableBlockEntity catalyzer) {
 
-            player.openMenu(furnace);
+            player.openMenu(catalyzer);
         }
 
         return InteractionResult.SUCCESS;
     }
 
-    /*
-     * Crea el BlockEntity asociado al horno.
-     */
     @Override
     public @Nullable BlockEntity newBlockEntity(
             BlockPos pos,
             BlockState state
     ) {
+        // Esta entidad guarda los materiales, combustible y progreso.
         return new CatalyzerTableBlockEntity(pos, state);
     }
 
-    /*
-     * Ejecuta la lógica del horno solamente en el servidor.
-     */
     @Override
     public <T extends BlockEntity>
     @Nullable BlockEntityTicker<T> getTicker(
@@ -72,6 +78,7 @@ public class CatalyzerTableBlock extends Block implements EntityBlock {
             BlockState state,
             BlockEntityType<T> type
     ) {
+        // La logica se ejecuta solamente en el servidor.
         if (level.isClientSide()) {
             return null;
         }
@@ -84,17 +91,26 @@ public class CatalyzerTableBlock extends Block implements EntityBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.@NonNull Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(
+            StateDefinition.@NonNull Builder<Block, BlockState> builder
+    ) {
         super.createBlockStateDefinition(builder);
-        builder.add(FACING);
+
+        // Registramos la orientacion y el estado de encendido.
+        builder.add(FACING, LIT);
     }
 
     @Override
-    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-        return defaultBlockState().setValue(
-                FACING,
-                context.getHorizontalDirection().getOpposite()
-        );
+    public @Nullable BlockState getStateForPlacement(
+            BlockPlaceContext context
+    ) {
+        // El frente queda mirando hacia quien coloca el bloque.
+        return defaultBlockState()
+                .setValue(
+                        FACING,
+                        context.getHorizontalDirection().getOpposite()
+                )
+                .setValue(LIT, false);
     }
 
     @SuppressWarnings("unchecked")
@@ -106,6 +122,7 @@ public class CatalyzerTableBlock extends Block implements EntityBlock {
             BlockEntityType<E> expectedType,
             BlockEntityTicker<? super E> ticker
     ) {
+        // Solo usamos el ticker si corresponde a esta entidad.
         if (receivedType != expectedType) {
             return null;
         }

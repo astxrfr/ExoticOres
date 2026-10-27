@@ -39,7 +39,7 @@ public class RadiationScreenOverlay {
     private RadiationScreenOverlay() {}
 
     public static void recieve(RadiationIntensityPayload payload) {
-        target = (float) (payload.intensity() / RadiationExposure.EFFECT_RANGE);
+        target = (float) (payload.intensity() / RadiationExposure.EFFECT_RANGE.getAsDouble());
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null) lastPacketTick = mc.level.getGameTime();
     }

@@ -7,6 +7,7 @@ public class ExoticOresConfig {
 
     public static final ModConfigSpec.BooleanValue RADIATION_ENABLED;
     public static final ModConfigSpec.DoubleValue RADIATION_RADIUS_MULT;
+    public static final ModConfigSpec.DoubleValue RADIATION_HIT_MULT;
 
     static final ModConfigSpec SERVER_SPEC;
 
@@ -20,6 +21,10 @@ public class ExoticOresConfig {
         RADIATION_RADIUS_MULT = SERVER_BUILDER
                 .comment("Multiplies the range for radiation applying objects/blocks.")
                 .defineInRange("multiplier", 1, 0.1, 10);
+
+        RADIATION_HIT_MULT = SERVER_BUILDER
+                .comment("Multiplies the intensity of the radiation effect applied to entities hit by radiation inducing tools/items.")
+                .defineInRange("multiplier", 1, 0.1, 5);
 
         SERVER_BUILDER.pop();
 

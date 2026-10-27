@@ -4,6 +4,10 @@ import net.kirks.exoticores.ExoticOres;
 import net.kirks.exoticores.datagen.ModArmorMaterial;
 import net.kirks.exoticores.item.RadioactiveBlockItem;
 import net.kirks.exoticores.item.RadioactiveItem;
+import net.kirks.exoticores.item.radiation.hit.RadioactiveHitAxeItem;
+import net.kirks.exoticores.item.radiation.hit.RadioactiveHitHoeItem;
+import net.kirks.exoticores.item.radiation.hit.RadioactiveHitItem;
+import net.kirks.exoticores.item.radiation.hit.RadioactiveHitShovelItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.AxeItem;
@@ -35,55 +39,28 @@ public class ModItems {
     // TOOLS
     public static final DeferredItem<Item> THORITE_PICKAXE =
             ITEMS.registerItem("thorite_pickaxe", properties ->
-                    new Item(
-                            toolAppearance(properties, "thorite_pickaxe")
-                                    .pickaxe(
-                                            ModToolMaterial.THORITE,
-                                            1.0F,
-                                            -2.8F
-                                    )
-                    ));
+                    new RadioactiveHitItem(toolAppearance(properties, "thorite_pickaxe")
+                            .pickaxe(ModToolMaterial.THORITE, 1.0F, -2.8F)));
 
-    // Usamos AxeItem para conservar el clic derecho al pelar troncos.
     public static final DeferredItem<AxeItem> THORITE_AXE =
             ITEMS.registerItem("thorite_axe", properties ->
-                    new AxeItem(
-                            ModToolMaterial.THORITE,
-                            5.0F,
-                            -3.0F,
-                            toolAppearance(properties, "thorite_axe")
-                    ));
+                    new RadioactiveHitAxeItem(ModToolMaterial.THORITE, 5.0F, -3.0F,
+                            toolAppearance(properties, "thorite_axe")));
 
-    // La pala conserva la funcion de hacer caminos.
     public static final DeferredItem<ShovelItem> THORITE_SHOVEL =
             ITEMS.registerItem("thorite_shovel", properties ->
-                    new ShovelItem(
-                            ModToolMaterial.THORITE,
-                            1.5F,
-                            -3.0F,
-                            toolAppearance(properties, "thorite_shovel")
-                    ));
+                    new RadioactiveHitShovelItem(ModToolMaterial.THORITE, 1.5F, -3.0F,
+                            toolAppearance(properties, "thorite_shovel")));
 
-    // La azada conserva la funcion de arar la tierra.
     public static final DeferredItem<HoeItem> THORITE_HOE =
             ITEMS.registerItem("thorite_hoe", properties ->
-                    new HoeItem(
-                            ModToolMaterial.THORITE,
-                            -4.0F,
-                            0.0F,
-                            toolAppearance(properties, "thorite_hoe")
-                    ));
+                    new RadioactiveHitHoeItem(ModToolMaterial.THORITE, -4.0F, 0.0F,
+                            toolAppearance(properties, "thorite_hoe")));
 
     public static final DeferredItem<Item> THORITE_SWORD =
             ITEMS.registerItem("thorite_sword", properties ->
-                    new Item(
-                            toolAppearance(properties, "thorite_sword")
-                                    .sword(
-                                            ModToolMaterial.THORITE,
-                                            3.0F,
-                                            -2.4F
-                                    )
-                    ));
+                    new RadioactiveHitItem(toolAppearance(properties, "thorite_sword")
+                            .sword(ModToolMaterial.THORITE, 3.0F, -2.4F)));
 
     public static final DeferredItem<Item> LEAD_PICKAXE =
             ITEMS.registerItem("lead_pickaxe", properties ->

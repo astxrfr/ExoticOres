@@ -16,20 +16,20 @@ public interface RadiationItemEmitter extends Radioactive<ItemRadiationContext> 
     default @Nullable Map<? extends LivingEntity, Float> radiate(ItemRadiationContext context) {
         if (context.level().isClientSide()) return null;
 
-        if (context.owner() instanceof ItemEntity) {
+        if (context.entity() instanceof ItemEntity) {
             return affectNearby(context);
         }
 
-        if (context.owner() instanceof Player player) {
-            return Map.of(player, (float) RadiationExposure.EFFECT_RANGE);
+        if (context.entity() instanceof Player player) {
+            return Map.of(player, (float) RadiationExposure.EFFECT_RANGE.getAsDouble());
         }
 
         return null;
     }
 
     default Map<LivingEntity, Float> affectNearby(ItemRadiationContext context) {
-        var dropped = context.owner();
-        double radius = RadiationExposure.EFFECT_RANGE;
+        var dropped = context.entity();
+        double radius = RadiationExposure.EFFECT_RANGE.getAsDouble();
         var affected = new WeakHashMap<LivingEntity, Float>();
 
         for (LivingEntity target : context.level().getEntitiesOfClass(LivingEntity.class, dropped.getBoundingBox().inflate(radius))) {

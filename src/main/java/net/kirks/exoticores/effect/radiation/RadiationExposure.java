@@ -14,13 +14,16 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.WeakHashMap;
+import java.util.function.BooleanSupplier;
+import java.util.function.DoubleSupplier;
 
 public class RadiationExposure {
     public static final int INITIAL_DURATION = 10;
-    public static final double EFFECT_RANGE = 10 * ExoticOresConfig.RADIATION_RADIUS_MULT.get();
     public static final float EFFECT_INTENSITY = 3f;
 
-    private static final boolean RADIATION_DISABLED = !ExoticOresConfig.RADIATION_ENABLED.get();
+    private static final BooleanSupplier RADIATION_DISABLED = () -> !ExoticOresConfig.RADIATION_ENABLED.get();
+    public static final DoubleSupplier EFFECT_RANGE = () -> 10 * ExoticOresConfig.RADIATION_RADIUS_MULT.get();
+
     private static final Map<LivingEntity, Float> PENDING = new WeakHashMap<>();
 
     private static void advance(@Nonnull LivingEntity entity, @Nonnull MobEffectInstance currentInstance, float intensity) {
@@ -47,16 +50,20 @@ public class RadiationExposure {
     }
 
     public static void contribute(@Nonnull LivingEntity entity, float intensity) {
-        if (RADIATION_DISABLED) return;
-        if (entity.level().isClientSide()) return;
-        if (Float.isInfinite(intensity) || intensity <= 0) return;
-
-        PENDING.merge(entity, intensity, Float::sum);
+        if (isValid(entity, intensity))
+            PENDING.merge(entity, intensity, Float::sum);
     }
 
-    @SubscribeEvent
-    public static void beforeServerTick(ServerTickEvent.Pre event) {
-        PENDING.clear();
+    public static void contributeHit(@Nonnull LivingEntity entity, float intensity) {
+        if (isValid(entity, intensity))
+            attemptToAdvance(entity, intensity);
+    }
+
+    private static boolean isValid(@Nonnull LivingEntity entity, float intensity) {
+        if (RADIATION_DISABLED.getAsBoolean()) return false;
+        if (entity.level().isClientSide()) return false;
+        if (Float.isInfinite(intensity) || intensity <= 0) return false;
+        return true;
     }
 
     @SubscribeEvent

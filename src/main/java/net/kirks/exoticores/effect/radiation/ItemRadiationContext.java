@@ -5,7 +5,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public record ItemRadiationContext(ServerLevel level, ItemStack stack, Entity owner) implements RadiationContext {
+public record ItemRadiationContext(ServerLevel level, ItemStack stack, Entity entity) implements RadiationContext {
     @Override
     public Level getLevel() {
         return level;

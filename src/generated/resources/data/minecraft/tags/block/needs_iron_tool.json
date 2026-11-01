@@ -1,6 +1,9 @@
 {
   "values": [
     "exoticores:lead_ore",
-    "exoticores:deepslate_lead_ore"
+    "exoticores:deepslate_lead_ore",
+    "exoticores:lead_ore",
+    "exoticores:deepslate_lead_ore",
+    "exoticores:lead_block"
   ]
 }

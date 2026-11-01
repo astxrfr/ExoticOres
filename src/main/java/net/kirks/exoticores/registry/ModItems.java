@@ -161,6 +161,8 @@ public class ModItems {
             ITEMS.registerSimpleBlockItem("lead_ore", ModBlocks.LEAD_ORE);
     public static final DeferredItem<BlockItem> DEEPSLATE_LEAD_ORE_ITEM =
             ITEMS.registerSimpleBlockItem("deepslate_lead_ore", ModBlocks.DEEPSLATE_LEAD_ORE);
+    public static final DeferredItem<BlockItem> LEAD_BLOCK_ITEM =
+            ITEMS.registerSimpleBlockItem("lead_block", ModBlocks.LEAD_BLOCK);
 
     // EQUIPMENT
     public static final DeferredItem<Item> THORITE_HELMET = ITEMS.registerItem("thorite_helmet", properties ->

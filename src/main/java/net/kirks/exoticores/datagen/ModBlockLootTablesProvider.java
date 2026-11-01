@@ -20,6 +20,8 @@ public class ModBlockLootTablesProvider extends BlockLootSubProvider {
         // SELF-DROPS
         dropSelf(ModBlocks.THORITE_BLOCK.get());
         dropSelf(ModBlocks.CATALYZER_TABLE_BLOCK.get());
+        dropSelf(ModBlocks.LEAD_BLOCK.get());
+        
 
         // ORE DROPS
         add(

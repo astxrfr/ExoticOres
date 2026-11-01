@@ -47,6 +47,12 @@ public class ModBlocks {
             .sound(SoundType.DEEPSLATE)
             .mapColor(DyeColor.GRAY);
 
+    private static final BlockBehaviour.Properties LEAD_BLOCK_PROPERTIES = BlockBehaviour.Properties.of()
+            .requiresCorrectToolForDrops()
+            .strength(5.0F, 6.0F)
+            .sound(SoundType.METAL)
+            .mapColor(DyeColor.GRAY);
+
     // BLOCKS
     public static final DeferredBlock<RadioactiveBlock> THORITE_ORE =
             BLOCKS.registerBlock("thorite_ore", RadioactiveBlock::new, () -> THORITE_ORE_PROPERTIES);
@@ -62,5 +68,8 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> DEEPSLATE_LEAD_ORE =
             BLOCKS.registerBlock("deepslate_lead_ore", Block::new, () -> DEEPSLATE_LEAD_ORE_PROPERTIES);
+
+    public static final DeferredBlock<Block> LEAD_BLOCK =
+            BLOCKS.registerBlock("lead_block", Block::new, () -> LEAD_BLOCK_PROPERTIES);
 }
 

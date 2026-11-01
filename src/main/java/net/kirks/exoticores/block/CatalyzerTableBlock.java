@@ -24,25 +24,21 @@ import org.jspecify.annotations.Nullable;
 
 public class CatalyzerTableBlock extends Block implements EntityBlock {
 
-    // Hacia donde mira el frente del catalizador.
-    public static final EnumProperty<Direction> FACING =
-            BlockStateProperties.HORIZONTAL_FACING;
+    // PROPERTIES
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
-    // Aqui guardamos si esta encendido o apagado.
-    public static final BooleanProperty LIT =
-            BlockStateProperties.LIT;
-
+    // CONSTRUCTOR
     public CatalyzerTableBlock(Properties properties) {
         super(properties);
 
-        // Al colocarlo empieza apagado.
-        registerDefaultState(
-                defaultBlockState()
-                        .setValue(FACING, Direction.NORTH)
-                        .setValue(LIT, false)
-        );
+        // El catalizador empieza apagado.
+        registerDefaultState(defaultBlockState()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(LIT, false));
     }
 
+    // INTERACTION
     @Override
     protected InteractionResult useWithoutItem(
             BlockState state,
@@ -53,32 +49,27 @@ public class CatalyzerTableBlock extends Block implements EntityBlock {
     ) {
         // Abrimos el menu desde el servidor.
         if (!level.isClientSide()
-                && level.getBlockEntity(pos)
-                instanceof CatalyzerTableBlockEntity catalyzer) {
-
+                && level.getBlockEntity(pos) instanceof CatalyzerTableBlockEntity catalyzer) {
             player.openMenu(catalyzer);
         }
 
         return InteractionResult.SUCCESS;
     }
 
+    // BLOCK ENTITY
     @Override
-    public @Nullable BlockEntity newBlockEntity(
-            BlockPos pos,
-            BlockState state
-    ) {
-        // Esta entidad guarda los materiales, combustible y progreso.
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new CatalyzerTableBlockEntity(pos, state);
     }
 
+    // TICK
     @Override
-    public <T extends BlockEntity>
-    @Nullable BlockEntityTicker<T> getTicker(
+    public <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(
             Level level,
             BlockState state,
             BlockEntityType<T> type
     ) {
-        // La logica se ejecuta solamente en el servidor.
+        // El procesamiento solo ocurre en el servidor.
         if (level.isClientSide()) {
             return null;
         }
@@ -90,39 +81,29 @@ public class CatalyzerTableBlock extends Block implements EntityBlock {
         );
     }
 
+    // BLOCK STATE
     @Override
-    protected void createBlockStateDefinition(
-            StateDefinition.@NonNull Builder<Block, BlockState> builder
-    ) {
+    protected void createBlockStateDefinition(StateDefinition.@NonNull Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-
-        // Registramos la orientacion y el estado de encendido.
         builder.add(FACING, LIT);
     }
 
     @Override
-    public @Nullable BlockState getStateForPlacement(
-            BlockPlaceContext context
-    ) {
-        // El frente queda mirando hacia quien coloca el bloque.
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
+        // El frente queda mirando hacia el jugador.
         return defaultBlockState()
-                .setValue(
-                        FACING,
-                        context.getHorizontalDirection().getOpposite()
-                )
+                .setValue(FACING, context.getHorizontalDirection().getOpposite())
                 .setValue(LIT, false);
     }
 
+    // TICKER HELPER
     @SuppressWarnings("unchecked")
-    private static <
-            T extends BlockEntity,
-            E extends BlockEntity
-            > @Nullable BlockEntityTicker<T> createTickerHelper(
+    private static <T extends BlockEntity, E extends BlockEntity> @Nullable BlockEntityTicker<T> createTickerHelper(
             BlockEntityType<T> receivedType,
             BlockEntityType<E> expectedType,
             BlockEntityTicker<? super E> ticker
     ) {
-        // Solo usamos el ticker si corresponde a esta entidad.
+        // Solo usamos el ticker de esta entidad.
         if (receivedType != expectedType) {
             return null;
         }

@@ -24,14 +24,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
-public class CatalyzerTableBlockEntity extends BlockEntity
-        implements Container, MenuProvider {
+public class CatalyzerTableBlockEntity extends BlockEntity implements Container, MenuProvider {
 
+    // SLOTS
     public static final int INPUT_SLOT = 0;
     public static final int FUEL_SLOT = 1;
     public static final int OUTPUT_SLOT = 2;
     public static final int WATER_SLOT = 3;
 
+    // PROPERTIES
     private static final int CONTAINER_SIZE = 4;
     private static final int COOKING_TIME = 200;
 
@@ -42,11 +43,9 @@ public class CatalyzerTableBlockEntity extends BlockEntity
     private int burnDuration;
     private int cookingProgress;
 
-    // Estos datos se sincronizan con la pantalla del catalizador.
-    // 0 = combustible restante, 1 = duracion del combustible,
-    // 2 = progreso actual, 3 = tiempo total de procesamiento.
+    // MENU DATA
+    // 0: combustible, 1: duracion, 2: progreso, 3: tiempo total.
     private final ContainerData data = new ContainerData() {
-
         @Override
         public int get(int index) {
             return switch (index) {
@@ -75,14 +74,12 @@ public class CatalyzerTableBlockEntity extends BlockEntity
         }
     };
 
+    // CONSTRUCTOR
     public CatalyzerTableBlockEntity(BlockPos pos, BlockState state) {
-        super(
-                ModBlockEntities.CATALYZER_TABLE_BLOCK_ENTITY.get(),
-                pos,
-                state
-        );
+        super(ModBlockEntities.CATALYZER_TABLE_BLOCK_ENTITY.get(), pos, state);
     }
 
+    // TICK
     public static void serverTick(
             Level level,
             BlockPos pos,
@@ -91,20 +88,20 @@ public class CatalyzerTableBlockEntity extends BlockEntity
     ) {
         boolean changed = false;
 
-        // Si esta encendido, descontamos el combustible cada tick.
+        // Descontamos el combustible mientras esta encendido.
         if (blockEntity.burnTime > 0) {
             blockEntity.burnTime--;
             changed = true;
         }
 
-        // Solo gastamos otro combustible si hay algo que procesar.
+        // Solo usamos otro combustible si podemos procesar.
         if (blockEntity.burnTime == 0 && blockEntity.canProcess()) {
             if (blockEntity.tryConsumeFuel(level)) {
                 changed = true;
             }
         }
 
-        // Avanzamos mientras haya fuego y se cumplan los requisitos.
+        // Avanzamos el proceso mientras haya combustible.
         if (blockEntity.burnTime > 0 && blockEntity.canProcess()) {
             blockEntity.cookingProgress++;
             changed = true;
@@ -118,17 +115,15 @@ public class CatalyzerTableBlockEntity extends BlockEntity
             changed = true;
         }
 
-        // Aqui conectamos el combustible con la apariencia del bloque.
-        boolean encendido = blockEntity.burnTime > 0;
+        // Actualizamos la apariencia cuando cambia el estado.
+        boolean burning = blockEntity.burnTime > 0;
 
-        // Solo actualizamos el bloque cuando se enciende o se apaga.
-        if (state.getValue(CatalyzerTableBlock.LIT) != encendido) {
+        if (state.getValue(CatalyzerTableBlock.LIT) != burning) {
             level.setBlock(
                     pos,
-                    state.setValue(CatalyzerTableBlock.LIT, encendido),
+                    state.setValue(CatalyzerTableBlock.LIT, burning),
                     Block.UPDATE_ALL
             );
-
             changed = true;
         }
 
@@ -137,6 +132,7 @@ public class CatalyzerTableBlockEntity extends BlockEntity
         }
     }
 
+    // PROCESSING
     private boolean hasValidInput() {
         return items.get(INPUT_SLOT).is(ModItems.RAW_THORITE.get());
     }
@@ -145,19 +141,8 @@ public class CatalyzerTableBlockEntity extends BlockEntity
         return items.get(WATER_SLOT).is(Items.WATER_BUCKET);
     }
 
-    private boolean isAllowedFuel(ItemStack stack) {
-        return stack.is(Items.COAL) || stack.is(Items.CHARCOAL);
-    }
-
-    private static int getFuelDuration(Level level, ItemStack fuel) {
-        return fuel.getBurnTime(
-                RecipeType.SMELTING,
-                level.fuelValues()
-        );
-    }
-
     private boolean canProcess() {
-        // Necesitamos Thorite sin procesar y un cubo de agua.
+        // Necesitamos Thorite en bruto y un cubo de agua.
         if (!hasValidInput() || !hasWaterBucket()) {
             return false;
         }
@@ -168,9 +153,36 @@ public class CatalyzerTableBlockEntity extends BlockEntity
             return true;
         }
 
-        // La salida debe tener espacio y contener el mismo producto.
         return output.is(ModItems.THORITE_SHARD.get())
                 && output.getCount() < output.getMaxStackSize();
+    }
+
+    private void processItem() {
+        if (!canProcess()) {
+            return;
+        }
+
+        items.get(INPUT_SLOT).shrink(1);
+
+        ItemStack output = items.get(OUTPUT_SLOT);
+
+        if (output.isEmpty()) {
+            items.set(OUTPUT_SLOT, new ItemStack(ModItems.THORITE_SHARD.get()));
+        } else {
+            output.grow(1);
+        }
+
+        // El agua se queda dentro y no se consume.
+        setChanged();
+    }
+
+    // FUEL
+    private boolean isAllowedFuel(ItemStack stack) {
+        return stack.is(Items.COAL) || stack.is(Items.CHARCOAL);
+    }
+
+    private static int getFuelDuration(Level level, ItemStack fuel) {
+        return fuel.getBurnTime(RecipeType.SMELTING, level.fuelValues());
     }
 
     private boolean tryConsumeFuel(Level level) {
@@ -189,36 +201,12 @@ public class CatalyzerTableBlockEntity extends BlockEntity
         burnTime = duration;
         burnDuration = duration;
 
-        // Consumimos una unidad de carbon o carbon vegetal.
+        // Gastamos una unidad de carbon o carbon vegetal.
         fuel.shrink(1);
-
         return true;
     }
 
-    private void processItem() {
-        if (!canProcess()) {
-            return;
-        }
-
-        // Quitamos una unidad del mineral sin procesar.
-        items.get(INPUT_SLOT).shrink(1);
-
-        ItemStack output = items.get(OUTPUT_SLOT);
-
-        // Entregamos un cristal de Thorite.
-        if (output.isEmpty()) {
-            items.set(
-                    OUTPUT_SLOT,
-                    new ItemStack(ModItems.THORITE_SHARD.get())
-            );
-        } else {
-            output.grow(1);
-        }
-
-        // El cubo de agua se queda dentro y no se consume.
-        setChanged();
-    }
-
+    // GETTERS
     public boolean isBurning() {
         return burnTime > 0;
     }
@@ -239,6 +227,7 @@ public class CatalyzerTableBlockEntity extends BlockEntity
         return COOKING_TIME;
     }
 
+    // CONTAINER
     @Override
     public int getContainerSize() {
         return CONTAINER_SIZE;
@@ -251,7 +240,6 @@ public class CatalyzerTableBlockEntity extends BlockEntity
                 return false;
             }
         }
-
         return true;
     }
 
@@ -262,16 +250,11 @@ public class CatalyzerTableBlockEntity extends BlockEntity
 
     @Override
     public ItemStack removeItem(int slot, int amount) {
-        ItemStack removed = ContainerHelper.removeItem(
-                items,
-                slot,
-                amount
-        );
+        ItemStack removed = ContainerHelper.removeItem(items, slot, amount);
 
         if (!removed.isEmpty()) {
             setChanged();
         }
-
         return removed;
     }
 
@@ -293,7 +276,7 @@ public class CatalyzerTableBlockEntity extends BlockEntity
 
     @Override
     public boolean canPlaceItem(int slot, ItemStack stack) {
-        // Cada casilla acepta solamente lo que le corresponde.
+        // Cada casilla acepta solamente su material.
         return switch (slot) {
             case INPUT_SLOT -> stack.is(ModItems.RAW_THORITE.get());
             case FUEL_SLOT -> isAllowedFuel(stack);
@@ -305,8 +288,7 @@ public class CatalyzerTableBlockEntity extends BlockEntity
 
     @Override
     public boolean stillValid(Player player) {
-        if (level == null
-                || level.getBlockEntity(worldPosition) != this) {
+        if (level == null || level.getBlockEntity(worldPosition) != this) {
             return false;
         }
 
@@ -323,11 +305,10 @@ public class CatalyzerTableBlockEntity extends BlockEntity
         setChanged();
     }
 
+    // MENU
     @Override
     public Component getDisplayName() {
-        return Component.translatable(
-                "container.exoticores.water_furnace"
-        );
+        return Component.translatable("container.exoticores.water_furnace");
     }
 
     @Override
@@ -336,26 +317,17 @@ public class CatalyzerTableBlockEntity extends BlockEntity
             Inventory playerInventory,
             Player player
     ) {
-        return new CatalyzerTableMenu(
-                containerId,
-                playerInventory,
-                this,
-                this.data
-        );
+        return new CatalyzerTableMenu(containerId, playerInventory, this, data);
     }
 
+    // SAVE AND LOAD
     @Override
     public void loadAdditional(ValueInput input) {
         super.loadAdditional(input);
 
-        items = NonNullList.withSize(
-                CONTAINER_SIZE,
-                ItemStack.EMPTY
-        );
-
+        items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
         ContainerHelper.loadAllItems(input, items);
 
-        // Recuperamos el combustible y el progreso al cargar el mundo.
         burnTime = input.getIntOr("BurnTime", 0);
         burnDuration = input.getIntOr("BurnDuration", 0);
         cookingProgress = input.getIntOr("CookingProgress", 0);
@@ -367,7 +339,6 @@ public class CatalyzerTableBlockEntity extends BlockEntity
 
         ContainerHelper.saveAllItems(output, items);
 
-        // Guardamos los datos para conservarlos al salir del mundo.
         output.putInt("BurnTime", burnTime);
         output.putInt("BurnDuration", burnDuration);
         output.putInt("CookingProgress", cookingProgress);

@@ -239,6 +239,21 @@ public class ModRecipeProvider extends RecipeProvider {
                 "  I",
                 " B ",
                 "B  ");
+
+        // 1 LEAD_BLOCK
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.BUILDING_BLOCKS, ModBlocks.LEAD_BLOCK)
+                .pattern("III")
+                .pattern("III")
+                .pattern("III")
+                .define('I', ModItems.LEAD_INGOT)
+                .unlockedBy("has_lead_ingot", has(ModItems.LEAD_INGOT))
+                .save(output);
+
+        // 9 LEAD INGOTS
+        ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, ModItems.LEAD_INGOT, 9)
+                .requires(ModBlocks.LEAD_BLOCK)
+                .unlockedBy("has_lead_block", has(ModBlocks.LEAD_BLOCK))
+                .save(output, ExoticOres.MODID + ":lead_ingot_from_block");
     }
 
     private void toolRecipe(

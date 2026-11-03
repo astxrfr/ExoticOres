@@ -52,15 +52,38 @@ public class RadiationExposure {
                 PacketDistributor.sendToPlayer((ServerPlayer) entity, new RadiationIntensityPayload(intensity));
         }
     }
-
+    
+    /**
+     * Queues radiation exposure to be combined with other contributions and applied after the server tick.
+     *
+     * @param entity the living entity receiving exposure
+     * @param intensity the positive amount of exposure to contribute in ticks
+     */
     public static void contribute(@Nonnull LivingEntity entity, float intensity) {
         if (isValid(entity, intensity))
             PENDING.merge(entity, intensity, Float::sum);
     }
 
+    /**
+     * Immediately increases the entity's radiation effect by the supplied intensity.
+     *
+     * @param entity the living entity receiving radiation
+     * @param intensity the positive amount by which to advance the effect in ticks
+     */
     public static void contributeHit(@Nonnull LivingEntity entity, float intensity) {
         if (isValid(entity, intensity))
             attemptToAdvance(entity, intensity);
+    }
+
+    /**
+     * Immediately reduces the entity's radiation effect by the supplied intensity.
+     *
+     * @param entity the living entity whose radiation effect is reduced
+     * @param intensity the positive amount by which to reduce the effect in ticks
+     */
+    public static void contributeHeal(@Nonnull LivingEntity entity, float intensity) {
+        if (isValid(entity, intensity))
+            attemptToAdvance(entity, -intensity);
     }
 
     private static boolean isValid(@Nonnull LivingEntity entity, float intensity) {

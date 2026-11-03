@@ -26,7 +26,7 @@ public class ModPlacedFeatures {
         context.register(THORITE_ORE_PLACED, new PlacedFeature(
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.THORITE_ORE),
                 List.of(
-                        CountPlacement.of(4), // Attempts per chunk
+                        CountPlacement.of(1), // Attempts per chunk
                         InSquarePlacement.spread(), // horizontal spread within the chunk
                         HeightRangePlacement.uniform(
                                 VerticalAnchor.absolute(0),  // Range

@@ -15,6 +15,13 @@ import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
+import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.resources.Identifier;
 
 public class ModModelProvider extends ModelProvider {
 
@@ -33,11 +40,96 @@ public class ModModelProvider extends ModelProvider {
 
     private void registerBlocks(BlockModelGenerators blockModels) {
         // TRIVIAL CUBES
-        blockModels.createTrivialCube(ModBlocks.THORITE_ORE.get());
         blockModels.createTrivialCube(ModBlocks.THORITE_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.LEAD_ORE.get());
         blockModels.createTrivialCube(ModBlocks.DEEPSLATE_LEAD_ORE.get());
         blockModels.createTrivialCube(ModBlocks.LEAD_BLOCK.get());
+        blockModels.createTrivialBlock(
+                ModBlocks.KYANITE.get(),
+                TexturedModel.createDefault(
+                        block -> new TextureMapping()
+                                .put(
+                                        TextureSlot.SIDE,
+                                        new Material(Identifier.fromNamespaceAndPath(
+                                                "exoticores",
+                                                "block/kyanite_block_side"
+                                        ))
+                                )
+                                .put(
+                                        TextureSlot.TOP,
+                                        new Material(Identifier.fromNamespaceAndPath(
+                                                "exoticores",
+                                                "block/kyanite_block_top"
+                                        ))
+                                )
+                                .put(
+                                        TextureSlot.BOTTOM,
+                                        new Material(Identifier.fromNamespaceAndPath(
+                                                "exoticores",
+                                                "block/kyanite_block_down"
+                                        ))
+                                ),
+                        ModelTemplates.CUBE_BOTTOM_TOP
+                )
+        );
+
+        blockModels.createTrivialBlock(
+                ModBlocks.THORITE_ORE.get(),
+                TexturedModel.createDefault(
+                        block -> new TextureMapping()
+                                .put(
+                                        TextureSlot.SIDE,
+                                        new Material(Identifier.fromNamespaceAndPath(
+                                                "exoticores",
+                                                "block/thorite_ore_side"
+                                        ))
+                                )
+                                .put(
+                                        TextureSlot.TOP,
+                                        new Material(Identifier.fromNamespaceAndPath(
+                                                "exoticores",
+                                                "block/thorite_ore_top"
+                                        ))
+                                )
+                                .put(
+                                        TextureSlot.BOTTOM,
+                                        new Material(Identifier.fromNamespaceAndPath(
+                                                "exoticores",
+                                                "block/thorite_ore_top"
+                                        ))
+                                ),
+                        ModelTemplates.CUBE_BOTTOM_TOP
+                )
+        );
+
+        blockModels.createTrivialBlock(
+                ModBlocks.KYANITE_OFF.get(),
+                TexturedModel.createDefault(
+                        block -> new TextureMapping()
+                                .put(
+                                        TextureSlot.SIDE,
+                                        new Material(Identifier.fromNamespaceAndPath(
+                                                "exoticores",
+                                                "block/kyanite_block_side"
+                                        ))
+                                )
+                                .put(
+                                        TextureSlot.TOP,
+                                        new Material(Identifier.fromNamespaceAndPath(
+                                                "exoticores",
+                                                "block/kyanite_off_top"
+                                        ))
+                                )
+                                .put(
+                                        TextureSlot.BOTTOM,
+                                        new Material(Identifier.fromNamespaceAndPath(
+                                                "exoticores",
+                                                "block/kyanite_off_top"
+                                        ))
+                                ),
+                        ModelTemplates.CUBE_BOTTOM_TOP
+                )
+        );
 
         createCatalyzerModels(blockModels);
     }

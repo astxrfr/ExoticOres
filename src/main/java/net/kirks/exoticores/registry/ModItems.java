@@ -115,6 +115,9 @@ public class ModItems {
                                   8.0F, 5.0F, // Ventana y velocidad para empujar.
                                   12.0F, 4.5F // Ventana y velocidad para hacer daño.
                           )));
+  //KYANITE
+    public static final DeferredItem<BlockItem> KYANITE_ITEM =
+            ITEMS.registerSimpleBlockItem("kyanite", ModBlocks.KYANITE);
 
   private static Item.Properties toolAppearance(Item.Properties properties, String modelName) {
     return properties.rarity(Rarity.RARE).component(
@@ -140,6 +143,8 @@ public class ModItems {
             ITEMS.registerSimpleBlockItem("deepslate_lead_ore", ModBlocks.DEEPSLATE_LEAD_ORE);
     public static final DeferredItem<BlockItem> LEAD_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("lead_block", ModBlocks.LEAD_BLOCK);
+    public static final DeferredItem<BlockItem> KYANITE_OFF_ITEM =
+            ITEMS.registerSimpleBlockItem("kyanite_off", ModBlocks.KYANITE_OFF);
 
     // EQUIPMENT
     public static final DeferredItem<Item> THORITE_HELMET = ITEMS.registerItem("thorite_helmet", properties ->

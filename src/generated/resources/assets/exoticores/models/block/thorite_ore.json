@@ -1,8 +1,6 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "bottom": "exoticores:block/thorite_ore_top",
-    "side": "exoticores:block/thorite_ore_side",
-    "top": "exoticores:block/thorite_ore_top"
+    "all": "exoticores:block/thorite_ore"
   }
 }

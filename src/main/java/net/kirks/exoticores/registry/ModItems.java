@@ -1,6 +1,12 @@
 package net.kirks.exoticores.registry;
 
 import net.kirks.exoticores.ExoticOres;
+import net.kirks.exoticores.effect.ReduceRadiationConsumeEffect;
+import net.kirks.exoticores.item.RadioactiveMushroomBlockItem;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.item.component.Consumables;
+import java.util.Map;
 import net.kirks.exoticores.datagen.ModArmorMaterial;
 import net.kirks.exoticores.item.RadioactiveBlockItem;
 import net.kirks.exoticores.item.RadioactiveItem;
@@ -31,6 +37,8 @@ public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ExoticOres.MODID);
 
     // RAW MATERIALS
+    public static final DeferredItem<Item> MUSHROOM_PULP =
+            ITEMS.registerItem("mushroom_pulp", Item::new, Item.Properties::new);
     public static final DeferredItem<RadioactiveItem> RAW_THORITE =
             ITEMS.registerItem("raw_thorite", RadioactiveItem::new, () -> new Item.Properties().rarity(Rarity.RARE));
     public static final DeferredItem<Item> THORITE_SHARD =
@@ -128,27 +136,36 @@ public class ModItems {
 
 
   // BLOCK ITEMS
-    @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> THORITE_ORE_ITEM =
             registerSimpleRadioactiveBlockItem("thorite_ore", ModBlocks.THORITE_ORE);
-    @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> THORITE_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("thorite_block", ModBlocks.THORITE_BLOCK);
-    @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> CATALYZER_TABLE_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("catalyzer_table", ModBlocks.CATALYZER_TABLE_BLOCK);
-    @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> LEAD_ORE_ITEM =
             ITEMS.registerSimpleBlockItem("lead_ore", ModBlocks.LEAD_ORE);
-    @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> DEEPSLATE_LEAD_ORE_ITEM =
             ITEMS.registerSimpleBlockItem("deepslate_lead_ore", ModBlocks.DEEPSLATE_LEAD_ORE);
-    @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> LEAD_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("lead_block", ModBlocks.LEAD_BLOCK);
-    @SuppressWarnings("unused")
-    public static final DeferredItem<BlockItem> KYANITE_BLOCK_ITEM =
-            ITEMS.registerSimpleBlockItem("kyanite_block", ModBlocks.KYANITE_BLOCK);
+
+    public static final DeferredItem<RadioactiveMushroomBlockItem> RADIOACTIVE_MUSHROOM =
+            ITEMS.registerItem("radioactive_mushroom", properties -> new RadioactiveMushroomBlockItem(ModBlocks.RADIOACTIVE_MUSHROOM.get(), properties),
+                    () -> new Item.Properties().useBlockDescriptionPrefix()
+                            .component(DataComponents.BLOCK_STATE, new BlockItemStateProperties(Map.of("age", "0"))));
+
+    // CONSUMABLES
+    public static final DeferredItem<Item> MYCELIUM_SERUM =
+            ITEMS.registerItem("mycelium_serum", Item::new, () -> new Item.Properties()
+                    .stacksTo(1)
+                    .usingConvertsTo(Items.GLASS_BOTTLE)
+                    .component(DataComponents.CONSUMABLE, Consumables.defaultDrink()
+                            .onConsume(ReduceRadiationConsumeEffect.INSTANCE).build()));
+
+    public static final DeferredItem<BlockItem> KYANITE_ITEM =
+            ITEMS.registerSimpleBlockItem("kyanite", ModBlocks.KYANITE);
+    public static final DeferredItem<BlockItem> KYANITE_OFF_ITEM =
+            ITEMS.registerSimpleBlockItem("kyanite_off", ModBlocks.KYANITE_OFF);
 
     // EQUIPMENT
     public static final DeferredItem<Item> THORITE_HELMET = ITEMS.registerItem("thorite_helmet", properties ->

@@ -3,6 +3,7 @@ package net.kirks.exoticores;
 import com.mojang.logging.LogUtils;
 import net.kirks.exoticores.effect.ClearExceptProtectedConsumeEffect;
 import net.kirks.exoticores.effect.ModEffectEvents;
+import net.kirks.exoticores.recipe.ModBrewingEvents;
 import net.kirks.exoticores.effect.radiation.RadiationExposure;
 import net.kirks.exoticores.client.sound.GeigerTickClient;
 import net.kirks.exoticores.effect.radiation.container.ContainerRadiationTickListener;
@@ -52,13 +53,13 @@ public class ExoticOres {
         ModDataAttachments.ATTACHMENTS.register(modEventBus);
         ModConsumeEffects.CONSUME_EFFECTS.register(modEventBus);
         ModSounds.SOUND_EVENTS.register(modEventBus);
-        ModFeatures.FEATURES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (ExoticOres) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
         NeoForge.EVENT_BUS.register(ModEffectEvents.class);
+        NeoForge.EVENT_BUS.register(ModBrewingEvents.class);
         NeoForge.EVENT_BUS.register(GeigerTickClient.class);
         NeoForge.EVENT_BUS.register(RadiationExposure.class);
         NeoForge.EVENT_BUS.register(ContainerRadiationTickListener.class);

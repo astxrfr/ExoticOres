@@ -1,6 +1,8 @@
 package net.kirks.exoticores.menu;
 
 import net.kirks.exoticores.registry.ModMenuTypes;
+import net.kirks.exoticores.block.entity.CatalyzerTableBlockEntity;
+import net.minecraft.world.item.Items;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -47,16 +49,36 @@ public class CatalyzerTableMenu extends AbstractContainerMenu {
         this.data = data;
 
         // Raw thorite
-        this.addSlot(new Slot(container, 0, 56, 17));
+        this.addSlot(new Slot(container, 0, 56, 17) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return CatalyzerTableBlockEntity.isValidInput(stack);
+            }
+        });
 
         // Combustible
-        this.addSlot(new Slot(container, 1, 56, 53));
+        this.addSlot(new Slot(container, 1, 56, 53) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.is(Items.COAL) || stack.is(Items.CHARCOAL);
+            }
+        });
 
         // Resultado
-        this.addSlot(new Slot(container, 2, 116, 35));
+        this.addSlot(new Slot(container, 2, 116, 35) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return false;
+            }
+        });
 
         // Cubo de agua
-        this.addSlot(new Slot(container, 3, 21, 35));
+        this.addSlot(new Slot(container, 3, 21, 35) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.is(Items.WATER_BUCKET);
+            }
+        });
 
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);

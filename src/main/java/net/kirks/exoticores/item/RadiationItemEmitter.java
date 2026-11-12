@@ -4,6 +4,7 @@ import net.kirks.exoticores.effect.radiation.ItemRadiationContext;
 import net.kirks.exoticores.effect.radiation.RadiationExposure;
 import net.kirks.exoticores.effect.radiation.Radioactive;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import org.jspecify.annotations.Nullable;
@@ -12,9 +13,14 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 public interface RadiationItemEmitter extends Radioactive<ItemRadiationContext> {
+    default boolean isRadioactive(ItemStack stack) {
+        return !stack.isEmpty();
+    }
+
     @Override
     default @Nullable Map<? extends LivingEntity, Float> radiate(ItemRadiationContext context) {
         if (context.level().isClientSide()) return null;
+        if (!isRadioactive(context.stack())) return null;
 
         if (context.entity() instanceof ItemEntity) {
             return affectNearby(context);

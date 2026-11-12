@@ -3,6 +3,7 @@ package net.kirks.exoticores.effect.radiation.container.mixin;
 import net.kirks.exoticores.effect.radiation.BlockRadiationContext;
 import net.kirks.exoticores.effect.radiation.RadiationExposure;
 import net.kirks.exoticores.effect.radiation.Radioactive;
+import net.kirks.exoticores.item.RadiationItemEmitter;
 import net.kirks.exoticores.effect.radiation.container.ContainerRadiationTicker;
 import net.kirks.exoticores.effect.radiation.container.RadiationContainer;
 import net.minecraft.core.BlockPos;
@@ -62,10 +63,13 @@ public abstract class BaseContainerBlockEntityMixin extends BlockEntity implemen
 
     @Override
     public boolean exoticOres$hasRadioactiveItem() {
-        var items = getItems();
-        for (ItemStack item : items) {
-            if (item.is(itemHolder -> itemHolder.value() instanceof Radioactive<?>))
-                return true;
+        for (ItemStack stack : getItems()) {
+            if (stack.isEmpty()) continue;
+            if (stack.getItem() instanceof RadiationItemEmitter emitter) {
+                if (emitter.isRadioactive(stack)) return true;
+                continue;
+            }
+            if (stack.getItem() instanceof Radioactive<?>) return true;
         }
 
         return false;

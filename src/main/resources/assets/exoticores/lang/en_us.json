@@ -39,5 +39,6 @@
 
   "message.exoticores.effect_not_cleared": "Radiation cannot be cured with milk!",
 
-  "block.exoticores.lead_block": "Block of Lead"
+  "block.exoticores.lead_block": "Block of Lead",
+  "block.exoticores.kyanite_block": "Kyanite Block"
 }

@@ -1,20 +1,26 @@
 package net.kirks.exoticores.datagen;
 
+import net.kirks.exoticores.ExoticOres;
 import net.kirks.exoticores.block.CatalyzerTableBlock;
 import net.kirks.exoticores.registry.ModBlocks;
 import net.kirks.exoticores.registry.ModItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.renderer.block.dispatch.Variant;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.random.Weighted;
+import net.minecraft.util.random.WeightedList;
 import org.jspecify.annotations.NonNull;
+import net.minecraft.client.data.models.model.TexturedModel;
 
 public class ModModelProvider extends ModelProvider {
 
@@ -33,13 +39,70 @@ public class ModModelProvider extends ModelProvider {
 
     private void registerBlocks(BlockModelGenerators blockModels) {
         // TRIVIAL CUBES
-        blockModels.createTrivialCube(ModBlocks.THORITE_ORE.get());
         blockModels.createTrivialCube(ModBlocks.THORITE_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.LEAD_ORE.get());
         blockModels.createTrivialCube(ModBlocks.DEEPSLATE_LEAD_ORE.get());
         blockModels.createTrivialCube(ModBlocks.LEAD_BLOCK.get());
 
+        // TRIVIAL BLOCKS
+        createKyaniteModel(blockModels);
+
+        blockModels.createTrivialBlock(
+                ModBlocks.THORITE_ORE.get(),
+                TexturedModel.createDefault(
+                        _ -> new TextureMapping()
+                                .put(
+                                        TextureSlot.SIDE,
+                                        new Material(Identifier.fromNamespaceAndPath(
+                                                "exoticores",
+                                                "block/thorite_ore_side"
+                                        ))
+                                )
+                                .put(
+                                        TextureSlot.TOP,
+                                        new Material(Identifier.fromNamespaceAndPath(
+                                                "exoticores",
+                                                "block/thorite_ore_top"
+                                        ))
+                                )
+                                .put(
+                                        TextureSlot.BOTTOM,
+                                        new Material(Identifier.fromNamespaceAndPath(
+                                                "exoticores",
+                                                "block/thorite_ore_top"
+                                        ))
+                                ),
+                        ModelTemplates.CUBE_BOTTOM_TOP
+                )
+        );
+
         createCatalyzerModels(blockModels);
+    }
+
+    private void createKyaniteModel(BlockModelGenerators blockModels) {
+        var modelPasive = ModelTemplates.CUBE_BOTTOM_TOP.create(
+                ModBlocks.KYANITE_BLOCK.get(),
+                new TextureMapping()
+                        .put(TextureSlot.TOP, new Material(Identifier.fromNamespaceAndPath(ExoticOres.MODID, "block/kyanite_block_pasive")))
+                        .put(TextureSlot.BOTTOM, new Material(Identifier.fromNamespaceAndPath(ExoticOres.MODID, "block/kyanite_block_pasive")))
+                        .put(TextureSlot.SIDE, new Material(Identifier.fromNamespaceAndPath(ExoticOres.MODID, "block/kyanite_block_side"))),
+                blockModels.modelOutput);
+
+        var modelActive = ModelTemplates.CUBE_BOTTOM_TOP.create(
+                this.modLocation("block/kyanite_block_active"),
+                new TextureMapping()
+                        .put(TextureSlot.TOP, new Material(Identifier.fromNamespaceAndPath(ExoticOres.MODID, "block/kyanite_block_top")))
+                        .put(TextureSlot.BOTTOM, new Material(Identifier.fromNamespaceAndPath(ExoticOres.MODID, "block/kyanite_block_down")))
+                        .put(TextureSlot.SIDE, new Material(Identifier.fromNamespaceAndPath(ExoticOres.MODID, "block/kyanite_block_side"))),
+                blockModels.modelOutput);
+
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(
+                ModBlocks.KYANITE_BLOCK.get(),
+                new MultiVariant(WeightedList.of(
+                        new Weighted<>(new Variant(modelPasive), 8),
+                        new Weighted<>(new Variant(modelActive), 2)
+                )))
+        );
     }
 
     private void createCatalyzerModels(BlockModelGenerators blockModels) {

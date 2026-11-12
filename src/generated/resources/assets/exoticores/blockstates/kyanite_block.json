@@ -1,0 +1,14 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "exoticores:block/kyanite_block",
+        "weight": 8
+      },
+      {
+        "model": "exoticores:block/kyanite_block_active",
+        "weight": 2
+      }
+    ]
+  }
+}

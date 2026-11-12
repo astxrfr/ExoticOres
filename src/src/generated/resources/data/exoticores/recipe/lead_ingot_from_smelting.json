@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "experience": 0.5,
+  "ingredient": "exoticores:raw_lead",
+  "result": {
+    "id": "exoticores:lead_ingot"
+  }
+}

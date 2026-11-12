@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "exoticores:thorite_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "exoticores:thorite_shard"
+  }
+}

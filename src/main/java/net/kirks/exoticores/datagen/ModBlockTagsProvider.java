@@ -18,13 +18,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NonNull Provider registries) {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.KYANITE.getKey())
-                .add(ModBlocks.KYANITE_OFF.getKey());
-        tag(BlockTags.NEEDS_IRON_TOOL)
-                .add(ModBlocks.KYANITE.getKey())
-                .add(ModBlocks.KYANITE_OFF.getKey());
-
-        tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.THORITE_ORE.getKey())
                 .add(ModBlocks.THORITE_BLOCK.getKey())
                 .add(ModBlocks.LEAD_ORE.getKey())
@@ -49,5 +42,11 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.LEAD_ORE.getKey())
                 .add(ModBlocks.DEEPSLATE_LEAD_ORE.getKey())
                 .add(ModBlocks.LEAD_BLOCK.getKey());
+
+        tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(ModBlocks.KYANITE_BLOCK.getKey());
+
+        tag(BlockTags.NEEDS_IRON_TOOL)
+                .add(ModBlocks.KYANITE_BLOCK.getKey());
     }
 }

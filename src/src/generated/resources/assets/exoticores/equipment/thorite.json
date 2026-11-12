@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "exoticores:thorite"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "exoticores:thorite"
+      }
+    ]
+  }
+}

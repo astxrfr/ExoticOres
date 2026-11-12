@@ -1,12 +1,6 @@
 package net.kirks.exoticores.datagen;
 
 import net.kirks.exoticores.registry.ModBlocks;
-import net.kirks.exoticores.block.RadioactiveMushroomBlock;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.CopyBlockState;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.kirks.exoticores.registry.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -27,17 +21,8 @@ public class ModBlockLootTablesProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.THORITE_BLOCK.get());
         dropSelf(ModBlocks.CATALYZER_TABLE_BLOCK.get());
         dropSelf(ModBlocks.LEAD_BLOCK.get());
+        dropSelf(ModBlocks.KYANITE_BLOCK.get());
         
-
-        var mushroom = ModBlocks.RADIOACTIVE_MUSHROOM.get();
-        add(mushroom, LootTable.lootTable().withPool(
-                LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(applyExplosionDecay(mushroom, LootItem.lootTableItem(mushroom)
-                                .apply(CopyBlockState.copyState(mushroom).copy(RadioactiveMushroomBlock.AGE))))
-        ));
-
-        dropSelf(ModBlocks.KYANITE.get());
-        dropSelf(ModBlocks.KYANITE_OFF.get());
 
         // ORE DROPS
         add(

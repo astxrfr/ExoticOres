@@ -50,7 +50,7 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialBlock(
                 ModBlocks.THORITE_ORE.get(),
                 TexturedModel.createDefault(
-                        block -> new TextureMapping()
+                        _ -> new TextureMapping()
                                 .put(
                                         TextureSlot.SIDE,
                                         new Material(Identifier.fromNamespaceAndPath(

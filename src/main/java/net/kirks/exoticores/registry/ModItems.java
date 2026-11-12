@@ -128,18 +128,25 @@ public class ModItems {
 
 
   // BLOCK ITEMS
+    @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> THORITE_ORE_ITEM =
             registerSimpleRadioactiveBlockItem("thorite_ore", ModBlocks.THORITE_ORE);
+    @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> THORITE_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("thorite_block", ModBlocks.THORITE_BLOCK);
+    @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> CATALYZER_TABLE_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("catalyzer_table", ModBlocks.CATALYZER_TABLE_BLOCK);
+    @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> LEAD_ORE_ITEM =
             ITEMS.registerSimpleBlockItem("lead_ore", ModBlocks.LEAD_ORE);
+    @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> DEEPSLATE_LEAD_ORE_ITEM =
             ITEMS.registerSimpleBlockItem("deepslate_lead_ore", ModBlocks.DEEPSLATE_LEAD_ORE);
+    @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> LEAD_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("lead_block", ModBlocks.LEAD_BLOCK);
+    @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> KYANITE_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("kyanite_block", ModBlocks.KYANITE_BLOCK);
 

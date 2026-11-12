@@ -87,7 +87,7 @@ public class CorruptedScatteredOreFeature extends ScatteredOreFeature {
                     var existing = level.getBlockState(pos);
 
                     if (existing.is(Blocks.END_STONE)) {
-                        if(level.setBlock(pos, corruption, 2))
+                        if(level.setBlock(pos, corruption, Block.UPDATE_CLIENTS))
                             corruptedPositions.add(pos);
                     } else if (existing.is(corruption.getBlock())) {
                         corruptedPositions.add(pos);

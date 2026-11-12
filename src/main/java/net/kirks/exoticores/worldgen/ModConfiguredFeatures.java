@@ -2,8 +2,6 @@ package net.kirks.exoticores.worldgen;
 
 import net.kirks.exoticores.ExoticOres;
 import net.kirks.exoticores.registry.ModBlocks;
-import net.kirks.exoticores.registry.ModFeatures;
-import net.kirks.exoticores.worldgen.feature.CorruptedScatteredOreFeature;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
@@ -13,8 +11,6 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
 
@@ -47,7 +43,7 @@ public class ModConfiguredFeatures {
         );
 
         context.register(THORITE_ORE, new ConfiguredFeature<>(
-                ModFeatures.CORRUPTED_SCATTERED_ORE.get(),
+                Feature.SCATTERED_ORE,
                 new OreConfiguration(thoriteTargets, THORITE_VEIN_SIZE)
         ));
 

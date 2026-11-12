@@ -2,6 +2,7 @@ package net.kirks.exoticores.registry;
 
 import net.kirks.exoticores.ExoticOres;
 import net.kirks.exoticores.effect.ClearExceptProtectedConsumeEffect;
+import net.kirks.exoticores.effect.ReduceRadiationConsumeEffect;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.consume_effects.ConsumeEffect;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -12,4 +13,7 @@ public class ModConsumeEffects {
 
     public static final DeferredHolder<ConsumeEffect.Type<?>, ConsumeEffect.Type<ClearExceptProtectedConsumeEffect>> CLEAR_EXCEPT_PROTECTED_CONSUME_EFFECT =
             CONSUME_EFFECTS.register("clear_except_protected_consume_effect", () -> ClearExceptProtectedConsumeEffect.TYPE);
+
+    public static final DeferredHolder<ConsumeEffect.Type<?>, ConsumeEffect.Type<ReduceRadiationConsumeEffect>> REDUCE_RADIATION_CONSUME_EFFECT =
+            CONSUME_EFFECTS.register("reduce_radiation_consume_effect", () -> ReduceRadiationConsumeEffect.TYPE);
 }

@@ -23,7 +23,8 @@ public class ModBlockEntities {
                     "radioactive_block_entity",
                     () -> new BlockEntityType<>(
                             RadioactiveBlockEntity::new,
-                            ModBlocks.THORITE_ORE.get()
+                            ModBlocks.THORITE_ORE.get(),
+                            ModBlocks.RADIOACTIVE_MUSHROOM.get()
                     )
             );
 

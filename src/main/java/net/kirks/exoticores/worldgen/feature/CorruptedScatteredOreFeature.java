@@ -1,7 +1,7 @@
 package net.kirks.exoticores.worldgen.feature;
 
+import net.kirks.exoticores.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
@@ -12,9 +12,7 @@ import net.minecraft.world.level.levelgen.feature.OreFeature;
 import net.minecraft.world.level.levelgen.feature.ScatteredOreFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class CorruptedScatteredOreFeature extends ScatteredOreFeature {
@@ -53,8 +51,7 @@ public class CorruptedScatteredOreFeature extends ScatteredOreFeature {
 
     private void generateCorruption(RandomSource rdm, WorldGenLevel level, Set<BlockPos> placedOres) {
         Set<BlockPos> corruptedPositions = new HashSet<>();
-        var corruption =
-                Blocks.BLACKSTONE.defaultBlockState();
+        var corruption = ModBlocks.KYANITE_BLOCK.get().defaultBlockState();
 
         for (BlockPos orePos : placedOres) {
             int veinCount = 100 + rdm.nextInt(11);

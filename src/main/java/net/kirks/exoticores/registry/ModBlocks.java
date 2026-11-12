@@ -53,16 +53,10 @@ public class ModBlocks {
             .sound(SoundType.METAL)
             .mapColor(DyeColor.GRAY);
 
-    private static final BlockBehaviour.Properties KYANITE_PROPERTIES = BlockBehaviour.Properties.of()
+    private static final BlockBehaviour.Properties KYANITE_BLOCK_PROPERTIES = BlockBehaviour.Properties.of()
             .requiresCorrectToolForDrops()
             .strength(3.0F, 6.0F)
-            .sound(SoundType.AMETHYST)
-            .mapColor(DyeColor.BLUE);
-
-    private static final BlockBehaviour.Properties KYANITE_OFF_PROPERTIES = BlockBehaviour.Properties.of()
-            .requiresCorrectToolForDrops()
-            .strength(3.0F, 6.0F)
-            .sound(SoundType.AMETHYST)
+            .sound(SoundType.STONE)
             .mapColor(DyeColor.BLUE);
 
     // BLOCKS
@@ -84,10 +78,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> LEAD_BLOCK =
             BLOCKS.registerBlock("lead_block", Block::new, () -> LEAD_BLOCK_PROPERTIES);
 
-    public static final DeferredBlock<Block> KYANITE =
-            BLOCKS.registerBlock("kyanite", Block::new, () -> KYANITE_PROPERTIES);
-
-    public static final DeferredBlock<Block> KYANITE_OFF =
-            BLOCKS.registerBlock("kyanite_off", Block::new, () -> KYANITE_OFF_PROPERTIES);
+    public static final DeferredBlock<Block> KYANITE_BLOCK =
+            BLOCKS.registerBlock("kyanite_block", Block::new, () -> KYANITE_BLOCK_PROPERTIES);
 }
 

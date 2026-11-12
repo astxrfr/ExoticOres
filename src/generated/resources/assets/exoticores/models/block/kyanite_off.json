@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "exoticores:block/kyanite_off_top",
-    "side": "exoticores:block/kyanite_block_side",
-    "top": "exoticores:block/kyanite_off_top"
-  }
-}

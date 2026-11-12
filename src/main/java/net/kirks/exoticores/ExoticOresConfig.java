@@ -2,6 +2,9 @@ package net.kirks.exoticores;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
+/**
+ * Defines mod configuration options for radiation and poison mechanics.
+ */
 public class ExoticOresConfig {
     private static final ModConfigSpec.Builder SERVER_BUILDER = new ModConfigSpec.Builder();
 

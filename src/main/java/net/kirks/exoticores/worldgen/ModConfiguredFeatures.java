@@ -2,6 +2,7 @@ package net.kirks.exoticores.worldgen;
 
 import net.kirks.exoticores.ExoticOres;
 import net.kirks.exoticores.registry.ModBlocks;
+import net.kirks.exoticores.registry.ModFeatures;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
@@ -43,7 +44,7 @@ public class ModConfiguredFeatures {
         );
 
         context.register(THORITE_ORE, new ConfiguredFeature<>(
-                Feature.SCATTERED_ORE,
+                ModFeatures.CORRUPTED_SCATTERED_ORE.get(),
                 new OreConfiguration(thoriteTargets, THORITE_VEIN_SIZE)
         ));
 

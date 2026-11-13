@@ -53,6 +53,7 @@ public class ExoticOres {
         ModDataAttachments.ATTACHMENTS.register(modEventBus);
         ModConsumeEffects.CONSUME_EFFECTS.register(modEventBus);
         ModSounds.SOUND_EVENTS.register(modEventBus);
+        ModFeatures.FEATURES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (ExoticOres) to respond directly to events.

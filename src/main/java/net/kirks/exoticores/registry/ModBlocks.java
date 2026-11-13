@@ -11,6 +11,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.kirks.exoticores.block.CatalyzerTableBlock;
+import net.kirks.exoticores.block.RadiationChestBlock;
 
 
 public class ModBlocks {
@@ -60,6 +61,13 @@ public class ModBlocks {
             .sound(SoundType.STONE)
             .mapColor(DyeColor.BLUE);
 
+    private static final BlockBehaviour.Properties RADIATION_CHEST_PROPERTIES = BlockBehaviour.Properties.of()
+            .requiresCorrectToolForDrops()
+            .strength(5.0F, 6.0F)
+            .sound(SoundType.METAL)
+            .noOcclusion()
+            .mapColor(DyeColor.BLUE);
+
     private static final BlockBehaviour.Properties RADIOACTIVE_MUSHROOM_PROPERTIES = BlockBehaviour.Properties.of()
             .noCollision()
             .instabreak()
@@ -97,5 +105,8 @@ public class ModBlocks {
 
     public static final DeferredBlock<RadioactiveMushroomBlock> RADIOACTIVE_MUSHROOM =
             BLOCKS.registerBlock("radioactive_mushroom", RadioactiveMushroomBlock::new, () -> RADIOACTIVE_MUSHROOM_PROPERTIES);
+
+    public static final DeferredBlock<RadiationChestBlock> RADIATION_CHEST =
+            BLOCKS.registerBlock("radiation_chest", RadiationChestBlock::new, () -> RADIATION_CHEST_PROPERTIES);
 }
 

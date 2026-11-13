@@ -79,6 +79,10 @@ public class ModModelProvider extends ModelProvider {
 
         createMushroomModels(blockModels);
         createCatalyzerModels(blockModels);
+
+        createRadiationChestModels(blockModels);
+
+
     }
 
     private void createKyaniteModel(BlockModelGenerators blockModels) {
@@ -237,5 +241,17 @@ public class ModModelProvider extends ModelProvider {
                 ItemModelUtils.plainModel(Identifier.fromNamespaceAndPath("exoticores", "item/mushroom_pulp")));
         itemModels.itemModelOutput.accept(ModItems.MYCELIUM_SERUM.get(),
                 ItemModelUtils.plainModel(Identifier.fromNamespaceAndPath("exoticores", "item/mycelium_serum")));
+    }
+    //Lead chest
+    private void createRadiationChestModels(BlockModelGenerators blockModels) {
+      var block = ModBlocks.RADIATION_CHEST.get();
+      var model = this.modLocation("block/radiation_chest");
+
+      blockModels.blockStateOutput.accept(
+              MultiVariantGenerator.dispatch(block, BlockModelGenerators.plainVariant(model))
+                      .with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING)
+      );
+
+      blockModels.registerSimpleItemModel(block, model);
     }
 }

@@ -4,6 +4,7 @@ import net.kirks.exoticores.block.CatalyzerTableBlock;
 import net.kirks.exoticores.menu.CatalyzerTableMenu;
 import net.kirks.exoticores.registry.ModBlockEntities;
 import net.kirks.exoticores.registry.ModItems;
+import net.kirks.exoticores.item.RadioactiveMushroomBlockItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
@@ -133,8 +134,20 @@ public class CatalyzerTableBlockEntity extends BlockEntity implements Container,
     }
 
     // PROCESSING
+    private static ItemStack getProcessingResult(ItemStack stack) {
+        if (stack.is(ModItems.RAW_THORITE.get()))
+            return new ItemStack(ModItems.THORITE_SHARD.get());
+        if (stack.is(ModItems.RADIOACTIVE_MUSHROOM.get()) && RadioactiveMushroomBlockItem.getAge(stack) == 2)
+            return new ItemStack(ModItems.MUSHROOM_PULP.get());
+        return ItemStack.EMPTY;
+    }
+
+    public static boolean isValidInput(ItemStack stack) {
+        return !getProcessingResult(stack).isEmpty();
+    }
+
     private boolean hasValidInput() {
-        return items.get(INPUT_SLOT).is(ModItems.RAW_THORITE.get());
+        return isValidInput(items.get(INPUT_SLOT));
     }
 
     private boolean hasWaterBucket() {
@@ -142,7 +155,7 @@ public class CatalyzerTableBlockEntity extends BlockEntity implements Container,
     }
 
     private boolean canProcess() {
-        // Necesitamos Thorite en bruto y un cubo de agua.
+        // Necesitamos un material procesable y un cubo de agua.
         if (!hasValidInput() || !hasWaterBucket()) {
             return false;
         }
@@ -153,8 +166,9 @@ public class CatalyzerTableBlockEntity extends BlockEntity implements Container,
             return true;
         }
 
-        return output.is(ModItems.THORITE_SHARD.get())
-                && output.getCount() < output.getMaxStackSize();
+        ItemStack result = getProcessingResult(items.get(INPUT_SLOT));
+        return ItemStack.isSameItemSameComponents(output, result)
+                && output.getCount() + result.getCount() <= Math.min(getMaxStackSize(), output.getMaxStackSize());
     }
 
     private void processItem() {
@@ -162,14 +176,15 @@ public class CatalyzerTableBlockEntity extends BlockEntity implements Container,
             return;
         }
 
+        ItemStack result = getProcessingResult(items.get(INPUT_SLOT));
         items.get(INPUT_SLOT).shrink(1);
 
         ItemStack output = items.get(OUTPUT_SLOT);
 
         if (output.isEmpty()) {
-            items.set(OUTPUT_SLOT, new ItemStack(ModItems.THORITE_SHARD.get()));
+            items.set(OUTPUT_SLOT, result);
         } else {
-            output.grow(1);
+            output.grow(result.getCount());
         }
 
         // El agua se queda dentro y no se consume.
@@ -253,6 +268,7 @@ public class CatalyzerTableBlockEntity extends BlockEntity implements Container,
         ItemStack removed = ContainerHelper.removeItem(items, slot, amount);
 
         if (!removed.isEmpty()) {
+            if (slot == INPUT_SLOT && items.get(slot).isEmpty()) cookingProgress = 0;
             setChanged();
         }
         return removed;
@@ -260,11 +276,14 @@ public class CatalyzerTableBlockEntity extends BlockEntity implements Container,
 
     @Override
     public ItemStack removeItemNoUpdate(int slot) {
+        if (slot == INPUT_SLOT) cookingProgress = 0;
         return ContainerHelper.takeItem(items, slot);
     }
 
     @Override
     public void setItem(int slot, ItemStack stack) {
+        if (slot == INPUT_SLOT && !ItemStack.isSameItemSameComponents(items.get(slot), stack))
+            cookingProgress = 0;
         items.set(slot, stack);
 
         if (stack.getCount() > getMaxStackSize()) {
@@ -278,7 +297,7 @@ public class CatalyzerTableBlockEntity extends BlockEntity implements Container,
     public boolean canPlaceItem(int slot, ItemStack stack) {
         // Cada casilla acepta solamente su material.
         return switch (slot) {
-            case INPUT_SLOT -> stack.is(ModItems.RAW_THORITE.get());
+            case INPUT_SLOT -> isValidInput(stack);
             case FUEL_SLOT -> isAllowedFuel(stack);
             case WATER_SLOT -> stack.is(Items.WATER_BUCKET);
             case OUTPUT_SLOT -> false;
@@ -302,6 +321,7 @@ public class CatalyzerTableBlockEntity extends BlockEntity implements Container,
     @Override
     public void clearContent() {
         items.clear();
+        cookingProgress = 0;
         setChanged();
     }
 

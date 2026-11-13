@@ -1,6 +1,8 @@
 package net.kirks.exoticores.effect;
 
 import net.kirks.exoticores.registry.ModEffects;
+import net.kirks.exoticores.registry.ModDataAttachments;
+import net.kirks.exoticores.effect.radiation.RadiationExposure;
 import net.kirks.exoticores.tags.ModTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
@@ -22,6 +24,11 @@ public class ModEffectEvents {
     public static void onEffectApplicable(MobEffectEvent.Applicable event) {
         if (!event.getEffectInstance().getEffect().is(ModEffects.RADIATION.getKey())) return;
 
+        if (RadiationExposure.isHealingReplacement(event.getEffectInstance())) {
+            event.setResult(MobEffectEvent.Applicable.Result.APPLY);
+            return;
+        }
+
         boolean inmuneEntity = UNAFFECTED_ENTITIES_RADIATION.contains(event.getEntity().getType());
 
         boolean wearingProtection =
@@ -32,5 +39,12 @@ public class ModEffectEvents {
 
         if (inmuneEntity || wearingProtection)
             event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
+    }
+
+    @SubscribeEvent
+    public static void onRadiationExpired(MobEffectEvent.Expired event) {
+        var instance = event.getEffectInstance();
+        if (instance != null && instance.getEffect().is(ModEffects.RADIATION.getKey()))
+            event.getEntity().setData(ModDataAttachments.RADIATION_COOLDOWN, 0);
     }
 }

@@ -10,7 +10,6 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.registries.DeferredItem;
 import org.jspecify.annotations.NonNull;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -126,6 +125,36 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, ModItems.THORITE_SHARD, 9)
                 .requires(ModBlocks.THORITE_BLOCK)
                 .unlockedBy("has_thorite_block", has(ModBlocks.THORITE_BLOCK))
+                .save(output);
+
+        // 1 IMPURE_THORITE_CRYSTAL
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.MISC, ModBlocks.THORITE_CRYSTAL_BLOCK)
+                .pattern("III")
+                .pattern("III")
+                .pattern("III")
+                .define('I', ModItems.RAW_THORITE)
+                .unlockedBy("has_raw_thorite", has(ModItems.RAW_THORITE))
+                .save(output);
+
+        // 9 RAW_THORITE
+        ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, ModItems.RAW_THORITE, 9)
+                .requires(ModBlocks.THORITE_CRYSTAL_BLOCK)
+                .unlockedBy("has_thorite_crystal_block", has(ModBlocks.THORITE_CRYSTAL_BLOCK))
+                .save(output);
+
+        // 1 LEAD_BLOCK
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.MISC, ModBlocks.RAW_LEAD_BLOCK)
+                .pattern("III")
+                .pattern("III")
+                .pattern("III")
+                .define('I', ModItems.RAW_LEAD)
+                .unlockedBy("has_raw_lead", has(ModItems.RAW_LEAD))
+                .save(output);
+
+        // 9 RAW_LEAD
+        ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, ModItems.RAW_LEAD, 9)
+                .requires(ModBlocks.RAW_LEAD_BLOCK)
+                .unlockedBy("has_raw_lead_block", has(ModBlocks.RAW_LEAD_BLOCK))
                 .save(output);
     }
 

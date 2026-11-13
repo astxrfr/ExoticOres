@@ -43,6 +43,11 @@
   "block.exoticores.kyanite_block": "Bloque de Kyanita",
 
   "block.exoticores.radiation_chest": "Cofre Antirradiación",
-  "container.exoticores.radiation_chest": "Cofre Antirradiación"
+  "container.exoticores.radiation_chest": "Cofre Antirradiación",
 
+  "item.exoticores.mushroom_pulp": "Pulpa de hongo",
+  "item.exoticores.mycelium_serum": "Serum de micelio",
+  "block.exoticores.radioactive_mushroom": "Micelio",
+  "block.exoticores.thorite_crystal_block": "Bloque de cristal de Thorite",
+  "block.exoticores.raw_lead_block": "Bloque de plomo en bruto"
 }

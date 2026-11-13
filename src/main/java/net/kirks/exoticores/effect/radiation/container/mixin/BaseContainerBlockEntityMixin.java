@@ -1,24 +1,22 @@
 package net.kirks.exoticores.effect.radiation.container.mixin;
 
 import net.kirks.exoticores.effect.radiation.BlockRadiationContext;
-import net.kirks.exoticores.effect.radiation.RadiationExposure;
 import net.kirks.exoticores.effect.radiation.Radioactive;
+import net.kirks.exoticores.item.RadiationItemEmitter;
 import net.kirks.exoticores.effect.radiation.container.ContainerRadiationTicker;
 import net.kirks.exoticores.effect.radiation.container.RadiationContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.BlockEntityTypes;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-
-import java.util.WeakHashMap;
+import org.spongepowered.asm.mixin.Unique;
 
 /**
  * Mixin for {@link BaseContainerBlockEntity} to implement {@link RadiationContainer} and handle radiation emission for containers.
@@ -65,12 +63,20 @@ public abstract class BaseContainerBlockEntityMixin extends BlockEntity implemen
 
     @Override
     public boolean exoticOres$hasRadioactiveItem() {
-        var items = getItems();
-        for (ItemStack item : items) {
-            if (item.is(itemHolder -> itemHolder.value() instanceof Radioactive<?>))
-                return true;
+        if (exoticOres$isShulker()) return false;
+
+        for (ItemStack stack : getItems()) {
+            if (stack.isEmpty()) continue;
+            if (stack.getItem() instanceof Radioactive<?>) return true;
         }
 
         return false;
+    }
+
+    @Unique
+    private boolean exoticOres$isShulker() {
+        var container = (BaseContainerBlockEntity) (Object) this;
+
+        return container.is(BlockEntityTypes.SHULKER_BOX);
     }
 }

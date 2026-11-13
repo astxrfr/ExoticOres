@@ -20,7 +20,10 @@ public class RadiationEffect extends MobEffect {
     @Override
     public boolean applyEffectTick(@Nonnull ServerLevel serverLevel, LivingEntity mob, int amplification) {
         MobEffectInstance currentEffect = mob.getEffect(ModEffects.RADIATION);
-        if (currentEffect == null) return false;
+        if (currentEffect == null || (!currentEffect.isInfiniteDuration() && currentEffect.getDuration() <= 0)) {
+            mob.setData(ModDataAttachments.RADIATION_COOLDOWN, 0);
+            return false;
+        }
 
         int cooldown = mob.getData(ModDataAttachments.RADIATION_COOLDOWN.get()) - 1;
         if (cooldown > 0) {
@@ -28,12 +31,12 @@ public class RadiationEffect extends MobEffect {
             return true;
         }
 
-        var duration = currentEffect.getDuration();
+        int duration = currentEffect.isInfiniteDuration() ? 72000 : currentEffect.getDuration();
         float durationDamageFunction = (float) Math.sqrt(duration)/100.0f;
         float damage = Math.max(0.1f, durationDamageFunction);
         mob.hurtServer(serverLevel, mob.damageSources().magic(), damage);
 
-        float durationIntervalFunction = (float) (1 - Math.pow(Math.E, -(duration*duration/Math.pow(2, 30))))*10;
+        float durationIntervalFunction = (float) (1 - Math.pow(Math.E, -((double) duration * duration / Math.pow(2, 30))))*10;
         int nextInterval = Math.max(10, (int) (TICK_EFFECT_INTERVAL / Math.max(1.0, durationIntervalFunction)));
         mob.setData(ModDataAttachments.RADIATION_COOLDOWN, nextInterval);
         return true;
@@ -41,6 +44,6 @@ public class RadiationEffect extends MobEffect {
 
     @Override
     public boolean shouldApplyEffectTickThisTick(int remainingDuration, int amplification) {
-        return true;
+        return remainingDuration > 0 || remainingDuration == -1;
     }
 }

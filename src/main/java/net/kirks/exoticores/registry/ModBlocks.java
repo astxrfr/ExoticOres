@@ -2,6 +2,7 @@ package net.kirks.exoticores.registry;
 
 import net.kirks.exoticores.ExoticOres;
 import net.kirks.exoticores.block.RadioactiveBlock;
+import net.kirks.exoticores.block.RadioactiveMushroomBlock;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -66,12 +67,23 @@ public class ModBlocks {
             .sound(SoundType.METAL)
             .noOcclusion()
             .mapColor(DyeColor.BLUE);
+
+    private static final BlockBehaviour.Properties RADIOACTIVE_MUSHROOM_PROPERTIES = BlockBehaviour.Properties.of()
+            .noCollision()
+            .instabreak()
+            .randomTicks()
+            .sound(SoundType.GRASS)
+            .mapColor(MapColor.COLOR_PURPLE);
+
     // BLOCKS
     public static final DeferredBlock<RadioactiveBlock> THORITE_ORE =
             BLOCKS.registerBlock("thorite_ore", RadioactiveBlock::new, () -> THORITE_ORE_PROPERTIES);
 
     public static final DeferredBlock<Block> THORITE_BLOCK =
             BLOCKS.registerBlock("thorite_block", Block::new, () -> THORITE_BLOCK_PROPERTIES);
+
+    public static final DeferredBlock<RadioactiveBlock> THORITE_CRYSTAL_BLOCK =
+            BLOCKS.registerBlock("thorite_crystal_block", RadioactiveBlock::new, () -> THORITE_ORE_PROPERTIES);
 
     public static final DeferredBlock<CatalyzerTableBlock> CATALYZER_TABLE_BLOCK =
             BLOCKS.registerBlock("catalyzer_table", CatalyzerTableBlock::new, () -> CATALYZER_TABLE_BLOCK_PROPERTIES);
@@ -82,11 +94,17 @@ public class ModBlocks {
     public static final DeferredBlock<Block> DEEPSLATE_LEAD_ORE =
             BLOCKS.registerBlock("deepslate_lead_ore", Block::new, () -> DEEPSLATE_LEAD_ORE_PROPERTIES);
 
+    public static final DeferredBlock<Block> RAW_LEAD_BLOCK =
+            BLOCKS.registerBlock("raw_lead_block", Block::new, () -> LEAD_ORE_PROPERTIES);
+
     public static final DeferredBlock<Block> LEAD_BLOCK =
             BLOCKS.registerBlock("lead_block", Block::new, () -> LEAD_BLOCK_PROPERTIES);
 
     public static final DeferredBlock<Block> KYANITE_BLOCK =
             BLOCKS.registerBlock("kyanite_block", Block::new, () -> KYANITE_BLOCK_PROPERTIES);
+
+    public static final DeferredBlock<RadioactiveMushroomBlock> RADIOACTIVE_MUSHROOM =
+            BLOCKS.registerBlock("radioactive_mushroom", RadioactiveMushroomBlock::new, () -> RADIOACTIVE_MUSHROOM_PROPERTIES);
 
     public static final DeferredBlock<RadiationChestBlock> RADIATION_CHEST =
             BLOCKS.registerBlock("radiation_chest", RadiationChestBlock::new, () -> RADIATION_CHEST_PROPERTIES);

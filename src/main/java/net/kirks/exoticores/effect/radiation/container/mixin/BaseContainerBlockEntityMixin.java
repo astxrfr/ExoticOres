@@ -1,7 +1,6 @@
 package net.kirks.exoticores.effect.radiation.container.mixin;
 
 import net.kirks.exoticores.effect.radiation.BlockRadiationContext;
-import net.kirks.exoticores.effect.radiation.RadiationExposure;
 import net.kirks.exoticores.effect.radiation.Radioactive;
 import net.kirks.exoticores.item.RadiationItemEmitter;
 import net.kirks.exoticores.effect.radiation.container.ContainerRadiationTicker;
@@ -9,17 +8,15 @@ import net.kirks.exoticores.effect.radiation.container.RadiationContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.BlockEntityTypes;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-
-import java.util.WeakHashMap;
+import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(BaseContainerBlockEntity.class)
 public abstract class BaseContainerBlockEntityMixin extends BlockEntity implements RadiationContainer {
@@ -63,6 +60,8 @@ public abstract class BaseContainerBlockEntityMixin extends BlockEntity implemen
 
     @Override
     public boolean exoticOres$hasRadioactiveItem() {
+        if (exoticOres$isShulker()) return false;
+
         for (ItemStack stack : getItems()) {
             if (stack.isEmpty()) continue;
             if (stack.getItem() instanceof RadiationItemEmitter emitter) {
@@ -73,5 +72,12 @@ public abstract class BaseContainerBlockEntityMixin extends BlockEntity implemen
         }
 
         return false;
+    }
+
+    @Unique
+    private boolean exoticOres$isShulker() {
+        var container = (BaseContainerBlockEntity) (Object) this;
+
+        return container.is(BlockEntityTypes.SHULKER_BOX);
     }
 }

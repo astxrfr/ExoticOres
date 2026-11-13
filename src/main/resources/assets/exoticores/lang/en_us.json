@@ -44,6 +44,9 @@
   "block.exoticores.lead_block": "Block of Lead",
   "block.exoticores.kyanite_block": "Kyanite Block",
 
+  "block.exoticores.radiation_chest": "Radiation-Proof Chest",
+  "container.exoticores.radiation_chest": "Radiation-Proof Chest",
+
   "item.exoticores.mushroom_pulp": "Mushroom Pulp",
   "item.exoticores.mycelium_serum": "Mycelium Serum",
   "block.exoticores.radioactive_mushroom": "Mycelium"

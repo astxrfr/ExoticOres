@@ -155,6 +155,9 @@ public class ModItems {
             ITEMS.registerSimpleBlockItem("lead_block", ModBlocks.LEAD_BLOCK);
     public static final DeferredItem<BlockItem> KYANITE_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("kyanite_block", ModBlocks.KYANITE_BLOCK);
+    @SuppressWarnings("unused")
+    public static final DeferredItem<BlockItem> RADIATION_CHEST_ITEM =
+            ITEMS.registerSimpleBlockItem("radiation_chest", ModBlocks.RADIATION_CHEST);
 
     public static final DeferredItem<RadioactiveMushroomBlockItem> RADIOACTIVE_MUSHROOM =
             ITEMS.registerItem("radioactive_mushroom", properties -> new RadioactiveMushroomBlockItem(ModBlocks.RADIOACTIVE_MUSHROOM.get(), properties),

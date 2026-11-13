@@ -23,11 +23,6 @@ public class RadioactiveMushroomBlockItem extends RadioactiveBlockItem {
         };
     }
 
-    @Override
-    public boolean isRadioactive(ItemStack stack) {
-        return !stack.isEmpty() && getAge(stack) == 2;
-    }
-
     public static ItemStack createStack(int age) {
         if (age < 0 || age > 2) throw new IllegalArgumentException("La etapa debe ser 0, 1 o 2");
         ItemStack stack = new ItemStack(ModItems.RADIOACTIVE_MUSHROOM.get());

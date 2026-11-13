@@ -67,10 +67,6 @@ public abstract class BaseContainerBlockEntityMixin extends BlockEntity implemen
 
         for (ItemStack stack : getItems()) {
             if (stack.isEmpty()) continue;
-            if (stack.getItem() instanceof RadiationItemEmitter emitter) {
-                if (emitter.isRadioactive(stack)) return true;
-                continue;
-            }
             if (stack.getItem() instanceof Radioactive<?>) return true;
         }
 

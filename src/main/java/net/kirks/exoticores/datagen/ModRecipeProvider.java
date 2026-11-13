@@ -29,6 +29,15 @@ public class ModRecipeProvider extends RecipeProvider {
         toolRecipes(items);
         armorRecipes(items);
         storageRecipes(items);
+        // RADIATION CHEST
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.DECORATIONS, ModBlocks.RADIATION_CHEST)
+                .pattern("LLL")
+                .pattern("LCL")
+                .pattern("LLL")
+                .define('L', ModItems.LEAD_INGOT)
+                .define('C', Items.CHEST)
+                .unlockedBy("has_lead_ingot", has(ModItems.LEAD_INGOT))
+                .save(output);
         cookingRecipes(items);
     }
 
@@ -118,6 +127,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_thorite_block", has(ModBlocks.THORITE_BLOCK))
                 .save(output);
     }
+
 
     private void cookingRecipes(HolderLookup.RegistryLookup<Item> items) {
         // LEAD

@@ -6,6 +6,7 @@ import net.kirks.exoticores.block.entity.CatalyzerTableBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.kirks.exoticores.block.entity.RadiationChestBlockEntity;
 
 import java.util.function.Supplier;
 
@@ -36,6 +37,16 @@ public class ModBlockEntities {
                             ModBlocks.CATALYZER_TABLE_BLOCK.get()
                     )
             );
+    //lead chest
+    public static final Supplier<BlockEntityType<RadiationChestBlockEntity>>
+          RADIATION_CHEST_BLOCK_ENTITY =
+          BLOCK_ENTITIES.register(
+                  "radiation_chest_entity",
+                  () -> new BlockEntityType<>(
+                          RadiationChestBlockEntity::new,
+                          ModBlocks.RADIATION_CHEST.get()
+                  )
+          );
 
     private ModBlockEntities() {
     }

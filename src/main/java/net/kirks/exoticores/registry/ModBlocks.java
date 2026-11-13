@@ -10,6 +10,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.kirks.exoticores.block.CatalyzerTableBlock;
+import net.kirks.exoticores.block.RadiationChestBlock;
 
 
 public class ModBlocks {
@@ -59,6 +60,12 @@ public class ModBlocks {
             .sound(SoundType.STONE)
             .mapColor(DyeColor.BLUE);
 
+    private static final BlockBehaviour.Properties RADIATION_CHEST_PROPERTIES = BlockBehaviour.Properties.of()
+            .requiresCorrectToolForDrops()
+            .strength(5.0F, 6.0F)
+            .sound(SoundType.METAL)
+            .noOcclusion()
+            .mapColor(DyeColor.BLUE);
     // BLOCKS
     public static final DeferredBlock<RadioactiveBlock> THORITE_ORE =
             BLOCKS.registerBlock("thorite_ore", RadioactiveBlock::new, () -> THORITE_ORE_PROPERTIES);
@@ -80,5 +87,8 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> KYANITE_BLOCK =
             BLOCKS.registerBlock("kyanite_block", Block::new, () -> KYANITE_BLOCK_PROPERTIES);
+
+    public static final DeferredBlock<RadiationChestBlock> RADIATION_CHEST =
+            BLOCKS.registerBlock("radiation_chest", RadiationChestBlock::new, () -> RADIATION_CHEST_PROPERTIES);
 }
 

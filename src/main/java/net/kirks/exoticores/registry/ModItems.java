@@ -149,6 +149,9 @@ public class ModItems {
     @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> KYANITE_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("kyanite_block", ModBlocks.KYANITE_BLOCK);
+    @SuppressWarnings("unused")
+    public static final DeferredItem<BlockItem> RADIATION_CHEST_ITEM =
+            ITEMS.registerSimpleBlockItem("radiation_chest", ModBlocks.RADIATION_CHEST);
 
     // EQUIPMENT
     public static final DeferredItem<Item> THORITE_HELMET = ITEMS.registerItem("thorite_helmet", properties ->

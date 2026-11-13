@@ -7,7 +7,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ToolMaterial;
 import org.jspecify.annotations.NonNull;
 
+/**
+ * A hoe that applies its poison effect when it hurts an enemy.
+ */
 public class PoisonHitHoeItem extends HoeItem implements PoisonHitItemEmitter {
+  /**
+   * Creates a poison-emitting hoe with the specified combat attributes.
+   */
   public PoisonHitHoeItem(ToolMaterial material, float attackDamageBaseline, float attackSpeedBaseline, Properties properties) {
     super(material, attackDamageBaseline, attackSpeedBaseline, properties);
   }

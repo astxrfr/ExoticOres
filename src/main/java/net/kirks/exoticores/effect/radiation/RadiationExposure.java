@@ -1,6 +1,5 @@
 package net.kirks.exoticores.effect.radiation;
 
-import net.kirks.exoticores.ExoticOres;
 import net.kirks.exoticores.ExoticOresConfig;
 import net.kirks.exoticores.network.payload.RadiationIntensityPayload;
 import net.kirks.exoticores.registry.ModEffects;
@@ -18,6 +17,13 @@ import java.util.WeakHashMap;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
+/**
+ * Tracks and applies radiation exposure to living entities over time.
+ *
+ * <p>This helper accumulates exposure contributions from various sources, applies
+ * them after server ticks, and optionally syncs the intensity to players as a
+ * network payload.</p>
+ */
 public class RadiationExposure {
     public static final int INITIAL_DURATION = 10;
     public static final float EFFECT_INTENSITY = 3f;

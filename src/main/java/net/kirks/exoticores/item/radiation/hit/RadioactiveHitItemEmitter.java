@@ -10,8 +10,12 @@ import org.jspecify.annotations.Nullable;
 import java.util.Map;
 import java.util.function.Supplier;
 
+/**
+ * Emits radiation when an item hits a living entity.
+ */
 public interface RadioactiveHitItemEmitter extends Radioactive<ItemRadiationContext> {
     Supplier<Float> HIT_RADIATION_INTENSITY = () -> (float) (300 * ExoticOresConfig.RADIATION_HIT_MULT.getAsDouble());
+
 
     @Override
     default void emit(ItemRadiationContext context) {

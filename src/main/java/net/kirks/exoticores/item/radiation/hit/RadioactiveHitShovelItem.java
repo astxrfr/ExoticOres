@@ -9,11 +9,16 @@ import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.ToolMaterial;
 import org.jspecify.annotations.NonNull;
 
+
 public class RadioactiveHitShovelItem extends ShovelItem implements RadioactiveHitItemEmitter {
     public RadioactiveHitShovelItem(ToolMaterial material, float attackDamageBaseline, float attackSpeedBaseline, Properties properties) {
         super(material, attackDamageBaseline, attackSpeedBaseline, properties);
     }
 
+    /**
+     * Applies radiation to the target entity after a successful hit, provided the
+     * attacker and victim share the same level instance.
+     */
     @Override
     public void postHurtEnemy(@NonNull ItemStack itemStack, LivingEntity mob, LivingEntity attacker) {
         if (attacker.level() != mob.level()) {

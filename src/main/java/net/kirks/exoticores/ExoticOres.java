@@ -29,7 +29,6 @@ import org.slf4j.Logger;
 import net.kirks.exoticores.client.screen.CatalyzerTableScreen;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
-// The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(ExoticOres.MODID)
 public class ExoticOres {
     public static final String MODID = "exoticores";
@@ -68,14 +67,11 @@ public class ExoticOres {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        // Some common setup code
         LOGGER.info("Starting common setup");
     }
 
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        // Do something when the server starts
         LOGGER.info("Starting server setup");
     }
 
@@ -93,7 +89,6 @@ public class ExoticOres {
         }));
     }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MODID, value = Dist.CLIENT)
     public static class ClientModEvents {
 

@@ -10,7 +10,19 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+/**
+ * Defines a block emitter that can radiate nearby living entities using the
+ * current block radiation context.
+ */
 public interface RadiationBlockEmitter extends Radioactive<BlockRadiationContext> {
+    /**
+     * Evaluates nearby living entities and returns their exposure intensity based
+     * on their distance from the emitter position.
+     *
+     * @param context the radiation context containing the emitter position and world
+     * @return a map of affected entities to their computed radiation intensity, or
+     *         {@code null} when the logic is executed on the client side
+     */
     @Override
     default @Nullable Map<LivingEntity, Float> radiate(BlockRadiationContext context) {
         var pos = context.pos();

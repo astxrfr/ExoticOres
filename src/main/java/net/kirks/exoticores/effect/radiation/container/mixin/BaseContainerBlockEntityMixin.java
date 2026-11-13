@@ -20,6 +20,9 @@ import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.WeakHashMap;
 
+/**
+ * Mixin for {@link BaseContainerBlockEntity} to implement {@link RadiationContainer} and handle radiation emission for containers.
+ */
 @Mixin(BaseContainerBlockEntity.class)
 public abstract class BaseContainerBlockEntityMixin extends BlockEntity implements RadiationContainer {
 

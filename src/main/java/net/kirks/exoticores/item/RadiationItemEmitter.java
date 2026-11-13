@@ -11,7 +11,21 @@ import org.jspecify.annotations.Nullable;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+/**
+ * Defines an item emitter that emits radiation to its owner and nearby living entities.
+ */
 public interface RadiationItemEmitter extends Radioactive<ItemRadiationContext> {
+    /**
+     * Applies the radiation effect described by the provided context.
+     * <p>
+     * If the entity is an item dropped into the world, nearby living entities are affected based on distance.
+     * If the entity is a player, the player receives exposure at the configured effect range.
+     *
+     * @param context the context that defines the entity, world, and radiation
+     *                source being evaluated
+     * @return a map of affected living entities to their radiation intensity, or
+     *         {@code null} when the effect should not be applied
+     */
     @Override
     default @Nullable Map<? extends LivingEntity, Float> radiate(ItemRadiationContext context) {
         if (context.level().isClientSide()) return null;
@@ -27,6 +41,16 @@ public interface RadiationItemEmitter extends Radioactive<ItemRadiationContext> 
         return null;
     }
 
+    /**
+     * Finds living entities within the active radiation radius and computes how
+     * strongly each one is affected by the dropped item.
+     * <p>
+     * Closer targets receive greater intensity, while entities outside the range
+     * are omitted from the result.
+     *
+     * @param context the context containing the dropped item and world state
+     * @return a map of nearby living entities to their computed radiation level
+     */
     default Map<LivingEntity, Float> affectNearby(ItemRadiationContext context) {
         var dropped = context.entity();
         double radius = RadiationExposure.EFFECT_RANGE.getAsDouble();

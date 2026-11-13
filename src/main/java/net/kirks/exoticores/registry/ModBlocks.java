@@ -2,6 +2,7 @@ package net.kirks.exoticores.registry;
 
 import net.kirks.exoticores.ExoticOres;
 import net.kirks.exoticores.block.RadioactiveBlock;
+import net.kirks.exoticores.block.RadioactiveMushroomBlock;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -59,6 +60,13 @@ public class ModBlocks {
             .sound(SoundType.STONE)
             .mapColor(DyeColor.BLUE);
 
+    private static final BlockBehaviour.Properties RADIOACTIVE_MUSHROOM_PROPERTIES = BlockBehaviour.Properties.of()
+            .noCollision()
+            .instabreak()
+            .randomTicks()
+            .sound(SoundType.GRASS)
+            .mapColor(MapColor.COLOR_PURPLE);
+
     // BLOCKS
     public static final DeferredBlock<RadioactiveBlock> THORITE_ORE =
             BLOCKS.registerBlock("thorite_ore", RadioactiveBlock::new, () -> THORITE_ORE_PROPERTIES);
@@ -80,5 +88,8 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> KYANITE_BLOCK =
             BLOCKS.registerBlock("kyanite_block", Block::new, () -> KYANITE_BLOCK_PROPERTIES);
+
+    public static final DeferredBlock<RadioactiveMushroomBlock> RADIOACTIVE_MUSHROOM =
+            BLOCKS.registerBlock("radioactive_mushroom", RadioactiveMushroomBlock::new, () -> RADIOACTIVE_MUSHROOM_PROPERTIES);
 }
 

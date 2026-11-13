@@ -50,7 +50,7 @@ public class RadioactiveMushroomBlock extends VegetationBlock implements EntityB
 
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-        return state.is(ModBlocks.KYANITE.get());
+        return state.is(ModBlocks.KYANITE_BLOCK.get());
     }
 
     @Override

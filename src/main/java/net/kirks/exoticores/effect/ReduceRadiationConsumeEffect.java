@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
 
 public record ReduceRadiationConsumeEffect() implements ConsumeEffect {
-    public static final int REDUCTION_TICKS = 2 * 60 * 20;
+    public static final int REDUCTION_TICKS = 5 * 60 * 20;
     public static final ReduceRadiationConsumeEffect INSTANCE = new ReduceRadiationConsumeEffect();
     public static final MapCodec<ReduceRadiationConsumeEffect> CODEC = MapCodec.unit(INSTANCE);
     public static final StreamCodec<RegistryFriendlyByteBuf, ReduceRadiationConsumeEffect> STREAM_CODEC = StreamCodec.unit(INSTANCE);

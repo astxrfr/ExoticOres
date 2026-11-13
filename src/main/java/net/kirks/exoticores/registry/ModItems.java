@@ -141,12 +141,16 @@ public class ModItems {
             registerSimpleRadioactiveBlockItem("thorite_ore", ModBlocks.THORITE_ORE);
     public static final DeferredItem<BlockItem> THORITE_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("thorite_block", ModBlocks.THORITE_BLOCK);
+    public static final DeferredItem<BlockItem> IMPURE_THORITE_CRYSTAL_ITEM =
+            registerSimpleRadioactiveBlockItem("thorite_crystal_block", ModBlocks.THORITE_CRYSTAL_BLOCK);
     public static final DeferredItem<BlockItem> CATALYZER_TABLE_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("catalyzer_table", ModBlocks.CATALYZER_TABLE_BLOCK);
     public static final DeferredItem<BlockItem> LEAD_ORE_ITEM =
             ITEMS.registerSimpleBlockItem("lead_ore", ModBlocks.LEAD_ORE);
     public static final DeferredItem<BlockItem> DEEPSLATE_LEAD_ORE_ITEM =
             ITEMS.registerSimpleBlockItem("deepslate_lead_ore", ModBlocks.DEEPSLATE_LEAD_ORE);
+    public static final DeferredItem<BlockItem> RAW_LEAD_BLOCK_ITEM =
+            ITEMS.registerSimpleBlockItem("raw_lead_block", ModBlocks.RAW_LEAD_BLOCK);
     public static final DeferredItem<BlockItem> LEAD_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("lead_block", ModBlocks.LEAD_BLOCK);
     public static final DeferredItem<BlockItem> KYANITE_BLOCK_ITEM =

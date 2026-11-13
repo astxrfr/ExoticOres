@@ -39,9 +39,11 @@ public class ModModelProvider extends ModelProvider {
     private void registerBlocks(BlockModelGenerators blockModels) {
         // TRIVIAL CUBES
         blockModels.createTrivialCube(ModBlocks.THORITE_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.THORITE_CRYSTAL_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.LEAD_ORE.get());
         blockModels.createTrivialCube(ModBlocks.DEEPSLATE_LEAD_ORE.get());
         blockModels.createTrivialCube(ModBlocks.LEAD_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.RAW_LEAD_BLOCK.get());
 
         // TRIVIAL BLOCKS
         createKyaniteModel(blockModels);

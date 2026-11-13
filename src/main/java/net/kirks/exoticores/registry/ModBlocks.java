@@ -74,6 +74,9 @@ public class ModBlocks {
     public static final DeferredBlock<Block> THORITE_BLOCK =
             BLOCKS.registerBlock("thorite_block", Block::new, () -> THORITE_BLOCK_PROPERTIES);
 
+    public static final DeferredBlock<RadioactiveBlock> THORITE_CRYSTAL_BLOCK =
+            BLOCKS.registerBlock("thorite_crystal_block", RadioactiveBlock::new, () -> THORITE_ORE_PROPERTIES);
+
     public static final DeferredBlock<CatalyzerTableBlock> CATALYZER_TABLE_BLOCK =
             BLOCKS.registerBlock("catalyzer_table", CatalyzerTableBlock::new, () -> CATALYZER_TABLE_BLOCK_PROPERTIES);
 
@@ -82,6 +85,9 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> DEEPSLATE_LEAD_ORE =
             BLOCKS.registerBlock("deepslate_lead_ore", Block::new, () -> DEEPSLATE_LEAD_ORE_PROPERTIES);
+
+    public static final DeferredBlock<Block> RAW_LEAD_BLOCK =
+            BLOCKS.registerBlock("raw_lead_block", Block::new, () -> LEAD_ORE_PROPERTIES);
 
     public static final DeferredBlock<Block> LEAD_BLOCK =
             BLOCKS.registerBlock("lead_block", Block::new, () -> LEAD_BLOCK_PROPERTIES);

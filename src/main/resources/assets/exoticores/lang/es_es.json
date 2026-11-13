@@ -40,5 +40,11 @@
   "message.exoticores.effect_not_cleared": "¡La radiación no se puede curar con leche!",
 
   "block.exoticores.lead_block": "Bloque de plomo",
-  "block.exoticores.kyanite_block": "Bloque de Kyanita"
+  "block.exoticores.kyanite_block": "Bloque de Kyanita",
+
+  "item.exoticores.mushroom_pulp": "Pulpa de hongo",
+  "item.exoticores.mycelium_serum": "Serum de micelio",
+  "block.exoticores.radioactive_mushroom": "Micelio",
+  "block.exoticores.thorite_crystal_block": "Bloque de cristal de Thorite",
+  "block.exoticores.raw_lead_block": "Bloque de plomo en bruto"
 }

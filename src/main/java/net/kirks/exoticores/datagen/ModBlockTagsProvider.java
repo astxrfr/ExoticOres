@@ -20,8 +20,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.THORITE_ORE.getKey())
                 .add(ModBlocks.THORITE_BLOCK.getKey())
+                .add(ModBlocks.THORITE_CRYSTAL_BLOCK.getKey())
                 .add(ModBlocks.LEAD_ORE.getKey())
-                .add(ModBlocks.DEEPSLATE_LEAD_ORE.getKey());
+                .add(ModBlocks.DEEPSLATE_LEAD_ORE.getKey())
+                .add(ModBlocks.LEAD_BLOCK.getKey())
+                .add(ModBlocks.RAW_LEAD_BLOCK.getKey())
+                .add(ModBlocks.KYANITE_BLOCK.getKey());
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.THORITE_ORE.getKey())
@@ -29,24 +33,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
         tag(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.LEAD_ORE.getKey())
-                .add(ModBlocks.DEEPSLATE_LEAD_ORE.getKey());
-
-        tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.THORITE_ORE.getKey())
-                .add(ModBlocks.THORITE_BLOCK.getKey())
-                .add(ModBlocks.LEAD_ORE.getKey())
                 .add(ModBlocks.DEEPSLATE_LEAD_ORE.getKey())
                 .add(ModBlocks.LEAD_BLOCK.getKey());
-
-        tag(BlockTags.NEEDS_IRON_TOOL)
-                .add(ModBlocks.LEAD_ORE.getKey())
-                .add(ModBlocks.DEEPSLATE_LEAD_ORE.getKey())
-                .add(ModBlocks.LEAD_BLOCK.getKey());
-
-        tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.KYANITE_BLOCK.getKey());
-
-        tag(BlockTags.NEEDS_IRON_TOOL)
-                .add(ModBlocks.KYANITE_BLOCK.getKey());
     }
 }

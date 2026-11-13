@@ -4,6 +4,7 @@
   "effect.exoticores.radiation": "Radiation",
   "block.exoticores.thorite_ore": "Thorite Ore",
   "item.exoticores.raw_thorite": "Raw Thorite",
+  "block.exoticores.thorite_crystal_block": "Thorite Crystal Block",
   "block.exoticores.thorite_block": "Thorite Block",
   "item.exoticores.thorite_shard": "Thorite Shard",
   "block.exoticores.catalyzer_table": "Catalyzer Table",
@@ -12,6 +13,7 @@
   "item.exoticores.lead_ingot": "Lead Ingot",
   "block.exoticores.lead_ore": "Lead Ore",
   "block.exoticores.deepslate_lead_ore": "Deepslate Lead Ore",
+  "block.exoticores.raw_lead_block": "Raw Lead Block",
 
   "item.exoticores.thorite_helmet": "Thorite Helmet",
   "item.exoticores.thorite_chestplate": "Thorite Chestplate",
@@ -40,5 +42,9 @@
   "message.exoticores.effect_not_cleared": "Radiation cannot be cured with milk!",
 
   "block.exoticores.lead_block": "Block of Lead",
-  "block.exoticores.kyanite_block": "Kyanite Block"
+  "block.exoticores.kyanite_block": "Kyanite Block",
+
+  "item.exoticores.mushroom_pulp": "Mushroom Pulp",
+  "item.exoticores.mycelium_serum": "Mycelium Serum",
+  "block.exoticores.radioactive_mushroom": "Mycelium"
 }

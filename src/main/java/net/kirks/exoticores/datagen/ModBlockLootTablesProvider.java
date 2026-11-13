@@ -25,8 +25,10 @@ public class ModBlockLootTablesProvider extends BlockLootSubProvider {
     protected void generate() {
         // SELF-DROPS
         dropSelf(ModBlocks.THORITE_BLOCK.get());
+        dropSelf(ModBlocks.THORITE_CRYSTAL_BLOCK.get());
         dropSelf(ModBlocks.CATALYZER_TABLE_BLOCK.get());
         dropSelf(ModBlocks.LEAD_BLOCK.get());
+        dropSelf(ModBlocks.RAW_LEAD_BLOCK.get());
         dropSelf(ModBlocks.KYANITE_BLOCK.get());
 
         // ORE DROPS

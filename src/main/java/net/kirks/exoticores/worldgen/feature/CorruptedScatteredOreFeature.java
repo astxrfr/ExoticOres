@@ -1,5 +1,6 @@
 package net.kirks.exoticores.worldgen.feature;
 
+import net.kirks.exoticores.ExoticOres;
 import net.kirks.exoticores.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -22,6 +23,7 @@ public class CorruptedScatteredOreFeature extends ScatteredOreFeature {
 
     @Override
     public boolean place(FeaturePlaceContext<OreConfiguration> context) {
+        ExoticOres.LOGGER.debug("CorruptedScatteredOreFeature.place called");
         Set<BlockPos> placed = new HashSet<>();
 
         WorldGenLevel level = context.level();
@@ -44,13 +46,17 @@ public class CorruptedScatteredOreFeature extends ScatteredOreFeature {
             }
         }
 
-        generateCorruption(random, level, placed);
+        Set<BlockPos> corruptedPositions = new HashSet<>();
 
-        return true;
+        ExoticOres.LOGGER.debug("Placed ores: {}", placed.size());
+        generateCorruption(random, level, placed, corruptedPositions);
+        ExoticOres.LOGGER.debug("Corruption positions: {}", corruptedPositions.size());
+        generateShrooms(random, level, corruptedPositions);
+
+        return !placed.isEmpty();
     }
 
-    private void generateCorruption(RandomSource rdm, WorldGenLevel level, Set<BlockPos> placedOres) {
-        Set<BlockPos> corruptedPositions = new HashSet<>();
+    private void generateCorruption(RandomSource rdm, WorldGenLevel level, Set<BlockPos> placedOres, Set<BlockPos> corruptedPositions) {
         var corruption = ModBlocks.KYANITE_BLOCK.get().defaultBlockState();
 
         for (BlockPos orePos : placedOres) {
@@ -96,6 +102,20 @@ public class CorruptedScatteredOreFeature extends ScatteredOreFeature {
                     }
                 }
             }
+        }
+    }
+
+    private void generateShrooms(RandomSource random, WorldGenLevel level, Set<BlockPos> corruptedPositions) {
+        var mushroom = ModBlocks.RADIOACTIVE_MUSHROOM.get().defaultBlockState();
+
+        for (BlockPos ground : corruptedPositions) {
+            BlockPos above = ground.above();
+
+            if (!level.isEmptyBlock(above)) continue;
+            if (random.nextFloat() >= 0.10f) continue;
+            if (!mushroom.canSurvive(level, above)) continue;
+
+            level.setBlock(above, mushroom, Block.UPDATE_CLIENTS);
         }
     }
 

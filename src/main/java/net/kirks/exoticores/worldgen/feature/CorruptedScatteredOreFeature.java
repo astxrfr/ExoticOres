@@ -1,6 +1,7 @@
 package net.kirks.exoticores.worldgen.feature;
 
 import net.kirks.exoticores.ExoticOres;
+import net.kirks.exoticores.block.RadioactiveMushroomBlock;
 import net.kirks.exoticores.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -112,10 +113,12 @@ public class CorruptedScatteredOreFeature extends ScatteredOreFeature {
             BlockPos above = ground.above();
 
             if (!level.isEmptyBlock(above)) continue;
-            if (random.nextFloat() >= 0.10f) continue;
-            if (!mushroom.canSurvive(level, above)) continue;
+            if (random.nextFloat() >= 0.03f) continue;
 
-            level.setBlock(above, mushroom, Block.UPDATE_CLIENTS);
+            var randomState = mushroom.setValue(RadioactiveMushroomBlock.AGE, random.nextInt(3));
+            if (!randomState.canSurvive(level, above)) continue;
+
+            level.setBlock(above, randomState, Block.UPDATE_CLIENTS);
         }
     }
 

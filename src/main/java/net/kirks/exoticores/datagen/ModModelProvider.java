@@ -24,18 +24,6 @@ import net.minecraft.client.data.models.model.TexturedModel;
 
 public class ModModelProvider extends ModelProvider {
 
-    private void createRadiationChestModels(BlockModelGenerators blockModels) {
-      var block = ModBlocks.RADIATION_CHEST.get();
-      var model = this.modLocation("block/radiation_chest");
-
-      blockModels.blockStateOutput.accept(
-              MultiVariantGenerator.dispatch(block, BlockModelGenerators.plainVariant(model))
-                      .with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING)
-      );
-
-      blockModels.registerSimpleItemModel(block, model);
-    }
-
     public ModModelProvider(PackOutput output, String modId) {
         super(output, modId);
     }
@@ -227,5 +215,17 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.RADIATION_SUIT_CHESPLATE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RADIATION_SUIT_LEGGINGS.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RADIATION_SUIT_BOOTS.get(), ModelTemplates.FLAT_ITEM);
+    }
+    //Lead chest
+    private void createRadiationChestModels(BlockModelGenerators blockModels) {
+      var block = ModBlocks.RADIATION_CHEST.get();
+      var model = this.modLocation("block/radiation_chest");
+
+      blockModels.blockStateOutput.accept(
+              MultiVariantGenerator.dispatch(block, BlockModelGenerators.plainVariant(model))
+                      .with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING)
+      );
+
+      blockModels.registerSimpleItemModel(block, model);
     }
 }

@@ -26,9 +26,6 @@ public class ModRecipeProvider extends RecipeProvider {
     protected void buildRecipes() {
         var items = registries.lookupOrThrow(Registries.ITEM);
 
-        toolRecipes(items);
-        armorRecipes(items);
-        storageRecipes(items);
         // RADIATION CHEST
         ShapedRecipeBuilder.shaped(items, RecipeCategory.DECORATIONS, ModBlocks.RADIATION_CHEST)
                 .pattern("LLL")
@@ -38,6 +35,10 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('C', Items.CHEST)
                 .unlockedBy("has_lead_ingot", has(ModItems.LEAD_INGOT))
                 .save(output);
+
+        toolRecipes(items);
+        armorRecipes(items);
+        storageRecipes(items);
         cookingRecipes(items);
     }
 

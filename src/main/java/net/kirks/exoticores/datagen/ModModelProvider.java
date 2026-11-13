@@ -2,6 +2,7 @@ package net.kirks.exoticores.datagen;
 
 import net.kirks.exoticores.ExoticOres;
 import net.kirks.exoticores.block.CatalyzerTableBlock;
+import net.kirks.exoticores.block.RadioactiveMushroomBlock;
 import net.kirks.exoticores.registry.ModBlocks;
 import net.kirks.exoticores.registry.ModItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -10,17 +11,15 @@ import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
-import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TextureMapping;
-import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.block.dispatch.Variant;
+import net.minecraft.client.renderer.item.properties.select.ItemBlockState;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.random.Weighted;
 import net.minecraft.util.random.WeightedList;
 import org.jspecify.annotations.NonNull;
-import net.minecraft.client.data.models.model.TexturedModel;
 
 public class ModModelProvider extends ModelProvider {
 
@@ -76,6 +75,7 @@ public class ModModelProvider extends ModelProvider {
                 )
         );
 
+        createMushroomModels(blockModels);
         createCatalyzerModels(blockModels);
     }
 
@@ -102,6 +102,18 @@ public class ModModelProvider extends ModelProvider {
                         new Weighted<>(new Variant(modelPasive), 8),
                         new Weighted<>(new Variant(modelActive), 2)
                 )))
+        );
+    }
+
+    private void createMushroomModels(BlockModelGenerators blockModels) {
+        var block = ModBlocks.RADIOACTIVE_MUSHROOM.get();
+        blockModels.blockStateOutput.accept(
+                MultiVariantGenerator.dispatch(block).with(
+                        PropertyDispatch.initial(RadioactiveMushroomBlock.AGE)
+                                .select(0, BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath("exoticores", "block/radioactive_mushroom_stage0")))
+                                .select(1, BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath("exoticores", "block/radioactive_mushroom_stage1")))
+                                .select(2, BlockModelGenerators.plainVariant(Identifier.fromNamespaceAndPath("exoticores", "block/radioactive_mushroom_stage2")))
+                )
         );
     }
 
@@ -211,5 +223,17 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.RADIATION_SUIT_CHESPLATE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RADIATION_SUIT_LEGGINGS.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RADIATION_SUIT_BOOTS.get(), ModelTemplates.FLAT_ITEM);
+
+        // mycelium
+        var smallShroom = ItemModelUtils.plainModel(Identifier.fromNamespaceAndPath("exoticores", "item/radioactive_mushroom_stage0"));
+        var mediumShroom = ItemModelUtils.plainModel(Identifier.fromNamespaceAndPath("exoticores", "item/radioactive_mushroom_stage1"));
+        var matureShroom = ItemModelUtils.plainModel(Identifier.fromNamespaceAndPath("exoticores", "item/radioactive_mushroom_stage2"));
+        itemModels.itemModelOutput.accept(ModItems.RADIOACTIVE_MUSHROOM.get(),
+                ItemModelUtils.select(new ItemBlockState("age"), smallShroom,
+                        ItemModelUtils.when("0", smallShroom), ItemModelUtils.when("1", mediumShroom), ItemModelUtils.when("2", matureShroom)));
+        itemModels.itemModelOutput.accept(ModItems.MUSHROOM_PULP.get(),
+                ItemModelUtils.plainModel(Identifier.fromNamespaceAndPath("exoticores", "item/mushroom_pulp")));
+        itemModels.itemModelOutput.accept(ModItems.MYCELIUM_SERUM.get(),
+                ItemModelUtils.plainModel(Identifier.fromNamespaceAndPath("exoticores", "item/mycelium_serum")));
     }
 }

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "block": "exoticores:radioactive_mushroom",
+              "function": "minecraft:copy_state",
+              "properties": [
+                "age"
+              ]
+            },
+            {
+              "function": "minecraft:explosion_decay"
+            }
+          ],
+          "name": "exoticores:radioactive_mushroom"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "exoticores:blocks/radioactive_mushroom"
+}

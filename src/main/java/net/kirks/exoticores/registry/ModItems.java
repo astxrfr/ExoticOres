@@ -2,8 +2,10 @@ package net.kirks.exoticores.registry;
 
 import net.kirks.exoticores.ExoticOres;
 import net.kirks.exoticores.datagen.ModArmorMaterial;
+import net.kirks.exoticores.effect.ReduceRadiationConsumeEffect;
 import net.kirks.exoticores.item.RadioactiveBlockItem;
 import net.kirks.exoticores.item.RadioactiveItem;
+import net.kirks.exoticores.item.RadioactiveMushroomBlockItem;
 import net.kirks.exoticores.item.radiation.hit.RadioactiveHitAxeItem;
 import net.kirks.exoticores.item.radiation.hit.RadioactiveHitHoeItem;
 import net.kirks.exoticores.item.radiation.hit.RadioactiveHitItem;
@@ -14,17 +16,15 @@ import net.kirks.exoticores.item.poison.hit.PoisonHitItem;
 import net.kirks.exoticores.item.poison.hit.PoisonHitShovelItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class ModItems {
@@ -39,6 +39,8 @@ public class ModItems {
             ITEMS.registerItem("raw_lead", Item::new, Item.Properties::new);
     public static final DeferredItem<Item> LEAD_INGOT =
             ITEMS.registerItem("lead_ingot", Item::new, Item.Properties::new);
+    public static final DeferredItem<Item> MUSHROOM_PULP =
+            ITEMS.registerItem("mushroom_pulp", Item::new, Item.Properties::new);
 
     // TOOLS
     // thorite
@@ -84,27 +86,27 @@ public class ModItems {
                     new PoisonHitItem(toolAppearance(properties, "lead_pickaxe")
                             .pickaxe(ModToolMaterial.LEAD, 1.0F, -2.8F)));
 
-  public static final DeferredItem<AxeItem> LEAD_AXE =
+    public static final DeferredItem<AxeItem> LEAD_AXE =
           ITEMS.registerItem("lead_axe", properties ->
                   new PoisonHitAxeItem(ModToolMaterial.LEAD, 5.0F, -3.0F,
                           toolAppearance(properties, "lead_axe")));
 
-  public static final DeferredItem<ShovelItem> LEAD_SHOVEL =
+    public static final DeferredItem<ShovelItem> LEAD_SHOVEL =
           ITEMS.registerItem("lead_shovel", properties ->
                   new PoisonHitShovelItem(ModToolMaterial.LEAD, 1.5F, -3.0F,
                           toolAppearance(properties, "lead_shovel")));
 
-  public static final DeferredItem<HoeItem> LEAD_HOE =
+    public static final DeferredItem<HoeItem> LEAD_HOE =
           ITEMS.registerItem("lead_hoe", properties ->
                   new PoisonHitHoeItem(ModToolMaterial.LEAD, -4.0F, 0.0F,
                           toolAppearance(properties, "lead_hoe")));
 
-  public static final DeferredItem<Item> LEAD_SWORD =
+    public static final DeferredItem<Item> LEAD_SWORD =
           ITEMS.registerItem("lead_sword", properties ->
                   new PoisonHitItem(toolAppearance(properties, "lead_sword")
                           .sword(ModToolMaterial.LEAD, 3.0F, -2.4F)));
 
-  public static final DeferredItem<Item> LEAD_SPEAR =
+    public static final DeferredItem<Item> LEAD_SPEAR =
           ITEMS.registerItem("lead_spear", properties ->
                   new PoisonHitItem(toolAppearance(properties, "lead_spear")
                           .spear(ModToolMaterial.LEAD,
@@ -116,7 +118,7 @@ public class ModItems {
                                   12.0F, 4.5F // Ventana y velocidad para hacer daño.
                           )));
 
-  private static Item.Properties toolAppearance(Item.Properties properties, String modelName) {
+    private static Item.Properties toolAppearance(Item.Properties properties, String modelName) {
     return properties.rarity(Rarity.RARE).component(
             DataComponents.ITEM_MODEL,
             Identifier.fromNamespaceAndPath(
@@ -124,31 +126,40 @@ public class ModItems {
                     modelName
             )
     );
-  }
+    }
 
+    // CONSUMABLES
+    public static final DeferredItem<Item> MYCELIUM_SERUM =
+            ITEMS.registerItem("mycelium_serum", Item::new, () -> new Item.Properties()
+                    .stacksTo(1)
+                    .usingConvertsTo(Items.GLASS_BOTTLE)
+                    .component(DataComponents.CONSUMABLE, Consumables.defaultDrink()
+                    .onConsume(ReduceRadiationConsumeEffect.INSTANCE).build()));
 
-  // BLOCK ITEMS
-    @SuppressWarnings("unused")
+    // BLOCK ITEMS
     public static final DeferredItem<BlockItem> THORITE_ORE_ITEM =
             registerSimpleRadioactiveBlockItem("thorite_ore", ModBlocks.THORITE_ORE);
-    @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> THORITE_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("thorite_block", ModBlocks.THORITE_BLOCK);
-    @SuppressWarnings("unused")
+    public static final DeferredItem<BlockItem> IMPURE_THORITE_CRYSTAL_ITEM =
+            registerSimpleRadioactiveBlockItem("thorite_crystal_block", ModBlocks.THORITE_CRYSTAL_BLOCK);
     public static final DeferredItem<BlockItem> CATALYZER_TABLE_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("catalyzer_table", ModBlocks.CATALYZER_TABLE_BLOCK);
-    @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> LEAD_ORE_ITEM =
             ITEMS.registerSimpleBlockItem("lead_ore", ModBlocks.LEAD_ORE);
-    @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> DEEPSLATE_LEAD_ORE_ITEM =
             ITEMS.registerSimpleBlockItem("deepslate_lead_ore", ModBlocks.DEEPSLATE_LEAD_ORE);
-    @SuppressWarnings("unused")
+    public static final DeferredItem<BlockItem> RAW_LEAD_BLOCK_ITEM =
+            ITEMS.registerSimpleBlockItem("raw_lead_block", ModBlocks.RAW_LEAD_BLOCK);
     public static final DeferredItem<BlockItem> LEAD_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("lead_block", ModBlocks.LEAD_BLOCK);
-    @SuppressWarnings("unused")
     public static final DeferredItem<BlockItem> KYANITE_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("kyanite_block", ModBlocks.KYANITE_BLOCK);
+
+    public static final DeferredItem<RadioactiveMushroomBlockItem> RADIOACTIVE_MUSHROOM =
+            ITEMS.registerItem("radioactive_mushroom", properties -> new RadioactiveMushroomBlockItem(ModBlocks.RADIOACTIVE_MUSHROOM.get(), properties),
+                    () -> new Item.Properties().useBlockDescriptionPrefix()
+                            .component(DataComponents.BLOCK_STATE, new BlockItemStateProperties(Map.of("age", "0"))));
 
     // EQUIPMENT
     public static final DeferredItem<Item> THORITE_HELMET = ITEMS.registerItem("thorite_helmet", properties ->

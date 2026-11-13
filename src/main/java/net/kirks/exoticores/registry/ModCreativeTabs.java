@@ -1,6 +1,7 @@
 package net.kirks.exoticores.registry;
 
 import net.kirks.exoticores.ExoticOres;
+import net.kirks.exoticores.item.RadioactiveMushroomBlockItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -18,6 +19,8 @@ public class ModCreativeTabs {
                     .icon(() -> ModItems.THORITE_SHARD.get().getDefaultInstance())
                     .displayItems((params, output) -> {
                         ModItems.ITEMS.getEntries().forEach(entry -> output.accept(entry.get()));
+                        output.accept(RadioactiveMushroomBlockItem.createStack(1));
+                        output.accept(RadioactiveMushroomBlockItem.createStack(2));
                     })
                     .build()
     );
